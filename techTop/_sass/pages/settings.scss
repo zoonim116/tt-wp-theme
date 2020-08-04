@@ -1,0 +1,44 @@
+.settings-list {
+    width: 470px;
+    max-width: 100%;
+    .settings-item {
+        padding: 0px;
+        margin-bottom: 58px;
+        .settings-header {
+            padding: 31px 17px 21px;
+            border-bottom: 1px solid #d3d3d3;
+        }
+        .settings-body {
+            padding: 31px 17px 21px;
+            p {
+                font-size: $font-m;
+                margin-bottom: 2px;
+                span {
+                    color: $gray;
+                    display: inline-block;
+                    margin-right: 20px;
+                    font-size: $font-body;
+                }
+            }
+            .checkbox-set {
+                padding-top: 30px;
+                .info-checkbox {
+                    margin-bottom: 39px;
+                    label {
+                        span {
+                            &:last-child {
+                                font-size: $font-sm;
+                                display: inline-block;
+                                padding-right: 28px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .settings-footer {
+            padding: 4px 17px 35px;
+        }
+    }
+    
+}

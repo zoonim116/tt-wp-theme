@@ -1,0 +1,45 @@
+ .delivery-address-header {
+    font-weight: bold;
+    padding: 32px 0 75px;
+    .btn {
+        margin-top: 35px;
+    }
+}
+.delivery-address-list {
+    width: 470px;
+    max-width: 100%;
+    .delivery-address-item {
+        padding: 0;
+        margin-bottom: 59px;
+        .delivery-item-header {
+            padding: 31px 17px 21px;
+            border-bottom: 1px solid #d3d3d3;
+        }
+        .delivery-item-info {
+            padding: 31px 17px 17px;
+            p {
+                font-size: $font-m;
+            }
+        }
+        .button-group {
+            padding: 11px 17px 31px;
+            .main-address {
+                text-decoration: underline;
+                float: left;
+                padding-top: 9px;
+            }
+        }
+    }
+}
+
+.address-new {
+    .form-row {
+        & > div {
+            max-width: 100%;
+            width: 90px;
+            margin-left: 33px;
+            margin-bottom: 17px;
+        
+        }
+    }
+}

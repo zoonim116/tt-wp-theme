@@ -1,0 +1,106 @@
+.yearly-overview {
+    .title {
+        font-size: $font-m;
+        margin-top: 18px;
+        margin-bottom: 17px;
+    }
+    .yearly-overview-statistics {
+        padding-top: 30px;
+        padding-bottom: 1px;
+        p{
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            span {
+                flex: 1 1 0px;
+                &:first-child {
+                    font-size: $font-xs;
+                }
+                &:last-child {
+                    font-size: $font-s;
+                    color: $blue;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    .yearly-overview-grafic {
+        padding-top: 11px;
+        .select-wrap {
+            text-align: left;
+        }
+        .grafic-title {
+            font-weight: 500;
+            font-size: $font-xs;
+            padding-top: 10px;
+        }
+    }
+}
+
+.quater-table {
+    @include flexbox();
+    @include flex-wrap(wrap);
+    padding-top: 25px;
+    padding-bottom: 22px;
+    .quater-item {
+        padding: 0 10px 20px 40px;
+        width: 25%;
+        .quater-title {
+            color: $gray;
+            font-size: $font-s;
+            font-weight: 500;
+            padding-bottom: 6px;
+            margin-bottom: 17px;
+            border-bottom: 1px dashed #D8D8D8;
+        }
+        & > div {
+            p {
+                @include flexbox();
+                @include flex-wrap(wrap);
+                margin-bottom: 12px;
+                span {
+                    flex: 1 1 0px;
+                    &:first-child {
+                        font-size: $font-xs;
+                    }
+                    &:last-child {
+                        font-size: $font-s;
+                        color: $blue;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+        .quater-footer {
+            color: $blue;
+            font-weight: bold;
+            font-size: $font-sm;
+            text-align: left;
+        }
+    }
+}
+
+.statistics-by-categories {
+    margin-top: 73px;
+    .title-wrap {
+        @include flexbox();
+        @include flex-wrap(wrap);
+        @include justify-content(space-between);
+        @include align-items(center);
+        padding-bottom: 12px;
+        .title {
+            margin-bottom: 0px;
+            font-weight: 500;
+            font-size: $font-m;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .quater-table {
+        .quater-item {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+}

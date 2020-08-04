@@ -1,0 +1,103 @@
+.promo-list {
+    .promo-item {
+        padding: 0px;
+        @include flexbox();
+        @include flex-wrap(wrap);
+        margin-bottom: calc(40px + 1.7vw);
+        .promo-img {
+            width: 32%;
+            position: relative;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0px 5px 5px 0px;
+            }
+            .promo-img-title {
+                display: block;
+                position: absolute;
+                top: 25px;
+                right: 22px;
+                border-radius: 2px;
+                color: white;
+                padding: 9px;
+                min-width: 82px;
+                text-align: center;
+                background: #767676;
+                font-weight: 800;
+                
+                &.new {
+                    background: #FFC24A;
+                }
+            }
+        }
+        .promo-info { 
+            width: 68%;
+            .promo-title {
+                padding: 31px 27px 21px;
+                border-bottom: 1px solid #d3d3d3;
+            }
+            .promo-body {
+                padding: 22px 27px 10px;
+                .sale {
+                    color: $blue;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                }
+                .data {
+                    color: $gray;
+                    font-size: $font-sm;
+                }
+            }
+            .promo-code {
+                @include flexbox();
+                @include align-items(center);
+                padding: 18px 27px 30px;
+                .promo-form {
+                    position: relative;
+                    padding-right: 24px;
+                    max-width: 230px;
+                    .promo-copy {
+                        position: absolute;
+                        left: 18px;
+                        top: 10px;
+                        cursor: pointer;
+                        display: inline-block;
+                    }
+                    .input {
+                        padding-left: 35px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $tablet) {
+    .promo-list {
+        .promo-item {
+            .promo-img {
+                width: 40%;
+            }
+            .promo-info {
+                width: 60%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .promo-list {
+        .promo-item {
+            .promo-img {
+                width: 100%;
+                img {
+                    border-radius: 5px 5px 0px 0px;
+                }
+            }
+            .promo-info {
+                width: 100%;
+            }
+        }
+    }
+}

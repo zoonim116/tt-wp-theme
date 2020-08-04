@@ -1,0 +1,116 @@
+.consultant-info {
+    margin-bottom: calc(40px + 1.4vw);
+    width: 470px;
+    max-width: 100%;
+    padding: 16px 17px 29px;
+    p {
+        font-size: $font-m;
+    }
+    .consultant-info-title {
+        @include flexbox();
+        @include align-items(center);
+        margin-bottom: 30px;
+        img {
+            @include border-radius(50%);
+            margin-left: 26px;
+        }
+    }
+    .btn {
+        margin-top: 20px;
+    }
+}
+
+.consultant-form {
+    padding: 0px;
+    width: 470px;
+    max-width: 100%;
+    margin-bottom: 40px;
+    .consultant-form-title {
+        padding: 31px 17px 21px;
+        border-bottom: 1px solid #d3d3d3;
+    }
+    form {
+        padding: 35px 53px 21px;
+        .button-group {
+            padding-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            p {
+                margin-bottom: 10px;
+                span {
+                    color: $blue;
+                }
+            }
+            .select {
+                min-width: 70%;
+                select {
+                    min-width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.help-info {
+    padding: 0px;
+    width: 470px;
+    max-width: 100%;
+    margin-bottom: 40px;
+    .help-info-title {
+        padding: 31px 17px 21px;
+        border-bottom: 1px solid #d3d3d3;
+    }
+    .help-info-list {
+        padding: 24px 17px 21px;
+        .help-info-item {
+            margin-bottom: 20px;
+            p {
+                line-height: 1.7;
+                &:first-child {
+                    text-decoration: underline;
+                    font-size: $font-m;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+}
+
+.help-contact {
+    padding: 31px 17px 21px;
+    p {
+        @include flexbox();
+        @include flex-wrap(wrap);
+        @include align-items(center);
+        margin-bottom: 3px;
+        span{
+            display: inline-block;
+            &:first-child {
+                width: 90px;
+                font-size: $font-sm;
+            }
+            &:last-child {
+                font-size: $font-m;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .consultant-form {
+        form {
+            padding-left: 17px;
+            padding-right: 17px;
+        }
+    }
+    .help-contact {
+        p {
+            span{
+                &:first-child {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

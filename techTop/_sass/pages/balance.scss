@@ -1,0 +1,69 @@
+.balance-graph {
+    .balance-graph-info {
+        text-align: center;
+        p {
+            color: white;
+            &.title {
+                font-size: $font-title-l;
+            }
+            &.subtitle {
+                font-size: $font-body;
+                margin-bottom: 53px;
+            }
+        }
+    }
+}
+
+.balance-history {
+    padding: 0px;
+    margin-top: calc(50px + 3.8vw);
+
+    .balance-history-header {
+        border-bottom: 1px solid #d3d3d3;
+        padding: 29px 21px 21px;
+    }
+    .balance-history-table {
+        padding: 28px 21px 21px;
+        .balance-history-item {
+            @include flexbox();
+            @include justify-content(space-between);
+            @include align-items(center);
+            @include flex-wrap(wrap);
+            margin-bottom: 14px;
+            & > p {
+                flex: 1 1 0px;
+                span {
+                    display: inline-block;
+                    &:first-child {
+                        color: $gray;
+                        font-size: $font-xs;
+                        margin-left: calc(10px + 2vw);
+                    }
+                }
+                &:last-child {
+                    font-size: $font-xm;
+                    color: $blue;
+                    font-weight: bold;
+                }
+                &.balance-minus {
+                    color: $orange;
+                }
+                &:first-child {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+    .balance-history-footer {
+        text-align: left;
+        padding: 18px 21px 28px;
+        .see-more {
+            text-decoration: underline;
+        }
+        img {
+            margin-right: 10px;
+            position: relative;
+            top: 10px;
+        }
+    }
+}

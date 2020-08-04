@@ -1,0 +1,162 @@
+.payments-header {
+    padding: 33px 18px 73px;
+    p {
+        margin-bottom: 35px;
+    } 
+}
+
+.payments-list {
+    max-width: 100%;
+    width: 470px;
+    .payments-item {
+        padding: 0px;
+        margin-bottom: 60px;
+        .payments-item-header {
+            border-bottom: 1px solid #d3d3d3;
+            padding: 33px 21px 21px;
+        }
+        .payments-item-body {
+            padding: 29px 21px 21px;
+            @include flexbox();
+            @include justify-content(space-between);
+            p {
+                font-size: $font-m;
+                margin-bottom: 4px;
+                span {
+                    color: $orange;
+                }
+            }
+        }
+        .button-group {
+            padding: 0 21px 27px;
+            .check-default {
+                font-size: $font-sm;
+                float: left;
+                text-decoration: underline;
+                padding-top: 7px;
+            }
+        }
+    }
+}
+
+.payments-new {
+    padding: 27px 21px 35px;
+    .payments-new-form {
+        form {
+            position: relative;
+            width: 450px;
+            max-width: 80%;
+            padding-bottom: 128px;
+        }
+        .form-group {
+            background: white;
+            border: 1px solid #D5E5FF;
+            box-shadow: -4px 4px 20px rgba(112, 168, 255, 0.41);
+            border-radius: 5px;
+            padding: 23px 33px 49px;
+            
+            position: relative;
+            z-index: 1;
+            .form-row {
+                @include flexbox();
+                @include justify-content(space-between);
+                @include align-items(flex-end);
+                @include flex-wrap(wrap);
+                margin-bottom: 37px;
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+                .input {
+                    text-transform: uppercase;
+                }
+                & > div {
+                    &:first-child {
+                        width: 67%;
+                    }
+                    &:last-child {
+                        width: 23%;
+                    }
+                    p {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+            &.cvv-block {
+                position: absolute;
+                width: 100%;
+                height: calc(100% - 128px);
+                left: -53px;
+                bottom: 0;
+                z-index: 0;
+                @include flexbox();
+                @include flex-direction(column);
+                padding-bottom: 33px;
+                & > div {
+                    margin-top: auto;
+                    .input {
+                        max-width: 90px;
+                    }
+                }
+            }
+        }
+    }
+    .payment-new-info {
+        padding-top: 54px;
+        & > p {
+            font-size: $font-sm;
+            padding-top: 14px;
+            padding-bottom: 41px;        
+        }
+    }
+}
+
+.payment-modal {
+    .modal-content {
+        text-align: center;
+        padding-top: 77px;
+        padding-bottom: 69px;
+        p {
+            font-weight: bold;
+            font-size: $font-m;
+        }
+        .button-group {
+            margin-top: 60px;
+        }
+    }
+}
+
+.modal-background {
+    background: rgba(131, 139, 152, 0.41);
+}
+
+@media screen and (min-width: $tablet) {
+    .modal-content, .modal-card {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: $mobile-s) {
+    .payments-new {
+        .payments-new-form {
+            form {
+                max-width: 100%;
+            }
+            .form-group {
+                padding: 15px;
+                .form-row {
+                    margin-bottom: 15px;
+                    &:last-child {
+                        display: block;
+                        & > div {
+                            width: 100%;
+                            margin-bottom: 15px;
+                        }
+                    }
+                }
+                &.cvv-block {
+                    left: 0;
+                }
+            }
+        }
+    }
+}
