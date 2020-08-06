@@ -20,27 +20,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! empty( $breadcrumb ) ) {
+global $wp_query;
+$children_categories = get_term_children($wp_query->get_queried_object()->term_id, 'product_cat');
+if (count($children_categories) == 0) {
 
-	echo $wrap_before;
+	get_template_part('template-parts/banner');
 
-	foreach ( $breadcrumb as $key => $crumb ) {
+	if ( ! empty( $breadcrumb ) ) {
+		 ?>
 
-		echo $before;
+		<section class="breadcrumbs-catalog">
+			<div class="container">
+				<ul>
+<?php		foreach ( $breadcrumb as $key => $crumb ) {
 
-		if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
-			echo '<a href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>';
-		} else {
-			echo esc_html( $crumb[0] );
-		}
+			echo $before;
 
-		echo $after;
+			if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
+				echo '<li><a href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a></li>';
+			} else {
+				echo '<span>'.esc_html( $crumb[0] ).'</span>';
+			}
 
-		if ( sizeof( $breadcrumb ) !== $key + 1 ) {
-			echo $delimiter;
-		}
-	}
+			echo $after;
 
-	echo $wrap_after;
-
+			if ( sizeof( $breadcrumb ) !== $key + 1 ) {
+				echo $delimiter;
+			}
+		} ?>
+				</ul>
+			</div>
+		</section>
+	<?php }
 }

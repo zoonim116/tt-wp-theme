@@ -19,4 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="catalog-category">
+<?php
+global $wp_query;
+$children_categories = get_term_children($wp_query->get_queried_object()->term_id, 'product_cat');
+if (count($children_categories) == 0): ?>
+    <div class="catalog-products-list">
+<?php else: ?>
+    <div class="catalog-category">
+<?php endif; ?>
+

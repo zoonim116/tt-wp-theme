@@ -20,6 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $template = wc_get_theme_slug_for_templates();
+global $wp_query;
+$children_categories = get_term_children($wp_query->get_queried_object()->term_id, 'product_cat');
 
 switch ( $template ) {
 	case 'twentyten':
@@ -44,6 +46,12 @@ switch ( $template ) {
 		echo '<div id="primary" class="content-area twentysixteen"><main id="main" class="site-main" role="main">';
 		break;
 	default:
-		echo '<section class="main-catalog"><div class="container">';
+		if (count($children_categories) > 0) {
+			echo '<section class="main-catalog"><div class="container">';
+		} else {
+			echo '<section class="main-catalog">';
+			do_action('tt_breadcrumb');
+			echo '<div class="container">';
+		}
 		break;
 }
