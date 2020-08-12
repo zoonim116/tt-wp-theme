@@ -47,10 +47,10 @@ if ( empty( $product ) || ! $product->is_visible() ) {
             </div>
         </div>
         <div class="item-info">
-           <?php do_action( 'tt_shop_loop_item_title ' );  ?>
+           <?php do_action( 'tt_shop_loop_item_title' );  ?>
             <div class="item-flex">
                 <div class="item-description">
-                    <p>מגבר התקנות משולב קופסת חיבורים + מפסק ייעודי להפעלת מקרנים וכו' דרך פקודת IR</p>
+                    <?php do_action('tt_loop_product_short_description'); ?>
                 </div>
                 <div class="item-price">
 <!--                    <p class="old-price">₪910</p>-->

@@ -118,6 +118,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  var infScroll = new InfiniteScroll('.catalog-products-list', {
+    // options
+    path: ".woocommerce-pagination a.next",
+    append: ".catalog-products-list .catalog-products-item",
+    history: false,
+    button: '.open-more a',
+    scrollThreshold: false,
+  });
 
+  // $('.catalog-products-list').infiniteScroll();
+
+  //Unbind load more on scroll
+  $(window).unbind('.infscr');
+
+  $(".open-more a").click( function() {
+    $(document).trigger('retrieve.infscr');
+  });
 
 });

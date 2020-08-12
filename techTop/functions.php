@@ -2,36 +2,6 @@
 
 require_once 'inc/Helper.php';
 
-function wooc_extra_register_fields() { ?>
-    <p class="form-row form-row-first">
-        <label for="reg_billing_first_name"><?php _e( 'First name', 'woocommerce' ); ?><span class="required">*</span></label>
-        <input type="text" class="input-text" name="first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
-    </p>
-    <p class="form-row form-row-last">
-        <label for="reg_billing_last_name"><?php _e( 'Last name', 'woocommerce' ); ?><span class="required">*</span></label>
-        <input type="text" class="input-text" name="last_name" id="reg_billing_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) esc_attr_e( $_POST['billing_last_name'] ); ?>" />
-    </p>
-    <p class="form-row form-row-first">
-        <label for="reg_billing_city"><?php _e( 'City', 'woocommerce' ); ?><span class="required">*</span></label>
-        <input type="text" class="input-text" name="city" id="reg_billing_city" value="<?php if ( ! empty( $_POST['city'] ) ) esc_attr_e( $_POST['city'] ); ?>" />
-    </p>
-    <p class="form-row form-row-last">
-        <label for="reg_zipcode"><?php _e( 'Zipcode', 'woocommerce' ); ?><span class="required">*</span></label>
-        <input type="text" class="input-text" name="zipcode" id="reg_zipcode" value="<?php if ( ! empty( $_POST['zipcode'] ) ) esc_attr_e( $_POST['zipcode'] ); ?>" />
-    </p>
-    <p class="form-row form-row-wide">
-        <label for="reg_billing_phone"><?php _e( 'Phone', 'woocommerce' ); ?></label>
-        <input type="text" class="input-text" name="billing_phone" id="reg_billing_phone" value="<?php esc_attr_e( $_POST['billing_phone'] ); ?>" />
-    </p>
-    <p class="form-row form-row-wide">
-        <label for="reg_billing_address"><?php _e( 'Address', 'woocommerce' ); ?></label>
-        <input type="text" class="input-text" name="address" id="reg_billing_address" value="<?php esc_attr_e( $_POST['address'] ); ?>" />
-    </p>
-    <div class="clear"></div>
-	<?php
-}
-add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields' );
-
 /**
  * Enqueue scripts and styles.
  */
@@ -39,6 +9,9 @@ function tt_scripts() {
 	wp_enqueue_style( 'tt-style', get_template_directory_uri().'/css/index.css', array(), time() );
 	wp_style_add_data( 'tt-style', 'rtl', 'replace' );
 
+
+	wp_enqueue_script( 'infinite-scroll', get_template_directory_uri() . '/lib/infinite-scroll.pkgd.min.js', ['jquery'], time(), true );
+	wp_enqueue_script( 'nouislider', get_template_directory_uri() . '/lib/nouislider.min.js', ['jquery'], time(), true );
 	wp_enqueue_script( 'tt-script', get_template_directory_uri() . '/lib/main.js', ['jquery'], time(), true );
 }
 add_action( 'wp_enqueue_scripts', 'tt_scripts' );
@@ -228,3 +201,22 @@ add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
 function new_loop_shop_per_page( $cols ) {
 	return 12;
 }
+
+function tt_loop_product_short_description() {
+	the_excerpt();
+}
+
+add_action('tt_loop_product_short_description', 'tt_loop_product_short_description');
+
+
+function tt_template_single_excerpt() {
+	wc_get_template( 'single-product/short-description.php' );
+}
+
+add_action( 'tt_single_product_summary', 'tt_template_single_excerpt', 20 );
+
+function tt_template_single_price() {
+	wc_get_template( 'single-product/price.php' );
+}
+
+add_action( 'tt_template_single_price', 'tt_template_single_price', 10 );

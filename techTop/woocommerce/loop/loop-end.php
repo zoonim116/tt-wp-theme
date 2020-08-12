@@ -19,4 +19,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
+<?php
+global $wp_query;
+$children_categories = get_term_children( $wp_query->get_queried_object()->term_id, 'product_cat' );
+if ( count( $children_categories ) == 0 ): ?>
+    </div>
+    <div class="open-more">
+        <a href="#" class="btn btn-blue">לטעון יותר</a>
+    </div>
+<?php else: ?>
+    </div>
+<?php endif; ?>
+<div class="have-question">
+    <div class="have-question-image">
+        <img src="<?php echo get_template_directory_uri(); ?>/images/question.png">
+    </div>
+    <div class="have-question-info">
+        <p class="title">?ב תיפצ הנורחאל</p>
+        <p>ךלש ישיאה ץעויה םע רשק רוצ</p>
+        <a href="#" class="btn btn-blue">איש קשר </a>
+    </div>
 </div>

@@ -49,9 +49,15 @@ switch ( $template ) {
 		if (count($children_categories) > 0) {
 			echo '<section class="main-catalog"><div class="container">';
 		} else {
-			echo '<section class="main-catalog">';
-			do_action('tt_breadcrumb');
-			echo '<div class="container">';
+			if (is_product()) {
+				do_action('tt_breadcrumb');
+				echo '<section class="main-card">';
+				echo '<div class="container">';
+			} else {
+				do_action('tt_breadcrumb');
+				echo '<section class="main-catalog">';
+				echo '<div class="container">';
+			}
 		}
 		break;
 }
