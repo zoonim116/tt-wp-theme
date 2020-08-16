@@ -24,9 +24,9 @@
 								<li>
 									<a href="<?php echo get_term_link($cc, 'product_cat'); ?>">
 										<div>
-											<img src="images/menu-icon-1.svg">
+											<img src="<?php echo carbon_get_term_meta($cc->term_id, 'crb_additional_thumb')?>" alt="<?php echo $cc->name; ?>" title="<?php echo $cc->name; ?>">
 										</div>
-										<span><?php echo $cc->name?></span>
+										<span><?php echo $cc->name; ?></span>
 									</a>
 								</li>
 							<?php endforeach; ?>

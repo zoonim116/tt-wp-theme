@@ -48,5 +48,10 @@ switch ( $template ) {
 		break;
 	default:
 		echo '</div></section>';
+		if (is_product()) {
+			echo '<section class="same-products"><div class="container">';
+			do_action( 'woocommerce_after_single_product_summary' );
+			echo '</div></section>';
+		}
 		break;
 }

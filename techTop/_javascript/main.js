@@ -118,14 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  var infScroll = new InfiniteScroll('.catalog-products-list', {
-    // options
-    path: ".woocommerce-pagination a.next",
-    append: ".catalog-products-list .catalog-products-item",
-    history: false,
-    button: '.open-more a',
-    scrollThreshold: false,
-  });
+  if ($('.catalog-products-list').length > 0) {
+    var infScroll = new InfiniteScroll('.catalog-products-list', {
+      // options
+      path: ".woocommerce-pagination a.next",
+      append: ".catalog-products-list .catalog-products-item",
+      history: false,
+      button: '.open-more a',
+      scrollThreshold: false,
+    });
+  }
 
   // $('.catalog-products-list').infiniteScroll();
 

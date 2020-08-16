@@ -24,9 +24,11 @@ global $wp_query;
 $children_categories = get_term_children( $wp_query->get_queried_object()->term_id, 'product_cat' );
 if ( count( $children_categories ) == 0 ): ?>
     </div>
-    <div class="open-more">
-        <a href="#" class="btn btn-blue">לטעון יותר</a>
-    </div>
+    <?php if ($wp_query->max_num_pages > 1): ?>
+        <div class="open-more">
+            <a href="#" class="btn btn-blue">לטעון יותר</a>
+        </div>
+    <?php endif; ?>
 <?php else: ?>
     </div>
 <?php endif; ?>

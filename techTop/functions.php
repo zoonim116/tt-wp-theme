@@ -1,6 +1,16 @@
 <?php
 
 require_once 'inc/Helper.php';
+require_once 'inc/categories-additonal.php';
+require_once 'inc/product-additonal.php';
+
+function tt_setup() {
+	add_theme_support( 'woocommerce' );
+	require_once( 'vendor/autoload.php' );
+	\Carbon_Fields\Carbon_Fields::boot();
+}
+
+add_action( 'after_setup_theme', 'tt_setup' );
 
 /**
  * Enqueue scripts and styles.
@@ -69,7 +79,6 @@ function cat($arr, $parent = 0) {
 			)
 		);
 		$products = Product::get_items($category[0]);
-
 		if (count($products->OutTab) > 0) {
             foreach ($products->OutTab as $item) {
                 $product = new WC_Product();
@@ -93,22 +102,25 @@ function cat($arr, $parent = 0) {
                 $product->set_sold_individually(false);
                 $product->set_category_ids($cid);
                 $product->update_meta_data('remote_image', "https://shop4.wizsoft.com/vshop/images/techtopimg/heb/{$item[6]}");
-                $product_id = $product->save();
+	            try {
+		            $product_id = $product->save();
+                } catch (Exception $e) {
+	                print_r($e);
+                }
+
             }
-		}
+		};
 		if (!is_wp_error($cid)) {
 			if (is_array($category[10]) && count($category[10]) > 0) {
 				cat($category[10], $cid['term_id']);
 			}
-		}
+		} else {
+			if (is_array($category[10]) && count($category[10]) > 0) {
+				cat($category[10], $cid->error_data['term_exists']);
+			}
+        }
 	}
 }
-
-function tt_setup() {
-	add_theme_support( 'woocommerce' );
-}
-
-add_action( 'after_setup_theme', 'tt_setup' );
 
 //add_action('init', function () {
 //	$root = Categories::get_categories();
@@ -116,7 +128,6 @@ add_action( 'after_setup_theme', 'tt_setup' );
 //		if(is_array($root[10]) && count($root[10]) > 0){
 //			cat($root[10]);
 //		}
-//		die();
 //	} catch (Exception $e) {
 //		print $e->getMessage();
 //	}
@@ -167,6 +178,7 @@ function woo_remove_wc_breadcrumbs() {
 	    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
 	    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
 	    add_action( 'tt_shop_loop_item_title', 'tt_template_loop_product_title', 20 );
+	    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 //	}
 }
 
@@ -188,9 +200,23 @@ function tt_loop_product_thumbnail() {
 add_action('tt_loop_product_thumbnail', 'tt_loop_product_thumbnail');
 
 add_filter('woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text');
+add_filter( 'woocommerce_product_add_to_cart_text' , 'woo_custom_cart_button_text' );
 
 function woo_custom_cart_button_text() {
 	return __('להוסיף לתיק', 'tt');
+}
+
+add_filter( 'woocommerce_output_related_products_args', 'tt_related_products_args', 20 );
+function tt_related_products_args( $args ) {
+	$args['posts_per_page'] = 3; // 4 related products
+	$args['columns'] = 2; // arranged in 2 columns
+	return $args;
+}
+
+add_filter('woocommerce_product_related_products_heading', 'tt_related_products_heading', 10);
+
+function tt_related_products_heading($args) {
+    return 'בדרך כלל לקנות עם זה';
 }
 
 /**
@@ -220,3 +246,133 @@ function tt_template_single_price() {
 }
 
 add_action( 'tt_template_single_price', 'tt_template_single_price', 10 );
+
+add_filter( 'woocommerce_get_price_html', 'tt_price_html', 100, 2 );
+function tt_price_html( $price, $product ){
+	if ( $product->get_price() > 0 ) {
+		if ( $product->get_price() && $product->get_regular_price() ) {
+			$from = $product->get_regular_price();
+			$to = $product->get_price();
+			return '<div class="item-price">
+                    <p class="old-price">'. ( ( is_numeric( $from ) ) ? woocommerce_price( $from ) : $from ) .'</p>
+                    <p>'.( ( is_numeric( $to ) ) ? woocommerce_price( $to ) : $to ) .'</p>
+                </div>';
+		} else {
+			$to = $product->get_price();
+			return '<div class="item-price">
+                    <p>'.( ( is_numeric( $to ) ) ? woocommerce_price( $to ) : $to ) .'</p>
+                </div>';
+		}
+	} else {
+		return ;
+	}
+}
+
+function tt_show_drivers_list() {
+    global $product;
+    $drivers = carbon_get_post_meta($product->get_id(), 'crb_drivers');
+    $list_html = '';
+    if ($drivers) {
+        $list_html .= "<ul>";
+        foreach ($drivers as $driver) {
+            $list_html .="<li><a href='".$driver['crb_url']."' target='_blank'>".$driver['crb_title']."</a> </li>";
+        }
+        $list_html .="</ul>";
+        echo $list_html;
+    }
+}
+
+add_action('tt_show_drivers_list', 'tt_show_drivers_list', 10);
+
+function tt_show_software_list() {
+	global $product;
+	$drivers = carbon_get_post_meta($product->get_id(), 'crb_software');
+	$list_html = '';
+	if ($drivers) {
+		$list_html .= "<ul>";
+		foreach ($drivers as $driver) {
+			$list_html .="<li><a href='".$driver['crb_url']."' target='_blank'>".$driver['crb_title']."</a> </li>";
+		}
+		$list_html .="</ul>";
+		echo $list_html;
+	}
+}
+
+add_action('tt_show_software_list', 'tt_show_software_list', 10);
+
+function tt_show_media_list() {
+	global $product;
+	$drivers = carbon_get_post_meta($product->get_id(), 'crb_media');
+	$list_html = '';
+	if ($drivers) {
+		$list_html .= "<ul>";
+		foreach ($drivers as $driver) {
+			$list_html .="<li><a href='".$driver['crb_url']."' target='_blank'>".$driver['crb_title']."</a> </li>";
+		}
+		$list_html .="</ul>";
+		echo $list_html;
+	}
+}
+
+add_action('tt_show_media_list', 'tt_show_media_list', 10);
+
+function tt_show_documentation_list() {
+	global $product;
+	$drivers = carbon_get_post_meta($product->get_id(), 'crb_documentation');
+	$list_html = '';
+	if ($drivers) {
+		$list_html .= "<ul>";
+		foreach ($drivers as $driver) {
+			$list_html .="<li><a href='".$driver['crb_url']."' target='_blank'>".$driver['crb_title']."</a> </li>";
+		}
+		$list_html .="</ul>";
+		echo $list_html;
+	}
+}
+
+add_action('tt_show_documentation_list', 'tt_show_documentation_list', 10);
+
+function tt_show_attributes_list() {
+	global $product;
+	$formatted_attributes = array();
+
+	$attributes = $product->get_attributes();
+
+	foreach($attributes as $attr=>$attr_deets){
+
+		$attribute_label = wc_attribute_label($attr);
+
+		if ( isset( $attributes[ $attr ] ) || isset( $attributes[ 'pa_' . $attr ] ) ) {
+
+			$attribute = isset( $attributes[ $attr ] ) ? $attributes[ $attr ] : $attributes[ 'pa_' . $attr ];
+
+			if ( $attribute['is_taxonomy'] ) {
+
+				$formatted_attributes[$attribute_label] = implode( ', ', wc_get_product_terms( $product->id, $attribute['name'], array( 'fields' => 'names' ) ) );
+
+			} else {
+
+				$formatted_attributes[$attribute['name']] = $attribute['value'];
+			}
+
+		}
+	}
+	$list_1 = $list_2 = '<div class="column is-6 card-col"><ul>';
+	$index = 0;
+    foreach ($formatted_attributes as $name => $value) {
+        if ($value == 'true') {
+            $value = '<img src="'.get_template_directory_uri().'/images/check.svg">';
+        }
+        if ($index % 2 == 0) {
+            $list_1 .= '<li><span>'.$name.'</span><span>'.$value.'</span></li>';
+        } else {
+	        $list_2 .= '<li><span>'.$name.'</span><span>'.$value.'</span></li>';
+        }
+        $index++;
+    }
+    $list_1 .= '</ul></div>';
+    $list_2 .= '</ul></div>';
+    echo $list_1 . '' .$list_2;
+}
+
+add_action('tt_show_attributes_list', 'tt_show_attributes_list', 10);
