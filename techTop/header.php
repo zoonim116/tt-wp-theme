@@ -10,13 +10,4 @@
 </head>
 <body <?php body_class(); ?>>
 <?php do_action('display_woo_categories'); ?>
-<section class="catalog-search">
-    <div class="container">
-        <form>
-            <div class="search-form">
-                <input class="input" type="search" placeholder="חפש מוצר">
-                <img src="<?php echo get_template_directory_uri(); ?>/images/search.svg">
-            </div>
-        </form>
-    </div>
-</section>
+<?php get_search_form(); ?>

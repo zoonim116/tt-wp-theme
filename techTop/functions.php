@@ -3,9 +3,11 @@
 require_once 'inc/Helper.php';
 require_once 'inc/categories-additonal.php';
 require_once 'inc/product-additonal.php';
+require_once 'inc/my-account.php';
 
 function tt_setup() {
 	add_theme_support( 'woocommerce' );
+	add_theme_support( 'html5', array( 'search-form' ) );
 	require_once( 'vendor/autoload.php' );
 	\Carbon_Fields\Carbon_Fields::boot();
 }
@@ -22,7 +24,15 @@ function tt_scripts() {
 
 	wp_enqueue_script( 'infinite-scroll', get_template_directory_uri() . '/lib/infinite-scroll.pkgd.min.js', ['jquery'], time(), true );
 	wp_enqueue_script( 'nouislider', get_template_directory_uri() . '/lib/nouislider.min.js', ['jquery'], time(), true );
-	wp_enqueue_script( 'tt-script', get_template_directory_uri() . '/lib/main.js', ['jquery'], time(), true );
+	wp_enqueue_script( 'jquery-validate', get_template_directory_uri() . '/lib/jquery.validate.min.js', ['jquery'], time(), false );
+	wp_enqueue_script( 'additional-methods', get_template_directory_uri() . '/lib/additional-methods.min.js', ['jquery'], time(), false );
+	wp_enqueue_script( 'tt-script', get_template_directory_uri() . '/lib/main.js', ['jquery', 'jquery-validate', 'additional-methods'], time(), true );
+
+	wp_localize_script( 'tt-script', 'tt_ajax',
+		[
+			'url' => admin_url('admin-ajax.php')
+		]
+	);
 }
 add_action( 'wp_enqueue_scripts', 'tt_scripts' );
 
@@ -32,7 +42,12 @@ function login_handle($username, $password ) {
 		if (!empty($username) && !empty($password) && $_POST['customer_type'] === 'b2c') {
 			return User::b2c_login($username, $password);
 		} elseif (!empty($username) && !empty($password) && $_POST['customer_type'] === 'b2b') {
-			return  User::b2b_login($username, $password);
+			$res = User::b2b_login($username, $password);
+			if ($res) {
+                $user_details = User::get_user_details();
+				update_user_meta( get_current_user_id(), 'user_details', $user_details);
+            }
+			 return $res;
 		}
 	}
 	return false;
@@ -67,8 +82,7 @@ add_action('display_woo_categories', 'display_woo_categories');
 
 function cat($arr, $parent = 0) {
 	foreach ($arr as $category) {
-
-		$cid = wp_insert_term(
+	    $cid = wp_insert_term(
 			$category[0], // the term
 			'product_cat', // the taxonomy
 			array(
@@ -81,35 +95,46 @@ function cat($arr, $parent = 0) {
 		$products = Product::get_items($category[0]);
 		if (count($products->OutTab) > 0) {
             foreach ($products->OutTab as $item) {
-                $product = new WC_Product();
-                $product->set_name($item[0]);
-                $product->set_status('publish');
-                $product->set_catalog_visibility('visible');
-                $product->set_description($item[2]);
-                $product->set_sku($item[18]);
-                //TODO add price to product
-                $product->set_price(30);
-                $product->set_regular_price(30);
-                $product->set_manage_stock(true);
-                $product->set_stock_quantity(1);
-                if ($item[28] == 'Out of stock') {
-                    $product->set_stock_status('outofstock');
-                } else {
-	                $product->set_stock_status('instock');
-                }
-                $product->set_backorders('no');
-                $product->set_reviews_allowed(false);
-                $product->set_sold_individually(false);
-                $product->set_category_ids($cid);
-                $product->update_meta_data('remote_image', "https://shop4.wizsoft.com/vshop/images/techtopimg/heb/{$item[6]}");
+//                if ($item[0] == '34205 REVEAL 502') {
+//                    echo "<pre>";
+//                    die(var_dump($item));
+//                }
 	            try {
+                    $price = str_replace('NIS ', '', $item[7]);
+                    $product = new WC_Product();
+                    $product->set_name($item[1]);
+                    $product->set_status('publish');
+                    $product->set_catalog_visibility('visible');
+                    $product->set_description($item[2]);
+                    $product->set_sku($item[0]);
+                    //TODO add price to product
+                    $product->set_price($price);
+                    $product->set_regular_price($price);
+                    $product->set_manage_stock(true);
+                    $product->set_stock_quantity(1);
+                    if ($item[28] == 'Out of stock') {
+                        $product->set_stock_status('outofstock');
+                    } else {
+                        $product->set_stock_status('instock');
+                    }
+                    $product->set_backorders('no');
+                    $product->set_reviews_allowed(false);
+                    $product->set_sold_individually(false);
+                    $product->set_category_ids($cid);
+                    $product->update_meta_data('remote_image', "https://shop4.wizsoft.com/vshop/images/techtopimg/heb/{$item[6]}");
+                    if (count($item[27]) > 0) {
+                        $product->update_meta_data('info_data', $item[27]);
+                    }
+                    if (count($item[4]) > 0) {
+	                    $product->update_meta_data('gallery_info_data', $item[4]);
+                    }
 		            $product_id = $product->save();
                 } catch (Exception $e) {
 	                print_r($e);
                 }
 
             }
-		};
+		}
 		if (!is_wp_error($cid)) {
 			if (is_array($category[10]) && count($category[10]) > 0) {
 				cat($category[10], $cid['term_id']);
@@ -123,6 +148,8 @@ function cat($arr, $parent = 0) {
 }
 
 //add_action('init', function () {
+//    echo "<pre>";
+//    die(var_dump(User::get_balance()));
 //	$root = Categories::get_categories();
 //	try {
 //		if(is_array($root[10]) && count($root[10]) > 0){
@@ -161,7 +188,8 @@ function tt_show_subcategories($category) {
 }
 
 function tt_template_loop_product_title() {
-	echo '<p class="title ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '"><a href="'.get_permalink().'">' . get_the_title() . '</a></p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    global $product;
+	echo '<p class="title ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '"><a href="'.get_permalink().'">' . $product->get_name() . '</a></p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 add_action( 'init', 'woo_remove_wc_breadcrumbs' );
@@ -179,8 +207,18 @@ function woo_remove_wc_breadcrumbs() {
 	    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
 	    add_action( 'tt_shop_loop_item_title', 'tt_template_loop_product_title', 20 );
 	    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+	    remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
+	    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 //	}
 }
+
+function tt_template_loop_price(){
+    global $product;
+    $info = Product::get_item_info($product->get_sku());
+    echo '<p>'.$info->OutTab[0][6].'</p>';
+}
+add_action( 'woocommerce_after_shop_loop_item_title', 'tt_template_loop_price', 10 );
+
 
 function tt_show_filters() {
     global $wp_query;
@@ -249,23 +287,27 @@ add_action( 'tt_template_single_price', 'tt_template_single_price', 10 );
 
 add_filter( 'woocommerce_get_price_html', 'tt_price_html', 100, 2 );
 function tt_price_html( $price, $product ){
-	if ( $product->get_price() > 0 ) {
-		if ( $product->get_price() && $product->get_regular_price() ) {
-			$from = $product->get_regular_price();
-			$to = $product->get_price();
-			return '<div class="item-price">
-                    <p class="old-price">'. ( ( is_numeric( $from ) ) ? woocommerce_price( $from ) : $from ) .'</p>
-                    <p>'.( ( is_numeric( $to ) ) ? woocommerce_price( $to ) : $to ) .'</p>
-                </div>';
-		} else {
-			$to = $product->get_price();
-			return '<div class="item-price">
-                    <p>'.( ( is_numeric( $to ) ) ? woocommerce_price( $to ) : $to ) .'</p>
-                </div>';
-		}
-	} else {
-		return ;
-	}
+	$info = Product::get_item_info($product->get_sku());
+		return '<div class="item-price">
+            <p>'.$info->OutTab[0][6] .'</p>
+        </div>';
+//	if ( $product->get_price() > 0 ) {
+//		if ( $product->get_price() && $product->get_regular_price() ) {
+//			$from = $product->get_regular_price();
+//			$to = $product->get_price();
+//			return '<div class="item-price">
+//                    <p class="old-price">'. ( ( is_numeric( $from ) ) ? woocommerce_price( $from ) : $from ) .'</p>
+//                    <p>'.( ( is_numeric( $to ) ) ? woocommerce_price( $to ) : $to ) .'</p>
+//                </div>';
+//		} else {
+//			$to = $product->get_price();
+//			return '<div class="item-price">
+//                    <p>'.( ( is_numeric( $to ) ) ? woocommerce_price( $to ) : $to ) .'</p>
+//                </div>';
+//		}
+//	} else {
+//		return ;
+//	}
 }
 
 function tt_show_drivers_list() {
@@ -334,39 +376,17 @@ add_action('tt_show_documentation_list', 'tt_show_documentation_list', 10);
 
 function tt_show_attributes_list() {
 	global $product;
-	$formatted_attributes = array();
-
-	$attributes = $product->get_attributes();
-
-	foreach($attributes as $attr=>$attr_deets){
-
-		$attribute_label = wc_attribute_label($attr);
-
-		if ( isset( $attributes[ $attr ] ) || isset( $attributes[ 'pa_' . $attr ] ) ) {
-
-			$attribute = isset( $attributes[ $attr ] ) ? $attributes[ $attr ] : $attributes[ 'pa_' . $attr ];
-
-			if ( $attribute['is_taxonomy'] ) {
-
-				$formatted_attributes[$attribute_label] = implode( ', ', wc_get_product_terms( $product->id, $attribute['name'], array( 'fields' => 'names' ) ) );
-
-			} else {
-
-				$formatted_attributes[$attribute['name']] = $attribute['value'];
-			}
-
-		}
-	}
+	$formatted_attributes = get_post_meta($product->get_ID(), 'info_data')[0];
 	$list_1 = $list_2 = '<div class="column is-6 card-col"><ul>';
 	$index = 0;
-    foreach ($formatted_attributes as $name => $value) {
+    foreach ($formatted_attributes as $value) {
         if ($value == 'true') {
             $value = '<img src="'.get_template_directory_uri().'/images/check.svg">';
         }
         if ($index % 2 == 0) {
-            $list_1 .= '<li><span>'.$name.'</span><span>'.$value.'</span></li>';
+            $list_1 .= '<li><span>'.$value[0].'</span><span>'.$value[1].'</span></li>';
         } else {
-	        $list_2 .= '<li><span>'.$name.'</span><span>'.$value.'</span></li>';
+	        $list_2 .= '<li><span>'.$value[0].'</span><span>'.$value[1].'</span></li>';
         }
         $index++;
     }
@@ -376,3 +396,137 @@ function tt_show_attributes_list() {
 }
 
 add_action('tt_show_attributes_list', 'tt_show_attributes_list', 10);
+
+function tt_remove_specific_country( $countries ) {
+
+	global $woocommerce;
+
+	// default do not limit
+	$limited_countries = array_values(array_flip($countries));
+
+	// Country array to keep
+	$eu = ['IL'];
+
+	// keep countries, sort them out of the full array to keep the names
+	$found = array_filter($countries, function($item) use ($eu) {
+		return in_array($item, $eu);
+	}, ARRAY_FILTER_USE_KEY); // USE_KEY is essential cause we are filtering the language codes
+
+	// return the found countries
+	return $found;
+}
+add_filter( 'woocommerce_countries', 'tt_remove_specific_country', 10, 1 );
+
+function tt_prefill_checkout_fields($input, $key) {
+	$user = User::get_user_details();
+	switch ($key) :
+		case 'billing_first_name':
+		    return $user->Name;
+        break;
+		case 'shipping_first_name':
+			return $user->Name;
+        break;
+        case 'billing_email':
+            return $user->EMail;
+        break;
+		case 'billing_phone':
+			return $user->BPhone;
+        break;
+		case 'billing_city':
+			return $user->BCity;
+        break;
+		case 'billing_address_1':
+			return $user->BAddress;
+			break;
+    endswitch;
+}
+
+add_filter( 'woocommerce_checkout_get_value' , 'tt_prefill_checkout_fields', 10, 2 );
+
+add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
+function custom_override_checkout_fields($fields)
+{
+	$fields['billing']['billing_first_name']['placeholder'] = $fields['shipping']['shipping_first_name']['placeholder'] = 'שם ומשפחה';
+	$fields['billing']['billing_first_name']['label'] = $fields['shipping']['shipping_first_name']['label'] =  'שם ומשפחה';
+	$fields['billing']['billing_first_name']['class'][0] = $fields['shipping']['shipping_first_name']['class'][0] = 'form-row-wide';
+	unset($fields['billing']['billing_last_name']);
+	unset($fields['shipping']['shipping_last_name']);
+	unset($fields['billing']['billing_company']);
+	unset($fields['shipping']['shipping_company']);
+	unset( $fields['billing']['billing_phone']['validate']);
+	return $fields;
+}
+
+add_filter( 'woocommerce_default_address_fields', 'tt_unrequire_wc_phone_field');
+function tt_unrequire_wc_phone_field( $fields ) {
+	$fields['company']['required'] = false;
+	$fields['postcode']['required'] = false;
+
+	return $fields;
+}
+
+add_filter( 'woocommerce_cart_needs_payment', '__return_false' );
+
+add_action( 'woocommerce_after_checkout_billing_form', 'tt_select_field' );
+
+// select
+function tt_select_field( $checkout ){
+	$options = [];
+	$shipping_response = User::get_user_shipping_methods();
+    if (count($shipping_response->OutTab)) {
+        foreach ($shipping_response->OutTab[0][3] as $index => $delivery_method) {
+            $options[$delivery_method[0]] = $delivery_method[0];
+        }
+    }
+
+	$current_user = wp_get_current_user();
+	$DefaultDeliveryMethod = get_user_meta($current_user->ID, 'DefaultDeliveryMethod', true);
+	woocommerce_form_field( 'delivery_method', [
+		'type'          => 'select', // text, textarea, select, radio, checkbox, password, about custom validation a little later
+		'required'	=> true, // actually this parameter just adds "*" to the field
+		'class'         => array('delivery-field', 'form-row-wide'), // array only, read more about classes and styling in the previous step
+		'label'         => 'שיטת משלוח',
+		'label_class'   => 'delivery-label', // sometimes you need to customize labels, both string and arrays are supported
+		'options'	=> $options
+	], $DefaultDeliveryMethod);
+
+}
+
+add_action( 'woocommerce_checkout_update_order_meta', 'tt_save_checkout_custom_fields' );
+
+function tt_save_checkout_custom_fields( $order_id ){
+	if( !empty( $_POST['delivery_method'] ) )
+		update_post_meta( $order_id, 'delivery_method', sanitize_text_field( $_POST['delivery_method'] ) );
+}
+
+add_action('woocommerce_add_to_cart', 'customer_add_to_cart', 10 ,4);
+function customer_add_to_cart($cart_item_key, $product_id, $quantity) {
+    $product = wc_get_product( $product_id );
+    echo "<pre>";
+    die(var_dump($product->get_sku()));
+    Product::add_to_basket($product->get_sku(), $quantity);
+}
+
+add_action('wp_ajax_get_b2b_user_balance', 'get_b2b_user_balance');
+//add_action('wp_ajax_nopriv_get_b2b_user_balance', 'get_b2b_user_balance');
+function get_b2b_user_balance() {
+    $data = User::get_balance();
+    echo $data->CurrBalance;
+	wp_die();
+}
+
+add_action('wp_ajax_update_password', 'update_password');
+//add_action('wp_ajax_nopriv_get_b2b_user_balance', 'get_b2b_user_balance');
+function update_password() {
+    if ($_POST['currPass'] && $_POST['newPass']) {
+	    $data = User::update_password($_POST['currPass'], $_POST['newPass']);
+//	    echo "<pre>";
+//	    die(var_dump($data));
+	    if ($data->Status && $data->Status == 'OK') {
+	        echo $data->Status;
+        } else {
+	        echo $data;
+        }
+    }
+	wp_die();
+}

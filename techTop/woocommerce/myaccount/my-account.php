@@ -22,15 +22,40 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.6.0
  */
-do_action( 'woocommerce_account_navigation' ); ?>
+//do_action( 'woocommerce_account_navigation' ); ?>
 
-<div class="woocommerce-MyAccount-content">
-	<?php
-		/**
-		 * My Account content.
-		 *
-		 * @since 2.6.0
-		 */
-		do_action( 'woocommerce_account_content' );
-	?>
-</div>
+<!--<div class="woocommerce-MyAccount-content">-->
+
+<section class="main-section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3">
+            </div>
+            <div class="column is-9">
+                <h1><?php the_title(); ?></h1>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-3 nav-menu">
+                <?php
+                /**
+                 * My Account navigation.
+                 *
+                 * @since 2.6.0
+                 */
+                do_action( 'woocommerce_account_navigation' ); ?>
+                <a href="#" class="more-btn"></a>
+            </div>
+            <div class="column is-9">
+	            <?php
+	            /**
+	             * My Account content.
+	             *
+	             * @since 2.6.0
+	             */
+	            do_action( 'woocommerce_account_content' );
+	            ?>
+            </div>
+        </div>
+    </div>
+</section>

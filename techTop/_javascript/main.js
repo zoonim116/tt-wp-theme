@@ -138,4 +138,63 @@ document.addEventListener('DOMContentLoaded', () => {
     $(document).trigger('retrieve.infscr');
   });
 
+  if ($('div.balance').length > 0) {
+    var data = {
+      action: 'get_b2b_user_balance',
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      $('div.balance p:last-child').html(response);
+    });
+  }
+
+  $('.show-pass').on('click', function (e) {
+      e.preventDefault();
+      $(this).toggleClass('show-text');
+      var type = $(this).prevAll('.input').first().attr('type');
+      if (type === 'password') {
+        $(this).prevAll('.input').first().attr('type', 'text');
+      } else {
+        $(this).prevAll('.input').first().attr('type', 'password');
+      }
+  });
+
+  jQuery( '#change-password' ).validate({
+    onsubmit: true,
+    rules: {
+      currPass: {
+        required: true,
+        minlength: 6
+      },
+      newPass: {
+        required: true,
+        minlength: 6
+      },
+      confPass: {
+        required: true,
+        minlength: 6,
+        equalTo: "#newPass"
+      }
+    }
+  });
+
+  $('#change-password .btn-orange').on('click', function (e){
+      e.preventDefault();
+      if (jQuery('#change-password').valid()) {
+        var data = {
+          action: 'update_password',
+          currPass: $('#change-password #currPass').val(),
+          newPass: $('#change-password #newPass').val()
+        };
+        jQuery.post( tt_ajax.url, data, function(response) {
+          $('#change-password .success').text('');
+          $('#change-password .errors').text('');
+          if (response == 'OK') {
+            $('#change-password .success').text('סיסמא שונתה');
+          } else {
+            $('#change-password .errors').text(response);
+          }
+        });
+      }
+  });
+
 });

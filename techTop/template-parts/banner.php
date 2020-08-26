@@ -1,18 +1,11 @@
-<section class="catalog-banner">
-	<div class="container">
-		<div class="columns is-vcentered is-mobile">
-			<div class="column is-6 banner-sale">
-				<span>מכירה גדולה</span>
-				<span>-15%</span>
-				<span>הצעה מיוחדת</span>
-			</div>
-			<div class="column is-4 banner-img">
-				<img src="<?php echo get_template_directory_uri();?>/images/banner-img.png">
-			</div>
-			<div class="column is-2 banner-price">
-				<span>₪1.700</span>
-				<span>₪1.400</span>
-			</div>
-		</div>
-	</div>
-</section>
+<?php
+$banner_url = $banner_image = null;
+if ($wp_query->get_queried_object()->term_id) {
+    $banner_image = carbon_get_term_meta($wp_query->get_queried_object()->term_id, 'crb_banner_thumb');
+    $banner_url = carbon_get_term_meta($wp_query->get_queried_object()->term_id, 'crb_banner_url');
+}
+if ($banner_url && $banner_image): ?>
+    <section class="catalog-banner">
+        <a href="<?php echo $banner_url; ?>"><img src="<?php echo $banner_image;?>"></a>
+    </section>
+<?php endif; ?>

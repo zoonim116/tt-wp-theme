@@ -22,14 +22,57 @@ if ( ! defined( 'ABSPATH' ) ) {
 do_action( 'woocommerce_before_account_navigation' );
 ?>
 
-<nav class="woocommerce-MyAccount-navigation">
 	<ul>
+
 		<?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
 			<li class="<?php echo wc_get_account_menu_item_classes( $endpoint ); ?>">
-				<a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>"><?php echo esc_html( $label ); ?></a>
+				<a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>">
+                    <div>
+                        <?php switch ($endpoint) {
+                            case  'dashboard': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/account.svg">
+                            <?php break;
+	                        case  'orders': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/my-orders.svg">
+                            <?php break;
+	                        case  'wishlist': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/like.svg">
+                            <?php break;
+	                        case  'statistic': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/statistics.svg">
+                            <?php break;
+	                        case  'balance': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/balance.svg">
+                            <?php break;
+	                        case  'payments': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/payments.svg">
+                            <?php break;
+	                        case  'delivery-addresses': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/map.svg">
+		                        <?php break;
+	                        case  'definitions': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/settings.svg">
+		                        <?php break;
+	                        case  'promotional': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/promo.svg">
+		                        <?php break;
+	                        case  'consultant': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/personal.svg">
+		                        <?php break;
+                            case  'help': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/help.svg">
+		                        <?php break;
+	                        case  'logout': ?>
+                                <img src="<?php echo get_template_directory_uri()?>/images/logout.svg">
+		                        <?php break;
+                        } ?>
+                    </div>
+                    <div>
+	                    <?php echo esc_html( $label ); ?>
+                    </div>
+                    </a>
 			</li>
 		<?php endforeach; ?>
 	</ul>
-</nav>
 
 <?php do_action( 'woocommerce_after_account_navigation' ); ?>
