@@ -1,8 +1,8 @@
 <?php if (get_class($wp_query->get_queried_object()) == 'WP_Term') {
 
 	$filters = Categories::get_filters($wp_query->get_queried_object()->name);
-	echo "<pre>";
-	die(var_dump($filters));
+//	echo "<pre>";
+//	die(var_dump($filters));
 }  ?>
 <div class="catalog-filter">
 	<form>

@@ -138,6 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
     $(document).trigger('retrieve.infscr');
   });
 
+  if ($('.nav-menu-balance').length > 0) {
+    var data = {
+      action: 'get_b2b_user_balance',
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      $('.nav-menu-balance').html(response);
+    });
+  }
+
   if ($('div.balance').length > 0) {
     var data = {
       action: 'get_b2b_user_balance',
@@ -195,6 +204,80 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }
+  });
+
+  $('#billing-info .btn-orange').on('click', function (e){
+      e.preventDefault();
+    var data = {
+      action: 'update_billing_info',
+      Name: $('#billing-info #Name').val(),
+      Phone: $('#billing-info #Phone').val(),
+      EMail: $('#billing-info #EMail').val(),
+      Address: $('#billing-info #Address').val(),
+      City: $('#billing-info #City').val(),
+      Country: $('#billing-info #Country').val()
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      if (response === 'OK') {
+        window.location.href = $('#billing-info .button-group a:last-child').attr('href');
+      } else {
+        $('#billing-info .errors').text(response);
+      }
+    });
+  });
+
+  $('#billing-address .btn-orange').on('click', function (e){
+    e.preventDefault();
+    var data = {
+      action: 'update_billing_info',
+      BName: $('#billing-address #BName').val(),
+      BAddress: $('#billing-address #BAddress').val(),
+      BCity: $('#billing-address #BCity').val(),
+      BRegion: $('#billing-address #BRegion').val(),
+      BZip: $('#billing-address #BZip').val(),
+      BPhone: $('#billing-address #BPhone').val(),
+      Name: $('#billing-address #Name').val(),
+      Phone: $('#billing-address #Phone').val(),
+      EMail: $('#billing-address #EMail').val(),
+      Address: $('#billing-address #Address').val(),
+      City: $('#billing-address #City').val(),
+      Country: $('#billing-address #Country').val()
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      if (response === 'OK') {
+        window.location.href = $('#billing-address .button-group a:last-child').attr('href');
+      } else {
+        $('#billing-address .errors').text(response);
+      }
+    });
+  });
+
+  $('.btn-group .like').on('click', function (e){
+    e.preventDefault();
+    var data = {
+      action: 'add_to_wishlist',
+      sku: $(this).data('sku')
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      alert(response);
+    });
+  });
+
+  $('[name="wishlist_sorting"]').on('change', function (e){
+    e.preventDefault();
+    window.location.search = '?sort=' + $('[name="wishlist_sorting"] option:selected').val();
+  });
+
+  $('.wishlist.active').on('click', function (e){
+    e.preventDefault();
+    var data = {
+      action: 'remove_from_wishlist',
+      sku: $(this).data('sku')
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      alert(response);
+      window.location.reload();
+    });
   });
 
 });

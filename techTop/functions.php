@@ -149,7 +149,7 @@ function cat($arr, $parent = 0) {
 
 //add_action('init', function () {
 //    echo "<pre>";
-//    die(var_dump(User::get_balance()));
+//    die(var_dump(Product::get_wishlist()));
 //	$root = Categories::get_categories();
 //	try {
 //		if(is_array($root[10]) && count($root[10]) > 0){
@@ -508,7 +508,6 @@ function customer_add_to_cart($cart_item_key, $product_id, $quantity) {
 }
 
 add_action('wp_ajax_get_b2b_user_balance', 'get_b2b_user_balance');
-//add_action('wp_ajax_nopriv_get_b2b_user_balance', 'get_b2b_user_balance');
 function get_b2b_user_balance() {
     $data = User::get_balance();
     echo $data->CurrBalance;
@@ -516,17 +515,53 @@ function get_b2b_user_balance() {
 }
 
 add_action('wp_ajax_update_password', 'update_password');
-//add_action('wp_ajax_nopriv_get_b2b_user_balance', 'get_b2b_user_balance');
 function update_password() {
     if ($_POST['currPass'] && $_POST['newPass']) {
 	    $data = User::update_password($_POST['currPass'], $_POST['newPass']);
-//	    echo "<pre>";
-//	    die(var_dump($data));
 	    if ($data->Status && $data->Status == 'OK') {
 	        echo $data->Status;
         } else {
 	        echo $data;
         }
     }
+	wp_die();
+}
+
+add_action('wp_ajax_update_billing_info', 'update_billing_info');
+function update_billing_info() {
+    $data = $_POST;
+    unset($data['action']);;
+    $data = User::update_user_details($data);
+	if ($data->Status && $data->Status == 'OK') {
+		echo $data->Status;
+    } else {
+		echo $data;
+    }
+	wp_die();
+}
+
+add_action('wp_ajax_add_to_wishlist', 'add_to_wishlist');
+function add_to_wishlist() {
+    if ($_POST['sku']) {
+	    $data = Product::add_to_wishlist($_POST['sku']);
+	    if ($data->Status && $data->Status == 'OK') {
+		    echo $data->Status;
+	    } else {
+		    echo $data;
+	    }
+    }
+	wp_die();
+}
+
+add_action('wp_ajax_remove_from_wishlist', 'remove_from_wishlist');
+function remove_from_wishlist() {
+	if ($_POST['sku']) {
+		$data = Product::remove_from_wishlist($_POST['sku']);
+		if ($data->Status && $data->Status == 'OK') {
+			echo $data->Status;
+		} else {
+			echo $data;
+		}
+	}
 	wp_die();
 }

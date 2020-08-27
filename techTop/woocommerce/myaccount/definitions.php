@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p><?php echo $user_data->Phone; ?></p>
 		</div>
 		<div class="settings-footer">
-			<a href="#" class="btn">ערוך</a>
+			<a href="<?php echo esc_url( wc_get_endpoint_url( 'change_billing_info' ) ); ?>" class="btn">ערוך</a>
 		</div>
 	</div>
 	<div class="settings-item white-bg">
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <!--			<p>09484610</p>-->
 		</div>
 		<div class="settings-footer">
-			<a href="#" class="btn">ערוך</a>
+			<a href="<?php echo esc_url( wc_get_endpoint_url( 'change_billing_address' ) ); ?>" class="btn">ערוך</a>
 		</div>
 	</div>
 	<div class="settings-item white-bg">

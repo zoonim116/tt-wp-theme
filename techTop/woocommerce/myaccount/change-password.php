@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
         <div class="button-group">
             <a href="#" class="btn btn-orange">לשמור</a>
-            <a href="#" class="btn">לבטל</a>
+            <a href="<?php echo esc_url( wc_get_endpoint_url( 'definitions' ) ); ?>" class="btn">לבטל</a>
         </div>
     </form>
 </div>
