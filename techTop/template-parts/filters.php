@@ -1,165 +1,67 @@
 <?php if (get_class($wp_query->get_queried_object()) == 'WP_Term') {
 
 	$filters = Categories::get_filters($wp_query->get_queried_object()->name);
-//	echo "<pre>";
-//	die(var_dump($filters));
 }  ?>
 <div class="catalog-filter">
-	<form>
-		<div class="filter-category">
-			<a href="#">מערכות קשר במה ואולפן</a>
-			<a href="#">תקנות ומכשירים בעבור לקויי שמיעה</a>
-			<a href="#">קופסאות חיבור ישיר - ID</a>
-			<a href="#">קופסת עיתונאים</a>
-		</div>
+    <?php
+    global $wp;
+    $current_url = home_url(add_query_arg(array(), $wp->request));
+    ?>
+	<form method="get" name="filter_action" id="filters-form" action="<?php $current_url; ?>">
+        <input type="hidden" name="action" value="filters">
+        <input type="hidden" name="CategoryPath" value="<?php echo $filters->CategoryPath[0];?>">
+<!--		<div class="filter-category">-->
+<!--			<a href="#">מערכות קשר במה ואולפן</a>-->
+<!--			<a href="#">תקנות ומכשירים בעבור לקויי שמיעה</a>-->
+<!--			<a href="#">קופסאות חיבור ישיר - ID</a>-->
+<!--			<a href="#">קופסת עיתונאים</a>-->
+<!--		</div>-->
 		<div class="filter-form">
-			<div class="form-item">
-				<div class="form-head">
-					<span>מותג</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body">
-					<div class="filter-param">
-						<ul>
-							<li>
-								<div class="info-checkbox">
-									<input type="checkbox" id="check1" name="item1">
-									<label for="check1">את כל</label>
-								</div>
-								<div class="count">
-									<span>567</span>
-								</div>
-							</li>
-							<li>
-								<div class="info-checkbox">
-									<input type="checkbox" id="check2" name="item1">
-									<label for="check2">Behringer</label>
-								</div>
-								<div class="count">
-									<span>12</span>
-								</div>
-							</li>
-							<li>
-								<div class="info-checkbox">
-									<input type="checkbox" id="check3" name="item1">
-									<label for="check3">Lake</label>
-								</div>
-								<div class="count">
-									<span>1</span>
-								</div>
-							</li>
-							<li>
-								<div class="info-checkbox">
-									<input type="checkbox" id="check4" name="item1">
-									<label for="check4">Klotz</label>
-								</div>
-								<div class="count">
-									<span>4</span>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="form-item chosen">
-				<div class="form-head">
-					<span>סוג אוזניות</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body"></div>
-			</div>
-			<div class="form-item">
-				<div class="form-head">
-					<span>מיקרופון</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body"></div>
-			</div>
-			<div class="form-item">
-				<div class="form-head">
-					<span>אטימות</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body"></div>
-			</div>
-			<div class="form-item">
-				<div class="form-head">
-					<span>התנגדות</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body"></div>
-			</div>
-			<div class="form-item">
-				<div class="form-head">
-					<span>תחום הענות</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body"></div>
-			</div>
-			<div class="form-item">
-				<div class="form-head">
-					<span>ערוצי סטריאו</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body">
-					<div class="filter-param">
-						<div class="range-slider">
-							<input type="text" id="input-with-keypress-0">
-							<div></div>
-							<input type="text" id="input-with-keypress-1">
-						</div>
-						<div id="steps-slider"></div>
-					</div>
-				</div>
-			</div>
-			<div class="form-item">
-				<div class="form-head">
-					<span>מחברי יציאה</span>
-					<img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
-				</div>
-				<div class="form-body">
-					<div class="filter-param">
-						<ul>
-							<li>
-								<div class="info-radio">
-									<input type="radio" id="radio1" name="item1">
-									<label for="radio1">6.3 mm</label>
-								</div>
-								<div class="count">
-									<span>567</span>
-								</div>
-							</li>
-							<li>
-								<div class="info-radio">
-									<input type="radio" id="radio2" name="item1">
-									<label for="radio2">MIDI</label>
-								</div>
-								<div class="count">
-									<span>12</span>
-								</div>
-							</li>
-							<li>
-								<div class="info-radio">
-									<input type="radio" id="radio3" name="item1">
-									<label for="radio3">USB 2.0</label>
-								</div>
-								<div class="count">
-									<span>1</span>
-								</div>
-							</li>
-							<li>
-								<div class="info-radio">
-									<input type="radio" id="radio4" name="item1">
-									<label for="radio4">Headphone jack</label>
-								</div>
-								<div class="count">
-									<span>4</span>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+            <?php if ($filters->Status == "OK"): ?>
+                <?php foreach ($filters->StringTab as $string_filter): ?>
+                    <div class="form-item">
+                        <div class="form-head">
+                            <span><?php echo $string_filter[1]; ?></span>
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
+                        </div>
+                        <div class="form-body">
+                            <div class="filter-param">
+                                <ul>
+                                    <?php foreach ($string_filter[2] as $index => $filter_value): ?>
+                                    <li>
+                                        <div class="info-radio">
+                                            <input type="radio" id="<?php echo $string_filter[1] . '_' . $index; ?>" name="<?php echo $string_filter[0];?>" value="<?php echo $filter_value; ?>">
+                                            <label for="<?php echo $string_filter[1] . '_' . $index; ?>"><?php echo $filter_value ?></label>
+                                        </div>
+<!--                                        <div class="count">-->
+<!--                                            <span>567</span>-->
+<!--                                        </div>-->
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+			    <?php foreach ($filters->NumericTab as $index => $numeric_filter): ?>
+                    <div class="form-item">
+                        <div class="form-head">
+                            <span><?php echo $numeric_filter[1]; ?></span>
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
+                        </div>
+                        <div class="form-body">
+                            <div class="filter-param">
+                                <div class="range-slider">
+                                    <input type="text" class="start_value" name="<?php echo $numeric_filter[0]; ?>[]"  value="<?php echo $filters->NumDefaultFrom; ?>">
+                                    <div></div>
+                                    <input type="text" class="end_value" name="<?php echo $numeric_filter[0]; ?>[]" value="<?php echo $filters->NumDefaultTo; ?>">
+                                </div>
+                                <div id="steps-slider-<?php echo $index; ?>"></div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
 		</div>
 	</form>
 </div>

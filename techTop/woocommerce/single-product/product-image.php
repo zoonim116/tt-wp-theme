@@ -25,6 +25,7 @@ if ( ! function_exists( 'wc_get_gallery_image_html' ) ) {
 global $product;
 $columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
 $post_thumbnail_id = $product->get_image_id();
+
 $html = '<div class="cart-slider-item">';
 if ( $product->get_image_id() ) {
 	$html .= wc_get_gallery_image_html( $post_thumbnail_id, true );
@@ -35,11 +36,13 @@ if ( $product->get_image_id() ) {
 }
 $html .= '</div>';
 ?>
+
 <div class="card-slider">
     <div>
         <div class="slider-for">
             <?php echo $html; ?>
             <?php wc_get_template( 'single-product/product-thumbnails.php' ); ?>
+            <?php wc_get_template('single-product/product-videos.php'); ?>
         </div>
         <div class="arrows-slider">
             <span class="next">
@@ -58,6 +61,7 @@ $html .= '</div>';
         <div class="slider-nav">
             <?php echo $html; ?>
             <?php wc_get_template( 'single-product/product-full-images.php' ); ?>
+            <?php wc_get_template('single-product/product-video-thumbs.php'); ?>
         </div>
     </div>
 </div>

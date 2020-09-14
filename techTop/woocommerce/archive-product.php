@@ -18,7 +18,6 @@
 defined( 'ABSPATH' ) || exit;
 
 get_header( 'shop' );
-
 /**
  * Hook: woocommerce_before_main_content.
  *
@@ -44,7 +43,41 @@ do_action( 'woocommerce_before_main_content' );
 	?>
 </header>
 <?php
-if ( woocommerce_product_loop() ) {
+global $wp;
+if ($wp->query_vars['action'] == 'filters') {
+	$params = $wp->query_vars;
+	$category = 'NON';
+	if ($wp->query_vars['CategoryPath']) {
+		$category = $wp->query_vars['CategoryPath'];
+	}
+	unset($params['action']);
+	unset($params['CategoryPath']);
+	unset($params['product_cat']);
+	$results = Categories::filter($params, $category);
+	do_action('tt_show_filters');
+	/**
+	 * Hook: woocommerce_before_shop_loop.
+	 *
+	 * @hooked woocommerce_output_all_notices - 10
+	 * @hooked woocommerce_result_count - 20
+	 * @hooked woocommerce_catalog_ordering - 30
+	 */
+
+	do_action( 'woocommerce_before_shop_loop' );
+
+	woocommerce_product_loop_start();
+	if ($results->Status == 'OK' && count($results->OutTab) > 0) {
+	    foreach ($results->OutTab as $item) {
+	        $product_id = wc_get_product_id_by_sku($item[0]);
+	        if ($product_id){
+		        $product = wc_get_product( $product_id );
+		        $pr = Product::get_item_info($product->get_sku());
+		        $info = $pr->OutTab;
+		        echo Helper::hm_get_template_part('woocommerce/filters-results', ['product' => $product, 'info' => $info[0]]);
+            }
+        }
+    }
+}elseif ( woocommerce_product_loop() ) {
         do_action('tt_show_filters');
 	/**
 	 * Hook: woocommerce_before_shop_loop.

@@ -40,36 +40,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php if (count($wishlist_data->OutTab) > 0): ?>
 			<?php foreach ($wishlist_data->OutTab as $item): ?>
 				<?php $product_id = wc_get_product_id_by_sku($item[1]); ?>
-				<?php $product = wc_get_product($product_id); ?>
-				<div class="products-item">
-					<div class="item-img">
-                        <img src="<?php echo get_post_meta($product->get_id(), 'remote_image', true); ?>">
-					</div>
-					<div class="item-content">
-						<a href="<?php echo get_permalink( $product->get_id() ); ?>"> <p class="title"><?php echo $product->get_name(); ?></p></a>
-						<p class="description"><?php echo apply_filters( 'the_excerpt', $product->post->post_excerpt ); ?></p>
-					</div>
-					<div class="item-footer">
-						<p class="price">₪<?php echo $item['5']; ?></p>
-						<div class="item-icons">
-							<a href="#" data-sku="<?php echo $item[1]; ?>" class="wishlist active"><span></span></a>
-							<?php
-							echo apply_filters(
-								'woocommerce_loop_add_to_cart_link',
-								sprintf(
-									'<a href="%s" data-product_id="%s" data-product_sku="%s" class="cart product_type_%s"><span></span></a>',
-									esc_url( $product->add_to_cart_url() ),
-									esc_attr( $product->get_id() ),
-									esc_attr( $product->get_sku() ),
-									$product->is_purchasable() ? 'add_to_cart_button' : '',
-									esc_attr( $product->product_type ),
-									esc_html( $product->add_to_cart_text() )
-								),
-								$product
-							);?>
-						</div>
-					</div>
-				</div>
+                <?php if ($product_id): ?>
+                    <?php $product = wc_get_product($product_id); ?>
+                    <div class="products-item">
+                        <div class="item-img">
+                            <img src="<?php echo get_post_meta($product->get_id(), 'remote_image', true); ?>">
+                        </div>
+                        <div class="item-content">
+                            <a href="<?php echo get_permalink( $product->get_id() ); ?>"> <p class="title"><?php echo $product->get_name(); ?></p></a>
+                            <p class="description"><?php echo apply_filters( 'the_excerpt', $product->post->post_excerpt ); ?></p>
+                        </div>
+                        <div class="item-footer">
+                            <p class="price">₪<?php echo $item['5']; ?></p>
+                            <div class="item-icons">
+                                <a href="#" data-sku="<?php echo $item[1]; ?>" class="wishlist active"><span></span></a>
+                                <?php
+                                echo apply_filters(
+                                    'woocommerce_loop_add_to_cart_link',
+                                    sprintf(
+                                        '<a href="%s" data-product_id="%s" data-product_sku="%s" class="cart product_type_%s"><span></span></a>',
+                                        esc_url( $product->add_to_cart_url() ),
+                                        esc_attr( $product->get_id() ),
+                                        esc_attr( $product->get_sku() ),
+                                        $product->is_purchasable() ? 'add_to_cart_button' : '',
+                                        esc_attr( $product->product_type ),
+                                        esc_html( $product->add_to_cart_text() )
+                                    ),
+                                    $product
+                                );?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>

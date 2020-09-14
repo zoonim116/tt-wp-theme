@@ -1,13 +1,24 @@
 <?php
-
+//
 require_once 'inc/Helper.php';
 require_once 'inc/categories-additonal.php';
 require_once 'inc/product-additonal.php';
 require_once 'inc/my-account.php';
+require_once 'inc/homepage-settings.php';
+require_once 'inc/bulma-navwalker.php';
 
 function tt_setup() {
 	add_theme_support( 'woocommerce' );
 	add_theme_support( 'html5', array( 'search-form' ) );
+
+	register_nav_menus(
+		array(
+			'top-header-menu' => esc_html__( 'Primary', 'tt' ),
+			'footer-bottom' => esc_html__( 'Footer Bottom', 'tt' ),
+		)
+	);
+
+	global $WIZ_CART;
 	require_once( 'vendor/autoload.php' );
 	\Carbon_Fields\Carbon_Fields::boot();
 }
@@ -18,6 +29,7 @@ add_action( 'after_setup_theme', 'tt_setup' );
  * Enqueue scripts and styles.
  */
 function tt_scripts() {
+	wp_enqueue_style( 'tt-nouislider', get_template_directory_uri().'/css/nouislider.min.css', array(), time() );
 	wp_enqueue_style( 'tt-style', get_template_directory_uri().'/css/index.css', array(), time() );
 	wp_style_add_data( 'tt-style', 'rtl', 'replace' );
 
@@ -82,74 +94,75 @@ add_action('display_woo_categories', 'display_woo_categories');
 
 function cat($arr, $parent = 0) {
 	foreach ($arr as $category) {
-	    $cid = wp_insert_term(
-			$category[0], // the term
-			'product_cat', // the taxonomy
-			array(
-		        //TODO add description to category
-				'description'=> '',
-				'slug' => $category[0],
-				'parent' => $parent
-			)
-		);
+		if ($term = term_exists($category[0], 'product_cat')) {
+            $cid = $term['term_id'];
+		} else {
+			$term = wp_insert_term(
+				$category[0], // the term
+				'product_cat', // the taxonomy
+				array(
+					//TODO add description to category
+					'description'=> '',
+					'slug' => $category[0],
+					'parent' => $parent
+				)
+			);
+			$cid = $term['term_id'];
+		}
 		$products = Product::get_items($category[0]);
 		if (count($products->OutTab) > 0) {
-            foreach ($products->OutTab as $item) {
-//                if ($item[0] == '34205 REVEAL 502') {
-//                    echo "<pre>";
-//                    die(var_dump($item));
-//                }
-	            try {
-                    $price = str_replace('NIS ', '', $item[7]);
-                    $product = new WC_Product();
-                    $product->set_name($item[1]);
-                    $product->set_status('publish');
-                    $product->set_catalog_visibility('visible');
-                    $product->set_description($item[2]);
-                    $product->set_sku($item[0]);
-                    //TODO add price to product
-                    $product->set_price($price);
-                    $product->set_regular_price($price);
-                    $product->set_manage_stock(true);
-                    $product->set_stock_quantity(1);
-                    if ($item[28] == 'Out of stock') {
-                        $product->set_stock_status('outofstock');
-                    } else {
-                        $product->set_stock_status('instock');
-                    }
-                    $product->set_backorders('no');
-                    $product->set_reviews_allowed(false);
-                    $product->set_sold_individually(false);
-                    $product->set_category_ids($cid);
-                    $product->update_meta_data('remote_image', "https://shop4.wizsoft.com/vshop/images/techtopimg/heb/{$item[6]}");
-                    if (count($item[27]) > 0) {
-                        $product->update_meta_data('info_data', $item[27]);
-                    }
-                    if (count($item[4]) > 0) {
-	                    $product->update_meta_data('gallery_info_data', $item[4]);
-                    }
-		            $product_id = $product->save();
-                } catch (Exception $e) {
-	                print_r($e);
-                }
+			foreach ($products->OutTab as $item) {
+                $tt_product = Product::get_item_info($item[0]);
 
-            }
+				$product_id = 0;
+                if (wc_get_product_id_by_sku($item[0])) {
+                    $product_id = wc_get_product_id_by_sku($item[0]);
+                }
+				try {
+					$price = str_replace('NIS ', '', $item[7]);
+					$product = new WC_Product($product_id);
+					$product->set_name($item[1]);
+					$product->set_status('publish');
+					$product->set_catalog_visibility('visible');
+					$product->set_short_description($item[2]);
+					if (!$product->get_sku()) {
+						$product->set_sku($item[0]);
+					}
+					//TODO add price to product
+					$product->set_price($price);
+					$product->set_regular_price($price);
+					$product->set_manage_stock(true);
+					$product->set_stock_quantity($item[4]);
+					if ($item[28] == 'Out of stock') {
+						$product->set_stock_status('outofstock');
+					} else {
+						$product->set_stock_status('instock');
+					}
+					$product->set_backorders('no');
+					$product->set_reviews_allowed(false);
+					$product->set_sold_individually(false);
+					$product->set_category_ids([$cid]);
+					$product->update_meta_data('remote_image', "https://shop4.wizsoft.com/vshop/images/techtopimg/heb/{$item[6]}");
+					if ($tt_product->Status == 'OK' &&  count($tt_product->VSNotesTab[1]) > 0) {
+						$product->update_meta_data('info_data', $tt_product->VSNotesTab[1]);
+					}
+					if (count($item[4]) > 0) {
+						$product->update_meta_data('gallery_info_data', $item[4]);
+					}
+					$product->save();
+				} catch (Exception $e) {
+				    echo "<pre>";
+					print_r($e);
+				}
+			}
 		}
-		if (!is_wp_error($cid)) {
-			if (is_array($category[10]) && count($category[10]) > 0) {
-				cat($category[10], $cid['term_id']);
-			}
-		} else {
-			if (is_array($category[10]) && count($category[10]) > 0) {
-				cat($category[10], $cid->error_data['term_exists']);
-			}
-        }
+		if (is_array($category[10]) && count($category[10]) > 0) {
+			cat($category[10], $cid);
+		}
 	}
 }
 
 //add_action('init', function () {
-//    echo "<pre>";
-//    die(var_dump(Product::get_wishlist()));
 //	$root = Categories::get_categories();
 //	try {
 //		if(is_array($root[10]) && count($root[10]) > 0){
@@ -244,6 +257,7 @@ function woo_custom_cart_button_text() {
 	return __('להוסיף לתיק', 'tt');
 }
 
+
 add_filter( 'woocommerce_output_related_products_args', 'tt_related_products_args', 20 );
 function tt_related_products_args( $args ) {
 	$args['posts_per_page'] = 3; // 4 related products
@@ -288,7 +302,12 @@ add_action( 'tt_template_single_price', 'tt_template_single_price', 10 );
 add_filter( 'woocommerce_get_price_html', 'tt_price_html', 100, 2 );
 function tt_price_html( $price, $product ){
 	$info = Product::get_item_info($product->get_sku());
-		return '<div class="item-price">
+	$old_price = '';
+	if ( is_user_logged_in() ){
+	    $old_price = '<p class="old-price">NIS '.$product->get_price().'</p>';
+    }
+	return '<div class="item-price">
+            '.$old_price.'
             <p>'.$info->OutTab[0][6] .'</p>
         </div>';
 //	if ( $product->get_price() > 0 ) {
@@ -467,10 +486,12 @@ function tt_unrequire_wc_phone_field( $fields ) {
 
 add_filter( 'woocommerce_cart_needs_payment', '__return_false' );
 
-add_action( 'woocommerce_after_checkout_billing_form', 'tt_select_field' );
+add_action( 'woocommerce_after_checkout_billing_form', 'tt_select_shipping_method' );
+add_action( 'woocommerce_after_checkout_billing_form', 'tt_select_payment_method' );
 
-// select
-function tt_select_field( $checkout ){
+
+// Dropdown with shipping methods from API
+function tt_select_shipping_method( $checkout ) {
 	$options = [];
 	$shipping_response = User::get_user_shipping_methods();
     if (count($shipping_response->OutTab)) {
@@ -489,22 +510,65 @@ function tt_select_field( $checkout ){
 		'label_class'   => 'delivery-label', // sometimes you need to customize labels, both string and arrays are supported
 		'options'	=> $options
 	], $DefaultDeliveryMethod);
-
 }
 
-add_action( 'woocommerce_checkout_update_order_meta', 'tt_save_checkout_custom_fields' );
+// Dropdown with payment methods from API
 
-function tt_save_checkout_custom_fields( $order_id ){
+function tt_select_payment_method( $checkout ) {
+	$options = [
+	        '1' => 'Payment will be competed in back-office',
+            '2' => 'Payment has already done other way'
+    ];
+
+	woocommerce_form_field( 'tt_payment_method', [
+		'type'          => 'select', // text, textarea, select, radio, checkbox, password, about custom validation a little later
+		'required'	    => true, // actually this parameter just adds "*" to the field
+		'class'         => array('delivery-field', 'form-row-wide'), // array only, read more about classes and styling in the previous step
+		'label'         => 'Payment method',
+		'label_class'   => 'delivery-label', // sometimes you need to customize labels, both string and arrays are supported
+		'options'	    => $options
+	], '');
+}
+
+add_action( 'woocommerce_checkout_update_order_meta', 'tt_save_shipping_method' );
+add_action( 'woocommerce_checkout_update_order_meta', 'tt_save_payment_method' );
+
+function tt_save_shipping_method( $order_id ){
 	if( !empty( $_POST['delivery_method'] ) )
 		update_post_meta( $order_id, 'delivery_method', sanitize_text_field( $_POST['delivery_method'] ) );
+}
+function tt_save_payment_method( $order_id ){
+	if( !empty( $_POST['tt_payment_method'] ) )
+		update_post_meta( $order_id, 'tt_payment_method', sanitize_text_field( $_POST['tt_payment_method'] ) );
 }
 
 add_action('woocommerce_add_to_cart', 'customer_add_to_cart', 10 ,4);
 function customer_add_to_cart($cart_item_key, $product_id, $quantity) {
     $product = wc_get_product( $product_id );
-    echo "<pre>";
-    die(var_dump($product->get_sku()));
-    Product::add_to_basket($product->get_sku(), $quantity);
+    Product::add_to_cart($product->get_sku(), $quantity);
+}
+
+function customer_remove_from_cart( $cart_item_key, $cart ) {
+	$product_id = $cart->cart_contents[ $cart_item_key ]['product_id'];
+	$product = wc_get_product( $product_id );
+	Product::remove_from_cart($product->get_sku());
+}
+add_action( 'woocommerce_remove_cart_item', 'customer_remove_from_cart', 10, 2 );
+
+add_action( 'woocommerce_after_cart_item_quantity_update', 'customer_update_cart', 10, 4 );
+function customer_update_cart( $cart_item_key, $quantity, $old_quantity, $that ){
+	$product_id = $that->cart_contents[ $cart_item_key ]['product_id'];
+	$product = wc_get_product( $product_id );
+	$cart = Product::get_cart();
+	$wiz_product = null;
+	foreach ($cart->OutTab as $product_in_cart) {
+		if ($product_in_cart[1] == $product->get_sku()) {
+			$wiz_product = $product_in_cart;
+		}
+	}
+	if ($wiz_product) {
+		Product::update_quantity_cart($wiz_product[0], $wiz_product[1], $quantity);
+    }
 }
 
 add_action('wp_ajax_get_b2b_user_balance', 'get_b2b_user_balance');
@@ -565,3 +629,51 @@ function remove_from_wishlist() {
 	}
 	wp_die();
 }
+
+add_action( 'woocommerce_checkout_order_processed', 'create_order',  1, 1  );
+function create_order( $order_id ){
+	$order = new WC_Order( $order_id );
+	$payment = get_post_meta($order_id, 'tt_payment_method', true);
+	$shipping = get_post_meta($order_id, 'delivery_method', true);
+	$data = User::create_order($payment, $shipping, $order->get_customer_order_notes());
+	if ($data->Status == 'OK') {
+		update_post_meta($order_id, 'tt_order_number', $data->OrderNo);
+		update_post_meta($order_id, 'tt_delivery_cost', $data->DeliveryCost);
+		update_post_meta($order_id, 'tt_Total', $data->Total);
+    }
+}
+
+add_action( 'woocommerce_calculate_totals', 'tt_calculate_total', 10 );
+/**
+ * @param WC_Cart $cart
+ */
+function tt_calculate_total( $cart ) {
+	$tt_cart = Product::get_cart();
+	$_SESSION['tt_cart'] = $tt_cart;
+	$cart->set_cart_contents_total( $tt_cart->TotalCostItems);
+	$cart->set_subtotal( $tt_cart->Total );
+	$cart->set_total($tt_cart->Total);
+	$cart->set_shipping_total( $tt_cart->DeliveryCost );
+}
+
+add_action( 'woocommerce_review_order_before_order_total', 'custom_cart_total' );
+add_action( 'woocommerce_before_cart_totals', 'custom_cart_total' );
+function custom_cart_total() {
+    if ($_SESSION['tt_cart']) {
+	    $tt_cart = $_SESSION['tt_cart'];
+	    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+		    return;
+	    WC()->cart->total = $tt_cart->Total;
+    }
+}
+
+
+function add_query_vars_filter( $vars ) {
+	$vars[] = "action";
+	$vars[] = "CategoryPath";
+	foreach ( range(0, 100) as $item ) {
+		$vars[] = $item;
+	}
+	return $vars;
+}
+add_filter( 'query_vars', 'add_query_vars_filter' );

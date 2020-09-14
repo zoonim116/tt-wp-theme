@@ -58,5 +58,12 @@ function crb_attach_product_options() {
 			    <% } %>
 			' )
 			     ->set_collapsed(true)
-		]);
+		])
+	->add_tab('Videos', [
+		Field::make( 'complex', 'crb_product_videos', __( 'Videos' ) )
+			->add_fields([
+				Field::make( 'file', 'crb_video', __('Video'))->set_type(['video']),
+				Field::make( 'file', 'crb_video_thumbnail', __( 'Video Thumbnail' ) )->set_type(['image'])
+			])
+	]);
 }

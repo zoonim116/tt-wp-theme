@@ -8,6 +8,7 @@ function crb_attach_category_options() {
 	         ->where( 'term_taxonomy', '=', 'product_cat' )
 	         ->add_fields([
 	         	 Field::make( 'image', 'crb_additional_thumb', __( 'Navigation thumb' ))->set_type(['image' ])->set_value_type( 'url' ),
+		         Field::make( 'image', 'crb_homepage_banner_thumb', __( 'Homepage Banner thumb' ))->set_type(['image' ])->set_value_type( 'url' ),
 		         Field::make( 'image', 'crb_banner_thumb', __( 'Banner thumb' ))->set_type(['image' ])->set_value_type( 'url' ),
 		         Field::make( 'text', 'crb_banner_url', __( 'Banner redirect url' ))->set_attribute('type', 'url'),
 	         ]);

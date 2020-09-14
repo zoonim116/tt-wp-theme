@@ -125,6 +125,7 @@ function my_account_endpoint_title( $title, $id ) {
 	if (array_key_exists ('logout', $wp->query_vars) && in_the_loop()) {
 		return  'להתנתק';
 	}
+	return $title;
 }
 
 add_filter( 'the_title', 'my_account_endpoint_title', 10, 2 );

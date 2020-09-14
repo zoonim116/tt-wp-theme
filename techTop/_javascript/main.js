@@ -84,9 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.nav-menu ul').toggleClass('active');
   });
 
+  // $("form#filters-form :input").change(function() {
+  //   $('form#filters-form').submit();
+  // });
+
   $('.form-head').click(function(){
-    $(this).parent().toggleClass('active');
+    var elem = $(this).parent();
+    $(this).parent().addClass('active');
+    $(document).click(function(event) {
+      var $target = $(event.target);
+      if(!$target.closest(elem[0]).length &&
+          $(elem[0]).is(":visible")) {
+        $(elem[0]).removeClass('active');
+        $('form#filters-form').submit();
+      }
+    });
   });
+
+
 
   $(".navbar-burger").click(function() {
     // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
@@ -94,29 +109,30 @@ document.addEventListener('DOMContentLoaded', () => {
     $(".navbar-menu").toggleClass("is-active");
   });
 
-  var stepsSlider = document.getElementById('steps-slider');
-  var input0 = document.getElementById('input-with-keypress-0');
-  var input1 = document.getElementById('input-with-keypress-1');
+  $('[id^=steps-slider-]').each(function (index, stepsSlider) {
+    var filterParam = $(stepsSlider).prev();
+    var input0 = filterParam.find('.start_value');
+    var input1 = filterParam.find('.end_value');
+    var minVal = $(input0).val();
+    var maxVal = $(input1).val();
+    var inputs = [input0[0], input1[0]];
+    if (null!==stepsSlider) {
+      noUiSlider.create(stepsSlider, {
+        start: [minVal, maxVal],
+        connect: true,
+        direction: 'rtl',
+        range: {
+          'min': parseFloat(minVal),
+          'max': parseFloat(maxVal)
+        }
+      });
 
-  var inputs = [input0, input1];
-  if (null!==stepsSlider) {
-    noUiSlider.create(stepsSlider, {
-      start: [20, 80],
-      connect: true,
-      direction: 'rtl',
-      range: {
-        'min': [0],
-        '10%': [10, 10],
-        '50%': [80, 50],
-        '80%': 150,
-        'max': 200
-      }
-    });
+      stepsSlider.noUiSlider.on('update', function (values, handle) {
+        inputs[handle].value = values[handle];
+      });
+    }
+  });
 
-    stepsSlider.noUiSlider.on('update', function (values, handle) {
-      inputs[handle].value = values[handle];
-    });
-  }
 
   if ($('.catalog-products-list').length > 0) {
     var infScroll = new InfiniteScroll('.catalog-products-list', {
@@ -254,12 +270,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('.btn-group .like').on('click', function (e){
     e.preventDefault();
+    var self = this;
     var data = {
       action: 'add_to_wishlist',
       sku: $(this).data('sku')
     };
     jQuery.post( tt_ajax.url, data, function(response) {
-      alert(response);
+      if (response == "OK") {
+        $(self).addClass('active');
+      } else {
+        alert(response);
+      }
+
     });
   });
 
@@ -277,6 +299,81 @@ document.addEventListener('DOMContentLoaded', () => {
     jQuery.post( tt_ajax.url, data, function(response) {
       alert(response);
       window.location.reload();
+    });
+  });
+
+  $('.home-slider').slick({
+    infinite: true,
+    dots: true,
+    rtl: true,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 5000,
+  });
+
+  $('.brands-list').slick({
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    dots: false,
+    rtl: true,
+    arrows: true,
+    prevArrow: $('.our-brands .arrows-slider .prev'),
+    nextArrow: $('.our-brands .arrows-slider .next'),
+    responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+  $('[id^=catalog-products-list-]').each(function (index, productList) {
+    $(productList).slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 4000,
+      dots: false,
+      rtl: true,
+      arrows: true,
+      prevArrow: $(productList).next().find('.prev'),
+      nextArrow: $(productList).next().find('.next'),
+      responsive: [
+        {
+          breakpoint: 991,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     });
   });
 

@@ -41,7 +41,7 @@
                 <?php if (is_user_logged_in()): ?>
                     <div class="balance">
                         <p>איזון</p>
-                        <p>...</p>
+                        <p style="direction: ltr">...</p>
                     </div>
                 <?php endif; ?>
 				<ul>
