@@ -25,7 +25,15 @@
                 <?php foreach ($filters->StringTab as $string_filter): ?>
                     <div class="form-item">
                         <div class="form-head">
-                            <span><?php echo $string_filter[1]; ?></span>
+                            <?php if ($params[$string_filter[0]]): ?>
+	                            <?php foreach ($string_filter[2] as $index => $filter_value): ?>
+	                                <?php if ($params[$string_filter[0]] == $filter_value): ?>
+                                        <span><?php echo $filter_value; ?></span>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <span><?php echo $string_filter[1]; ?></span>
+                            <?php endif; ?>
                             <img src="<?php echo get_template_directory_uri(); ?>/images/filter-arrow.svg">
                         </div>
                         <div class="form-body">
