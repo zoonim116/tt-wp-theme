@@ -88,6 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
   //   $('form#filters-form').submit();
   // });
 
+  $('.product-quantity input').on('blur', function () {
+      $('.actions button[name="update_cart"]').trigger('click');
+  });
+
   $('.form-head').click(function(){
     var elem = $(this).parent();
     $(this).parent().addClass('active');

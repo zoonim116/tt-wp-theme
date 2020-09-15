@@ -6,6 +6,10 @@
     <?php
     global $wp;
     $current_url = home_url(add_query_arg(array(), $wp->request));
+    $params = $wp->query_vars;
+    unset($params['action']);
+    unset($params['CategoryPath']);
+    unset($params['product_cat']);
     ?>
 	<form method="get" name="filter_action" id="filters-form" action="<?php $current_url; ?>">
         <input type="hidden" name="action" value="filters">
@@ -30,12 +34,13 @@
                                     <?php foreach ($string_filter[2] as $index => $filter_value): ?>
                                     <li>
                                         <div class="info-radio">
-                                            <input type="radio" id="<?php echo $string_filter[1] . '_' . $index; ?>" name="<?php echo $string_filter[0];?>" value="<?php echo $filter_value; ?>">
+                                            <?php if ($params[$string_filter[0]] && $params[$string_filter[0]] == $filter_value): ?>
+                                                <input type="radio" id="<?php echo $string_filter[1] . '_' . $index; ?>" name="<?php echo $string_filter[0];?>" value="<?php echo $filter_value; ?>" checked="checked">
+                                            <?php else: ?>
+                                                <input type="radio" id="<?php echo $string_filter[1] . '_' . $index; ?>" name="<?php echo $string_filter[0];?>" value="<?php echo $filter_value; ?>">
+                                            <?php endif; ?>
                                             <label for="<?php echo $string_filter[1] . '_' . $index; ?>"><?php echo $filter_value ?></label>
                                         </div>
-<!--                                        <div class="count">-->
-<!--                                            <span>567</span>-->
-<!--                                        </div>-->
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>

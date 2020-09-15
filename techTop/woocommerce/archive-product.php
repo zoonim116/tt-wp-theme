@@ -53,6 +53,8 @@ if ($wp->query_vars['action'] == 'filters') {
 	unset($params['action']);
 	unset($params['CategoryPath']);
 	unset($params['product_cat']);
+//	echo "<pre>";
+//	die(var_dump($params));
 	$results = Categories::filter($params, $category);
 	do_action('tt_show_filters');
 	/**
