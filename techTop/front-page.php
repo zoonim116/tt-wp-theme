@@ -7,10 +7,8 @@
                 <div class="columns is-mobile">
                     <div class="column is-10 home-slider-title">
                         <?php echo apply_filters( 'the_content', $item['crb_ts_description'] ); ?>
-                        <?php var_dump(get_term($item['crb_ts_category'][0]['id'])); ?>
-                        <?php if (!is_null($item['crb_ts_category'][0])): ?>
-                            <a href="<?php echo get_term_link(get_term($item['crb_ts_category'][0]['id'])); ?>" class="btn btn-blue">צפה בקטלוג</a>
-                        <?php endif; ?>
+
+                        <a href="<?php echo get_term_link(get_term($item['crb_ts_category'][0]['id'])); ?>" class="btn btn-blue">צפה בקטלוג</a>
                     </div>
                     <div class="column is-2 col-products">
                         <span><span><?php echo $item['crb_ts_product_count']?></span>מוצרים</span>
@@ -141,7 +139,9 @@
                                     <div class="item-info">
                                         <p class="title"><a href="<?php echo get_permalink($product->get_ID()); ?>"><?php echo $product->get_name(); ?> </a></p>
                                         <div class="item-flex">
-
+                                            <div class="item-description">
+                                                <p><?php //echo $product->get_short_description(); ?></p>
+                                            </div>
                                             <div class="item-price">
 <!--                                                <p class="old-price">₪910</p>-->
                                                 <p><?php $info = Product::get_item_info($product->get_sku()); echo $info->OutTab[0][6]; ?></p>
@@ -200,7 +200,7 @@
                             </div>
                             <div class="banners-set-last">
                                 <div class="first-img">
-                                    <img src="images/set3.png">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/set3.png">
                                 </div>
                                 <div class="set-info">
                                     <p class="sale"><span>15% - </span>הצעה מיוחדת</p>
@@ -232,8 +232,9 @@
                 </div>
             </div>
             <div class="home-join-form">
-                <p class="subtitle">היה הראשון לדעת על הנחות ומבצעים</p>
-                <p class="title">הצטרף כמנוי לניוזלטר</p>
+                <p class="subtitle">כל החדשות והעדכונים שלנו ישירות אליכם למייל
+פשוט, חינמי ושווה.</p>
+                <p class="title">הצטרפו לניוזלטר שלנו וקבלו עדכונים,</br> ישירות למייל.</p>
                 <form>
                     <p>אימייל</p>
                     <div class="form-group">

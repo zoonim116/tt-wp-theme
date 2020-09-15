@@ -40,8 +40,8 @@
 			<div class="navbar-item">
                 <?php if (is_user_logged_in()): ?>
                     <div class="balance">
-                        <p>איזון</p>
-                        <p style="direction: ltr">...</p>
+                        <p>יתרת כרטיס</p>
+                        <p style="direction: ltr;">...</p>
                     </div>
                 <?php endif; ?>
 				<ul>
