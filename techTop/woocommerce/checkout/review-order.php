@@ -21,14 +21,9 @@ if ($_SESSION['tt_cart']) {
 	$tt_cart = $_SESSION['tt_cart'];
 }
 ?>
-<table class="shop_table woocommerce-checkout-review-order-table">
-	<thead>
-		<tr>
-			<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-			<th class="product-total"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
-		</tr>
-	</thead>
-	<tbody>
+<div class="shop_table woocommerce-checkout-review-order-table">
+	
+	
 		<?php
 		do_action( 'woocommerce_review_order_before_cart_contents' );
 
@@ -43,29 +38,45 @@ if ($_SESSION['tt_cart']) {
 			}
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				?>
-				<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
-					<td class="product-name">
-						<?php echo apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $wiz_product[4] ) . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</td>
-					<td class="product-total">
-						<?php echo $wiz_product[8]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</td>
-				</tr>
+				<div class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
+					<a href="#" class="customer-order-img" style="background-color: red;">
+						<img src="" alt="">
+					</a>
+					<div class="customer-order-wrap">
+						<a href="#" class="product-name">
+							<?php echo apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						</a>
+						<div class="product-total">
+							<?php echo $wiz_product[8]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $wiz_product[4] ) . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						</div>
+					</div>
+				</div>
 				<?php
 			}
 		}
 
 		do_action( 'woocommerce_review_order_after_cart_contents' );
 		?>
-	</tbody>
-	<tfoot>
+		<div class="promo-wrap">
+			<label class="promo" for="promo">
+			דוק
+				<div class="promo-icon">
+					<svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M16.0439 8.0083V18.9331H4.79395V15.5581H0.293945V0.933105H7.84375L11.2188 4.30811H12.3438L16.0439 8.0083ZM12.6689 7.68311H14.1191L12.6689 6.23291V7.68311ZM4.79395 4.30811H9.61914L7.36914 2.05811H1.41895V14.4331H4.79395V4.30811ZM14.9189 8.80811H11.5439V5.43311H5.91895V17.8081H14.9189V8.80811Z" fill="#0060FE"/>
+					</svg>
+					<input class="promo-field" type="text">
+				</div>
+			</label>
+		</div>
+		<div class="customer-order-total">
+			<div class="customer-order-total__title">מ"עמ ללוכ אל ריחמ</div>
+			<div class="customer-order-total"><?php wc_cart_totals_order_total_html(); ?></div>
+		</div>
+	<div>
 
-		<tr class="cart-subtotal">
-			<th><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
-			<td><?php wc_cart_totals_subtotal_html(); ?></td>
-		</tr>
+		
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
 			<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
@@ -99,14 +110,6 @@ if ($_SESSION['tt_cart']) {
 			<?php endif; ?>
 		<?php endif; ?>
 
-		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
-		<tr class="order-total">
-			<th><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
-			<td><?php wc_cart_totals_order_total_html(); ?></td>
-		</tr>
-
-		<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
-
-	</tfoot>
-</table>
+	</div>
+</div>
