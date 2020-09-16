@@ -2,6 +2,9 @@ var $ = require( "jquery" );
 var slick = require('slick-carousel');
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  var filtersWasChanged = false;
+
   var blogList = {
     infinite: true,
     slidesToShow: 3,
@@ -84,15 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.nav-menu ul').toggleClass('active');
   });
 
-  // $("form#filters-form :input").change(function() {
-  //   $('form#filters-form').submit();
-  // });
+  $("form#filters-form :input").change(function() {
+    filtersWasChanged = true;
+  });
 
   $('.product-quantity input').on('blur', function () {
       $('.actions button[name="update_cart"]').trigger('click');
   });
 
-  $('.form-head').click(function(){
+  $('.form-head').click(function() {
     var elem = $(this).parent();
     $(this).parent().addClass('active');
     $(document).click(function(event) {
@@ -100,7 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if(!$target.closest(elem[0]).length &&
           $(elem[0]).is(":visible")) {
         $(elem[0]).removeClass('active');
-        $('form#filters-form').submit();
+        if (filtersWasChanged) {
+          $('form#filters-form').submit();
+        }
       }
     });
   });
