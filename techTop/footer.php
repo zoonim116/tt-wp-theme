@@ -2,9 +2,11 @@
     <div class="container">
         <div class="columns">
             <div class="column is-3 column-center">
+                <p>טק טופ שיווק בע"מ</p>
+                <p>רחוב דב הוז 26,  קרית אונו 5555624</p>
+                <p>טלפון: 03-5353762</p>
                 <p>פקס: 03-6353048</p>
-                <p>טל: 03-5353762</p>
-                <p>5555624 ונוא תירק 26 זוה בד</p>
+                <p>דוא"ל: sales@techtop.co.il</p>
             </div>
             <div class="column is-2">
                 <p class="footer-title">TechTop</p>

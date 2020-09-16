@@ -18,12 +18,20 @@
 defined( 'ABSPATH' ) || exit;
 $cart = $_SESSION['tt_cart'];
 do_action( 'woocommerce_before_cart' ); ?>
-
+<div class="bread-crumbs">
+	<div class="bread-crumbs__container">
+		<a href="#" class="bread-crumbs__item">Page 1</a>
+		<a href="#" class="bread-crumbs__item">Page 2</a>
+	</div>
+</div>
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+	
+	<h2 class="sub-title">Cart</h2>
 	<?php do_action( 'woocommerce_before_cart_table' ); ?>
-
+	<div class="shop_table-wrapp">
+	
 	<table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
-		<thead>
+		<!-- <thead>
 			<tr>
 				<th class="product-remove">&nbsp;</th>
 				<th class="product-thumbnail">&nbsp;</th>
@@ -32,7 +40,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 				<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
 				<th class="product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
 			</tr>
-		</thead>
+		</thead> -->
 		<tbody>
 			<?php do_action( 'woocommerce_before_cart_contents' ); ?>
 
@@ -55,9 +63,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 						<td class="product-remove">
 							<?php
 								echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									'woocommerce_cart_item_remove_link',
+									'woocommerce_cart_item_remove_link0',
 									sprintf(
-										'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
+										'<a href="%s" aria-label="%s" data-product_id="%s" data-product_sku="%s"> <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M19.4992 4.50079H17.9993V21.7501C17.9993 22.0626 17.9407 22.3555 17.8235 22.629C17.7063 22.9024 17.5462 23.1407 17.343 23.3438C17.1399 23.5469 16.9017 23.707 16.6282 23.8242C16.3548 23.9414 16.0618 24 15.7494 24H3.74985C3.43736 24 3.1444 23.9414 2.87098 23.8242C2.59755 23.707 2.35928 23.5469 2.15616 23.3438C1.95305 23.1407 1.7929 22.9024 1.67571 22.629C1.55853 22.3555 1.49994 22.0626 1.49994 21.7501V4.50079H0V3.00085H5.99976V1.50092C5.99976 1.28999 6.03882 1.09468 6.11694 0.915002C6.19506 0.735322 6.30052 0.579078 6.43333 0.446271C6.56614 0.313464 6.72629 0.204093 6.91378 0.118159C7.10127 0.0322252 7.29658 -0.00683566 7.49969 0.000976523H11.9995C12.2104 0.000976523 12.4057 0.0400374 12.5854 0.118159C12.7651 0.196281 12.9213 0.301746 13.0542 0.434553C13.187 0.56736 13.2963 0.72751 13.3823 0.915002C13.4682 1.10249 13.5073 1.2978 13.4995 1.50092V3.00085H19.4992V4.50079ZM7.49969 3.00085H11.9995V1.50092H7.49969V3.00085ZM16.4993 4.50079H2.99988V21.7501C2.99988 21.9532 3.07409 22.129 3.22253 22.2774C3.37096 22.4258 3.54673 22.5001 3.74985 22.5001H15.7494C15.9525 22.5001 16.1283 22.4258 16.2767 22.2774C16.4251 22.129 16.4993 21.9532 16.4993 21.7501V4.50079ZM7.49969 19.5002H5.99976V7.50067H7.49969V19.5002ZM10.4996 19.5002H8.99963V7.50067H10.4996V19.5002ZM13.4995 19.5002H11.9995V7.50067H13.4995V19.5002Z" fill="#C2D7F8"/>
+										</svg>
+										</a>',
 										esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
 										esc_html__( 'Remove this item', 'woocommerce' ),
 										esc_attr( $product_id ),
@@ -162,13 +173,27 @@ do_action( 'woocommerce_before_cart' ); ?>
 				</td>
 			</tr>
 
+			<tr>
+					<td style="text-align: right;" colspan="3">
+						<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="button alt wc-forward checkout-button-custom">
+						התקדם לנקודת הביקורת
+						</a>
+					</td>
+					<td></td>
+					<td style="padding 10px 15px;  font-weight: 500; font-size: 18px; text-align: center; line-height: 68px;" class="">יפוס ריחמ</td>
+					<td style="color: #0060FE;" class="product-subtotal"><?php wc_cart_totals_order_total_html(); ?></td>
+					
+					
+			</tr>
+
 			<?php do_action( 'woocommerce_after_cart_contents' ); ?>
 		</tbody>
 	</table>
+	</div>
 	<?php do_action( 'woocommerce_after_cart_table' ); ?>
 </form>
 
-<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
+<?php //do_action( 'woocommerce_before_cart_collaterals' ); ?>
 
 <div class="cart-collaterals">
 	<?php
@@ -178,8 +203,148 @@ do_action( 'woocommerce_before_cart' ); ?>
 		 * @hooked woocommerce_cross_sell_display
 		 * @hooked woocommerce_cart_totals - 10
 		 */
-		do_action( 'woocommerce_cart_collaterals' );
+		//do_action( 'woocommerce_cart_collaterals' );
 	?>
 </div>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>
+<style>
+.sub-title {
+	font-size: 72px;
+	line-height: 165px; 
+}
+.woocommerce-cart-form {
+	width: 1198px;
+	margin: 30px auto;
+}
+.bread-crumbs {
+	padding: 12px 0;
+	background-color: #fff;
+}
+.bread-crumbs__container {
+	width: 1198px;
+	margin:0 auto;
+}
+.bread-crumbs__item {
+	position: relative;
+	display: inline-block;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 18px;
+	color: #767676;
+	margin-right: 30px;
+}
+.bread-crumbs__item:after {
+	position: absolute;
+	content: '\2190';
+	color: #C4C4C4;
+	font-size: 15px;
+    left: -20px;
+}
+.shop_table  {
+	border: none !important;
+	td {
+		background-color: #fff !important;
+	}
+}
+.woocommerce table.shop_table tbody:first-child tr:first-child td, .woocommerce table.shop_table tbody:first-child tr:first-child th {
+	background-color: #fff;
+}
+#add_payment_method table.cart td, #add_payment_method table.cart th, .woocommerce-cart table.cart td, .woocommerce-cart table.cart th, .woocommerce-checkout table.cart td, .woocommerce-checkout table.cart th {
+	background-color: #fff !important;
+}
+.woocommerce table.shop_table tbody:first-child tr:first-child td:first-child {
+	border-top-right-radius: 5px;
+}
+.woocommerce table.shop_table tbody:first-child tr:first-child td:last-child {
+	border-top-left-radius: 5px;
+}
+.product-thumbnail {
+	width: 220px;
+    height: 141px;
+	text-align: center !important;
+}
+.product-thumbnail a {
+	width: 100%;
+}
+.product-thumbnail a img {
+	width: 100% !important;
+}
+.product-remove a.remove {
+	
+}
+.product-name {
+	text-align: right !important;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 26px;
+	color: #0000;
+	text-decoration: underline;
+	width: 420px;
+	padding-left: 50px;
+}
+.product-name a {
+	text-align: right;
+}
+.woocommerce table.shop_table .product-subtotal {
+	font-weight: bold;
+	font-size: 36px;
+	line-height: 47px;
+	color: #0060FE;
+	text-align: center;
+}
+.woocommerce table.shop_table tr td.actions {
+	display: none !important;
+}
+.product-remove {
+	text-align: center:
+}
+.woocommerce table.shop_table .product-price {
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 31px;
+	color: #0060FE;
+}
+.woocommerce table.shop_table td {
+	border-color: #C2D7F8;
+}
+.woocommerce .quantity .qty {
+	background: rgba(0, 96, 254, 0.1);
+	border-color: #C2D7F8;
+	text-align: right;
+	box-shadow: none;
+    border: none; 
+	padding: 3px 10px;
+	font-weight: 500;
+	width: 89px;
+	height: 40px;
+	font-size: 13px;
+	line-height: 19px;
+	border-radius: 4px;
+}
+.shop_table-wrapp {
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+	border-radius: 5px;
+	padding: 50px 39px;
+	padding-bottom: 0;
+	background-color: #fff;
+	margin-bottom: 134px;
+}
+.woocommerce-Price-amount.amount {
+	font-weight: bold;
+font-size: 36px;
+line-height: 47px;
+	color:  #0060FE !important; 
+}
+.checkout-button-custom {
+	width: 226px;
+height: 47px;
+font-weight: 500 !important; 
+font-size: 14px !important; 
+line-height: 28px !important; 
+background: linear-gradient(0deg, #0060FE, #0060FE), #FF720D !important; 
+box-shadow: 4px 4px 10px #75A9F9 !important; 
+border-radius: 25px !important; 
+margin: 68px 75px !important; 
+}
+</style>
