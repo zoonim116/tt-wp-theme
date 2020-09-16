@@ -28,7 +28,7 @@ if ( $related_products ) : ?>
 
 		if ( $heading ) :
 			?>
-			<p class="title"><?php echo esc_html( $heading ); ?></p>
+			<p class="title">מוצרים מומלצים</p>
 		<?php endif; ?>
 		
 		<?php woocommerce_product_loop_start(); ?>

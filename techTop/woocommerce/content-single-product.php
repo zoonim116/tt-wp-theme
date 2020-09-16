@@ -96,7 +96,7 @@ if ( post_password_required() ) {
 	    <?php do_action('tt_show_software_list'); ?>
     </div>
     <div class="column is-6">
-        <p class="title">נהגים</p>
+        <p class="title">התקנים</p>
         <?php do_action('tt_show_drivers_list'); ?>
     </div>
     <div class="column is-6">
