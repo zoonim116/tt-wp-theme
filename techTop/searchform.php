@@ -1,3 +1,4 @@
+<?php if(!is_cart() && !is_checkout()): ?>
 <section class="catalog-search">
 	<div class="container">
 		<form role="search" method="get" id="searchform" action="<?php echo home_url( '/' ) ?>" >
@@ -8,3 +9,4 @@
 		</form>
 	</div>
 </section>
+<?php endif; ?>

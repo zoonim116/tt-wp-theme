@@ -17,13 +17,8 @@
 
 defined( 'ABSPATH' ) || exit;
 $cart = $_SESSION['tt_cart'];
+do_action( 'woocommerce_before_main_content' );
 do_action( 'woocommerce_before_cart' ); ?>
-<div class="bread-crumbs">
-	<div class="bread-crumbs__container">
-		<a href="#" class="bread-crumbs__item">Page 1</a>
-		<a href="#" class="bread-crumbs__item">Page 2</a>
-	</div>
-</div>
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 	
 	<h2 class="sub-title">הלכלכ</h2>

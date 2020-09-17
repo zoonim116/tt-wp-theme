@@ -16,13 +16,22 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+do_action( 'woocommerce_before_main_content' );
 ?>
-
+<div class="thanks-page__mainTitle">
+			<h2 class="sub-title">החלצהב החלשנ ךלש הנמזהה !הדות</h2>
+			<p>רשק ךתיא רוצי ונלש תוריכמ גיצנ</p>
+		</div>
+	<div class="thanks-page">
+		
+<?php 
+wc_get_template( 'order/order-details.php', array( 'order_id' => $order->get_id() ) );
+?>
 <div class="woocommerce-order">
-
+	
 	<?php
 	if ( $order ) :
-
+		wc_get_template( 'order/order-details-customer.php', array( 'order' => $order ) );
 		do_action( 'woocommerce_before_thankyou', $order->get_id() );
 		?>
 
@@ -39,29 +48,29 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php else : ?>
 
-			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( '', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 
 			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
 
 				<li class="woocommerce-order-overview__order order">
-					<?php esc_html_e( 'Order number:', 'woocommerce' ); ?>
+					<?php esc_html_e( 'Order number', 'woocommerce' ); ?>
 					<strong><?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 
 				<li class="woocommerce-order-overview__date date">
-					<?php esc_html_e( 'Date:', 'woocommerce' ); ?>
+					<?php esc_html_e( 'Date', 'woocommerce' ); ?>
 					<strong><?php echo wc_format_datetime( $order->get_date_created() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 
 				<?php if ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email() ) : ?>
 					<li class="woocommerce-order-overview__email email">
-						<?php esc_html_e( 'Email:', 'woocommerce' ); ?>
+						<?php esc_html_e( 'Email', 'woocommerce' ); ?>
 						<strong><?php echo $order->get_billing_email(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 					</li>
 				<?php endif; ?>
 
 				<li class="woocommerce-order-overview__total total">
-					<?php esc_html_e( 'Total:', 'woocommerce' ); ?>
+					<?php esc_html_e( 'Total', 'woocommerce' ); ?>
 					<strong><?php echo $order->get_formatted_order_total(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 
@@ -77,7 +86,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php endif; ?>
 
 		<?php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
-		<?php do_action( 'woocommerce_thankyou', $order->get_id() ); ?>
+	
 
 	<?php else : ?>
 
@@ -85,4 +94,5 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php endif; ?>
 
+</div>
 </div>

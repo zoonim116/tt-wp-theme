@@ -45,7 +45,7 @@ if (count($children_categories) == 0) {
 			echo $after;
 
 			if ( sizeof( $breadcrumb ) !== $key + 1 ) {
-				echo $delimiter;
+				// echo $delimiter;
 			}
 		} ?>
 				</ul>

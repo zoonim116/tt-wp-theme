@@ -42,18 +42,10 @@ if ( $show_downloads ) {
 <section class="woocommerce-order-details">
 	<?php do_action( 'woocommerce_order_details_before_order_table', $order ); ?>
 
-	<h2 class="woocommerce-order-details__title"><?php esc_html_e( 'Order details', 'woocommerce' ); ?></h2>
 
-	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+	<div class="woocommerce-table woocommerce-table--order-details shop_table order_details woocommerce-checkout-review-order-table">
 
-		<thead>
-			<tr>
-				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
-			</tr>
-		</thead>
-
-		<tbody>
+		<div>
 			<?php
 			do_action( 'woocommerce_order_details_before_order_table_items', $order );
 
@@ -75,32 +67,26 @@ if ( $show_downloads ) {
 
 			do_action( 'woocommerce_order_details_after_order_table_items', $order );
 			?>
-		</tbody>
+		</div>
 
-		<tfoot>
+		<div class="thanks-page__footer">
 			<?php
-			foreach ( $order->get_order_item_totals() as $key => $total ) {
-				?>
-					<tr>
-						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
-						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
-					</tr>
-					<?php
-			}
+
+			$totals = $order->get_order_item_totals();
 			?>
+			
+						<div scope="row">יפוס ריחמ</div>
+						<div><?php echo $totals['order_total']['value'] ?></div>
+					
 			<?php if ( $order->get_customer_note() ) : ?>
-				<tr>
-					<th><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
-					<td><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
-				</tr>
+				
+					<div><?php esc_html_e( 'Note:', 'woocommerce' ); ?></div>
+					<div><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></div>
+				
 			<?php endif; ?>
-		</tfoot>
-	</table>
+		</div>
+	</div>
 
 	<?php do_action( 'woocommerce_order_details_after_order_table', $order ); ?>
 </section>
 
-<?php
-if ( $show_customer_details ) {
-	wc_get_template( 'order/order-details-customer.php', array( 'order' => $order ) );
-}
