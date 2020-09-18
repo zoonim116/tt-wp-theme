@@ -43,9 +43,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <?php if ($product_id): ?>
                     <?php $product = wc_get_product($product_id); ?>
                     <div class="products-item">
-                        <div class="item-img">
+                        <a href="<?php echo get_permalink( $product->get_id() ); ?>" class="item-img">
                             <img src="<?php echo get_post_meta($product->get_id(), 'remote_image', true); ?>">
-                        </div>
+						</a>
                         <div class="item-content">
                             <a href="<?php echo get_permalink( $product->get_id() ); ?>"> <p class="title"><?php echo $product->get_name(); ?></p></a>
                             <p class="description"><?php echo apply_filters( 'the_excerpt', $product->post->post_excerpt ); ?></p>

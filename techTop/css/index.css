@@ -9319,6 +9319,7 @@ h1 .number-result {
       height: 100%;
       width: 100%; }
       .catalog-products-list .catalog-products-item .item-wrap .item-img {
+        display: block;
         position: relative;
         text-align: center;
         height: 225px;
@@ -9357,7 +9358,7 @@ h1 .number-result {
             color: #0060FE;
             align-self: flex-end;
             font-weight: bold;
-            font-size: 24px; }
+            font-size: 20px; }
             .catalog-products-list .catalog-products-item .item-wrap .item-info .item-flex .item-price .old-price {
               text-decoration: line-through;
               font-size: 14px; }
@@ -10039,6 +10040,9 @@ button#place_order {
 
 .woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea, .woocommerce form .form-row select {
   width: 50%; }
+
+.woocommerce form .form-row input#billing_postcode {
+  width: 25%; }
 
 .woocommerce form .form-row select {
   border: none;

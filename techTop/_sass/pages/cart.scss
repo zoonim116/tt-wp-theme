@@ -453,6 +453,9 @@ button#place_order {
 .woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea, .woocommerce form .form-row select  {
   width: 50%;
 }
+.woocommerce form .form-row input#billing_postcode {
+  width: 25%;
+}
 .woocommerce form .form-row select {
   border: none;
   height: 40px;

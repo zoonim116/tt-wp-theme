@@ -1,7 +1,7 @@
 <?php extract($template_args); ?>
 <div class="catalog-products-item product type-product post-10496 status-publish first instock product_cat-1009 shipping-taxable purchasable product-type-simple">
     <div class="item-wrap">
-        <div class="item-img">
+        <a href="<?php echo get_permalink( $product->get_id() );?>" class="item-img">
             <img src="<?php echo get_post_meta($product->get_ID(), 'remote_image', true); ?>">
             <div class="btn-group">
                 <a href="?add-to-cart=<?php echo $product->get_ID(); ?>" data-quantity="1" class="btn btn-blue button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="<?php echo $product->get_ID(); ?>" data-product_sku="<?php echo $product->get_sku();?>" aria-label="Add “Product” to your cart" rel="nofollow">להוסיף לתיק</a>                <a href="#" data-sku="<?php echo $product->get_sku(); ?>" class="like">
@@ -11,7 +11,7 @@
                     </svg>
                 </a>
             </div>
-        </div>
+        </a>
         <div class="item-info">
             <p class="title woocommerce-loop-product__title"><a href="<?php echo get_permalink( $product->get_id() );?>"><?php echo $product->get_name(); ?></a></p>
             <div class="item-flex">
