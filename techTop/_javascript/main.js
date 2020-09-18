@@ -1,7 +1,10 @@
 var $ = require( "jquery" );
 var slick = require('slick-carousel');
-
 document.addEventListener('DOMContentLoaded', () => {
+
+  jQuery('body').on('added_to_cart', function (a1, a2, a3){
+    jQuery('.navbar-end-menu__sub-cart').html(a2['div.widget_shopping_cart_content']);
+  });
 
   var filtersWasChanged = false;
 

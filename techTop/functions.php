@@ -677,3 +677,19 @@ function add_query_vars_filter( $vars ) {
 	return $vars;
 }
 add_filter( 'query_vars', 'add_query_vars_filter' );
+
+//add_filter( 'woocommerce_add_to_cart_fragments', 'tt_mini_cart');
+//
+//function tt_mini_cart($fragments) {
+////	ob_start();
+//    echo "<pre>";
+//    die(var_dump(WC()->cart->get));
+//	return $fragments;
+//}
+
+add_filter( 'woocommerce_cart_totals_order_total_html', 'tt_cart_totals_order_total_html', 20, 1 );
+
+function tt_cart_totals_order_total_html($value) {
+    $tt_cart = Product::get_cart();
+    return '<strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">₪</span>'.$tt_cart->Total.'</span></strong>';
+}
