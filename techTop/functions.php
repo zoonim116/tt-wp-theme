@@ -162,6 +162,32 @@ function cat($arr, $parent = 0) {
 	}
 }
 
+add_filter( 'cron_schedules', 'tt_add_cron_interval' );
+function tt_add_cron_interval( $schedules ) {
+	$schedules['half_hour'] = array(
+		'interval' => 30*60,
+		'display'  => esc_html__( 'Half hour' ) );
+	return $schedules;
+}
+
+function tt_catalog_cron_hook () {
+	$root = Categories::get_categories();
+	try {
+		if(is_array($root[10]) && count($root[10]) > 0){
+			cat($root[10]);
+		}
+	} catch (Exception $e) {
+		print $e->getMessage();
+	}
+	die("Done");
+}
+
+add_action('tt_catalog_cron_hook', 'tt_catalog_cron_hook');
+
+if ( ! wp_next_scheduled( 'tt_catalog_cron_hook' ) ) {
+	wp_schedule_event( time(), 'half_hour', 'tt_catalog_cron_hook' );
+}
+
 //add_action('init', function () {
 //	$root = Categories::get_categories();
 //	try {
