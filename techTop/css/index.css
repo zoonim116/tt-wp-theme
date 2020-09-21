@@ -8109,6 +8109,85 @@ label {
       margin-bottom: 20px;
       display: inline-block; } }
 
+.login-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #C2D7F8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 130px; }
+  .login-page .logo {
+    text-align: center;
+    margin-bottom: auto; }
+    .login-page .logo__title {
+      font-weight: 800;
+      font-size: 36px;
+      line-height: 53px;
+      padding-top: 30px; }
+    .login-page .logo__image {
+      padding-top: 55px; }
+
+.registration-wrap {
+  text-align: right;
+  margin-bottom: auto; }
+
+.registration {
+  width: 470px;
+  background: #FFFFFF;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 40px 54px 50px 160px; }
+  .registration .woocommerce-form-login {
+    padding: 0 !important;
+    margin-top: 0 !important; }
+  .registration form.checkout_coupon, .registration form.login, .registration form.register {
+    width: 100% !important;
+    border: none;
+    text-align: right; }
+  .registration .input-text {
+    width: 100% !important;
+    text-align: right; }
+  .registration label {
+    display: flex;
+    width: 100% !important;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row-reverse; }
+    .registration label .woocommerce-form__input-checkbox {
+      margin-left: 20px; }
+  .registration .woocommerce-form-login__submit {
+    min-width: 109px !important;
+    float: none !important;
+    height: 34px !important;
+    background: #FF720D !important;
+    box-shadow: 4px 4px 10px rgba(255, 114, 13, 0.5) !important;
+    border-radius: 22px !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 18px !important;
+    margin-top: 40px !important; }
+  .registration .lost_password {
+    font-size: 12px;
+    line-height: 30px;
+    margin-top: -28px; }
+  .registration .required {
+    color: black !important; }
+  .registration .show-password-input {
+    right: auto !important;
+    top: -28px !important; }
+
+@media screen and (max-width: 450px) {
+  .registration {
+    width: 100%;
+    padding-left: 54px; }
+  .logo__title {
+    padding-right: 15px;
+    padding-left: 15px; } }
+
 .download-reports {
   background: white;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);

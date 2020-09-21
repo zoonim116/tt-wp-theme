@@ -112,7 +112,7 @@ if ( post_password_required() ) {
 </div>
 <div class="columns card-properties">
     <div class="column is-12">
-        <p class="title"> תיאור</p>
+        <p class="title"> מידע נוסף</p>
         <?php echo $product->get_description(); ?>
     </div>
 </div>
