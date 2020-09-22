@@ -17,38 +17,38 @@
 
 defined( 'ABSPATH' ) || exit;
 
-do_action( 'woocommerce_auth_page_header' ); ?>
+//do_action( 'woocommerce_auth_page_header' ); ?>
 
-<h1>
-	<?php
-	/* translators: %s: app name */
-	printf( esc_html__( '%s would like to connect to your store', 'woocommerce' ), esc_html( $app_name ) );
-	?>
-</h1>
 
 <?php wc_print_notices(); ?>
 
-<p>
-	<?php
-	/* translators: %1$s: app name, %2$s: URL */
-	echo wp_kses_post( sprintf( __( 'To connect to %1$s you need to be logged in. Log in to your store below, or <a href="%2$s">cancel and return to %1$s</a>', 'woocommerce' ), esc_html( wc_clean( $app_name ) ), esc_url( $return_url ) ) );
-	?>
+
+<form class="woocommerce-form woocommerce-form-login login" method="post">
+
+<?php do_action( 'woocommerce_login_form_start' ); ?>
+
+<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+<label for="username"><?php esc_html_e( 'חוקל רפסמ', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+</p>
+<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+<label for="password"><?php esc_html_e( 'המסיס', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password" />
 </p>
 
-<form method="post" class="wc-auth-login">
-	<p class="form-row form-row-wide">
-		<label for="username"><?php esc_html_e( 'Username or email address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-		<input type="text" class="input-text" name="username" id="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( $_POST['username'] ) : ''; ?>" /><?php //@codingStandardsIgnoreLine ?>
-	</p>
-	<p class="form-row form-row-wide">
-		<label for="password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-		<input class="input-text" type="password" name="password" id="password" />
-	</p>
-	<p class="wc-auth-actions">
-		<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
-		<button type="submit" class="button button-large button-primary wc-auth-login-button" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>"><?php esc_html_e( 'Login', 'woocommerce' ); ?></button>
-		<input type="hidden" name="redirect" value="<?php echo esc_url( $redirect_url ); ?>" />
-	</p>
+<?php do_action( 'woocommerce_login_form' ); ?>
+
+<p class="form-row">
+<p class="woocommerce-LostPassword lost_password">
+<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( '?אמסס תחכש', 'woocommerce' ); ?></a>
+</p>
+<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
+<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'Log in', 'woocommerce' ); ?></button>
+</p>
+
+
+<?php do_action( 'woocommerce_login_form_end' ); ?>
+
 </form>
 
-<?php do_action( 'woocommerce_auth_page_footer' ); ?>
+<?php //do_action( 'woocommerce_auth_page_footer' ); ?>

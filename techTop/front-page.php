@@ -42,7 +42,7 @@
                 <div class="home-review-img">
                     <img src="<?php echo get_template_directory_uri()?>/images/review3.png">
                 </div>
-                <p>מעל 40 שנה</p>
+                <p>מעל 25 שנים</p>
             </div>
         </div>
     </div>
@@ -133,9 +133,9 @@
                         <?php foreach ($products as $product): ?>
                             <div class="catalog-products-item">
                                 <div class="item-wrap">
-                                    <div class="item-img">
+                                    <a href="<?php echo get_permalink($product->get_ID()); ?>" class="item-img">
                                         <img src="<?php echo get_post_meta($product->get_ID(), 'remote_image', true); ?>">
-                                    </div>
+                                    </a>
                                     <div class="item-info">
                                         <p class="title"><a href="<?php echo get_permalink($product->get_ID()); ?>"><?php echo $product->get_name(); ?> </a></p>
                                         <div class="item-flex">

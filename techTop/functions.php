@@ -719,3 +719,22 @@ function tt_cart_totals_order_total_html($value) {
     $tt_cart = Product::get_cart();
     return '<strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">₪</span>'.$tt_cart->Total.'</span></strong>';
 }
+
+function my_render_wc_login_form( $atts ) {
+	if ( ! is_user_logged_in() ) {
+	if ( function_exists( 'woocommerce_login_form' ) &&
+	function_exists( 'woocommerce_output_all_notices' ) ) {
+	//render the WooCommerce login form
+	ob_start();
+	woocommerce_output_all_notices();
+	woocommerce_login_form();
+	return ob_get_clean();
+	} else {
+	//render the WordPress login form
+	return wp_login_form( array( 'echo' => false ));
+	}
+	} else {
+	return "Hello there! Welcome back.";
+	}
+	}
+	add_shortcode( 'my_wc_login_form', 'my_render_wc_login_form' );

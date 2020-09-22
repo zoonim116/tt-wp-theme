@@ -574,6 +574,7 @@ h1 {
       height: 100%;
       width: 100%;
       .item-img {
+        display: block;
         position: relative;
         text-align: center;
         height: 225px;
@@ -620,7 +621,7 @@ h1 {
             color: $blue;
             align-self: flex-end;
             font-weight: bold;
-            font-size: $font-title;
+            font-size: $font-title-sm;
             .old-price {
               text-decoration: line-through;
               font-size: $font-body;
@@ -920,6 +921,9 @@ h1 {
         ul {
           margin: 0;
           text-align: center;
+        }
+        li:hover .navbar-end-menu__sub-cart {
+          display: none;
         }
       }
     }

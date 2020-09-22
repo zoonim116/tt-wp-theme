@@ -101,6 +101,7 @@
   margin-bottom: 100px;
   &__subTitle {
     font-size: $font-xm;
+    color: #000;
   }
   .container {
     padding-top: 3.6vw;
@@ -741,18 +742,26 @@
       line-height: 53px;
       min-width: 100px;
       margin-left: 20px;
+      color: #000;
     }
     .sub-cart__footer-price {
       font-weight: bold;
       font-size: $font-m;
       line-height: 24px;
       color: blue;
+      .woocommerce-Price-amount.amount {
+        font-weight: bold;
+      font-size: $font-m;
+      line-height: 24px;
+      color: blue;
+      }
     }
     .sub-cart__footer-button {
       width: 100%;
       display: flex;
       justify-content: space-around;
       .btn {
+        min-width: 136px;
         height: 45px;
         line-height: 45px;
         border-radius: 50px;

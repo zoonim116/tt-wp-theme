@@ -27,7 +27,9 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <div <?php wc_product_class( 'catalog-products-item', $product ); ?> >
     <div class="item-wrap">
         <div class="item-img">
-            <?php do_action('tt_loop_product_thumbnail'); ?>
+           <a href="<?php echo get_permalink();?>">
+                <?php do_action('tt_loop_product_thumbnail'); ?>
+           </a>
             <div class="btn-group">
                 <?php
                 /**
