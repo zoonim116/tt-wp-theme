@@ -790,3 +790,18 @@ function tt_redirect_to_login(){
 }
 
 add_action('wp_logout','tt_redirect_to_login');
+
+add_action( 'template_redirect', function() {
+	if( is_page(15436) && is_user_logged_in() ){
+		wp_redirect(home_url('/my-account'), 301);
+		exit;
+	}
+} );
+
+
+function tt_update_mini_cart() {
+	echo wc_get_template( 'cart/mini-cart.php' );
+	die();
+}
+add_filter( 'wp_ajax_nopriv_tt_update_mini_cart', 'tt_update_mini_cart' );
+add_filter( 'wp_ajax_tt_update_mini_cart', 'tt_update_mini_cart' );

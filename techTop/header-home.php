@@ -35,13 +35,6 @@
 			]);
 			?>
         </div>
-<!--		<div class="navbar-start">-->
-<!--			<a class="navbar-item">אודות</a>-->
-<!--			<a class="navbar-item">קטלוג</a>-->
-<!--			<a class="navbar-item">שותפים</a>-->
-<!--			<a class="navbar-item">בלוג</a>-->
-<!--			<a class="navbar-item">צור קשר</a>-->
-<!--		</div>-->
 
 		<div class="navbar-end-menu">
 			<div class="navbar-item">

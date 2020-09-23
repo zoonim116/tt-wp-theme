@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     jQuery('.navbar-end-menu__sub-cart').html(a2['div.widget_shopping_cart_content']);
   });
 
+  jQuery('body').on('wc_fragments_refreshed', function (a1, a2, a3){
+    $.post(
+        woocommerce_params.ajax_url,
+        {'action': 'tt_update_mini_cart'},
+        function(response) {
+          $('.navbar-end-menu__sub-cart').html(response);
+        }
+    );
+  });
+
+
   var filtersWasChanged = false;
 
   $('[name="woocommerce_checkout_place_order"]').on('click', function () {
