@@ -34,7 +34,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	<?php if ( $checkout->get_checkout_fields() ) : ?>
 
 		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
-		<h2 class="sub-title">קודבל</h2>
+		<h2 class="sub-title">פרטי התשלום</h2>
 		<div class="col2-set" id="customer_details">
 			<div class="checkout-wrap customer_order">
 				<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
@@ -49,10 +49,9 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 				<?php do_action( 'woocommerce_checkout_shipping' ); ?>
 			</div>
 		</div>
-
 		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 
 	<?php endif; ?>
 </form>
-
+<button type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="הנמזה עצבל" data-value="הנמזה עצבל">הנמזה עצבל</button>
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

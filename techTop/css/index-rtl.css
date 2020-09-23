@@ -10688,3 +10688,6 @@ button#place_order {
   padding: 0; }
   .navbar-end-menu li:hover .navbar-end-menu__sub-cart .woocommerce-mini-cart__empty-message {
     text-align: center; }
+
+#payment {
+  display: none; }

@@ -39,8 +39,8 @@ if ($_SESSION['tt_cart']) {
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				?>
 				<div class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
-					<a href="#" class="customer-order-img" style="background-color: red;">
-						<img src="" alt="">
+					<a href="#" class="customer-order-img">
+						<img src="<?php echo get_post_meta($_product->get_ID(), 'remote_image', true); ?>" alt="<?php echo $_product->get_name(); ?>">
 					</a>
 					<div class="customer-order-wrap">
 						<a href="#" class="product-name">

@@ -514,8 +514,13 @@ function custom_override_checkout_fields( $fields ) {
 	unset( $fields['shipping']['shipping_last_name'] );
 	unset( $fields['billing']['billing_company'] );
 	unset( $fields['shipping']['shipping_company'] );
+	unset( $fields['billing']['billing_address_2'] );
 	unset( $fields['billing']['billing_phone']['validate'] );
-
+	$fields['billing']['billing_address_1']['placeholder'] = "!@#!@#!@#!@#";
+	$fields['billing']['billing_address_1']['priority'] = 71;
+	$fields['billing']['billing_city']['priority'] = 51;
+//	echo "<pre>";
+//	die(var_dump($fields));
 	return $fields;
 }
 
@@ -523,7 +528,6 @@ add_filter( 'woocommerce_default_address_fields', 'tt_unrequire_wc_phone_field' 
 function tt_unrequire_wc_phone_field( $fields ) {
 	$fields['company']['required']  = false;
 	$fields['postcode']['required'] = false;
-
 	return $fields;
 }
 
@@ -574,7 +578,7 @@ function tt_select_payment_method( $checkout ) {
 		// actually this parameter just adds "*" to the field
 		'class'       => array( 'delivery-field', 'form-row-wide' ),
 		// array only, read more about classes and styling in the previous step
-		'label'       => 'Payment method',
+		'label'       => 'שיטת תשלום',
 		'label_class' => 'delivery-label',
 		// sometimes you need to customize labels, both string and arrays are supported
 		'options'     => $options

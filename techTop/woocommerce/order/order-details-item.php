@@ -24,8 +24,8 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 }
 ?>
 <div class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
-	<a href="#" class="customer-order-img" style="background-color: red;">
-		<img src="" alt="">
+	<a href="#" class="customer-order-img">
+        <img src="<?php echo get_post_meta($product->get_ID(), 'remote_image', true); ?>" alt="<?php echo $product->get_name(); ?>">
 	</a>
 	<div class="customer-order-wrap">
 			<div class="woocommerce-table__product-name product-name">

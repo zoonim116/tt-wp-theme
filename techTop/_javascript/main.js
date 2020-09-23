@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var filtersWasChanged = false;
 
+  $('[name="woocommerce_checkout_place_order"]').on('click', function () {
+    $('#payment.woocommerce-checkout-payment #place_order').trigger('click');
+  });
+
   var blogList = {
     infinite: true,
     slidesToShow: 3,
