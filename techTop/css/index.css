@@ -9639,7 +9639,10 @@ h1 .number-result {
     margin: 0;
     text-align: center; }
   .main-navbar.navbar .navbar-end-menu li:hover .navbar-end-menu__sub-cart {
-    display: none; } }
+    display: none; }
+    .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
+      opacity: 1;
+      transform: scale(1); } }
 
 @media screen and (max-width: 991px) {
   footer .columns {
@@ -9701,6 +9704,11 @@ h1 .number-result {
     width: 100%; }
   .catalog-filter .filter-form .form-item {
     width: 100%; } }
+
+@media screen and (max-width: 1200px) {
+  .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
+    opacity: 1;
+    transform: scale(1); } }
 
 .woocommerce-shipping-calculator {
   display: none; }
