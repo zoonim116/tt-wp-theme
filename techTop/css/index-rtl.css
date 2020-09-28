@@ -7753,6 +7753,11 @@ label {
   .navbar .navbar-start-menu {
     max-width: 74%; } }
 
+@media screen and (max-width: 1300px) {
+  .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
+    opacity: 1;
+    transform: scale(1); } }
+
 @media screen and (min-width: 1408px) {
   .container {
     max-width: 1238px; } }
@@ -9652,10 +9657,7 @@ h1 .number-result {
     margin: 0;
     text-align: center; }
   .main-navbar.navbar .navbar-end-menu li:hover .navbar-end-menu__sub-cart {
-    display: none; } 
-  .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
-      opacity: 1;
-      transform: scale(1); }}
+    display: none; } }
 
 @media screen and (max-width: 991px) {
   footer .columns {
