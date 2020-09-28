@@ -56,7 +56,9 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
                     </a>
                     <div class="sub-cart__prod-info">
                         <a href="#" class="sub-cart__prod-name"><?php echo $product_name; ?></a>
-                        <div class="sub-cart__prod-price">₪<?php echo $product_price; ?></div>
+                        <div class="sub-cart__prod-price">₪<?php echo $product_price; ?>
+                            <strong class="product-quantity">×&nbsp;<?php echo $wiz_product[4]; ?></strong>
+                        </div>
                     </div>
                     <?php
 					echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

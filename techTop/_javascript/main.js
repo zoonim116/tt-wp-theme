@@ -4,6 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   jQuery('body').on('added_to_cart', function (a1, a2, a3){
     jQuery('.navbar-end-menu__sub-cart').html(a2['div.widget_shopping_cart_content']);
+    jQuery('.navbar-item li .counter').html(a2['header-cart-count']);
+  });
+
+  jQuery('body').on('removed_from_cart', function (a1, a2, a3){
+    jQuery('.navbar-item li .counter').html(a2['header-cart-count']);
+  });
+
+  jQuery('body').on('wishlist_fragments_refreshed', function (){
+    var data = {
+      action: 'mini_wishlist_fragments_refreshed',
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      $('.mini-wishlist .navbar-end-menu__sub-cart').html(response);
+    });
+
+    var data = {
+      action: 'mini_wishlist_count_refreshed',
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      $('.mini-wishlist .counter').html(response);
+    });
   });
 
   jQuery('body').on('wc_fragments_refreshed', function (a1, a2, a3){
@@ -16,6 +37,24 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   });
 
+  $(document).on('click', '.wish_list .remove_from_wishlist_button',  function (e){
+    e.preventDefault();
+    var self = this;
+    var data = {
+      action: 'mini_remove_from_wishlist',
+      sku: $(this).data('sku')
+    };
+    jQuery.post( tt_ajax.url, data, function(response) {
+      jQuery( 'body' ).trigger( 'wishlist_fragments_refreshed');
+      // $(self).closest('li').remove();
+      // var total = JSON.parse(response).total;
+      // if (total > 0) {
+      //   $('.mini-wishlist .counter span').text(total);
+      // } else {
+      //   $('.mini-wishlist .counter span').remove();
+      // }
+    });
+  });
 
   var filtersWasChanged = false;
 
@@ -304,6 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     jQuery.post( tt_ajax.url, data, function(response) {
       if (response == "OK") {
+        jQuery( 'body' ).trigger( 'wishlist_fragments_refreshed');
         $(self).addClass('active');
       } else {
         alert(response);

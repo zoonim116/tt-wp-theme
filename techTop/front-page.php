@@ -139,9 +139,6 @@
                                     <div class="item-info">
                                         <p class="title"><a href="<?php echo get_permalink($product->get_ID()); ?>"><?php echo $product->get_name(); ?> </a></p>
                                         <div class="item-flex">
-                                            <div class="item-description">
-                                                <p><?php //echo $product->get_short_description(); ?></p>
-                                            </div>
                                             <div class="item-price">
 <!--                                                <p class="old-price">₪910</p>-->
                                                 <p><?php $info = Product::get_item_info($product->get_sku()); echo $info->OutTab[0][6]; ?></p>

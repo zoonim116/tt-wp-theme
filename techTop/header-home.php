@@ -11,7 +11,7 @@
 <nav class="navbar main-navbar" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
 		<a class="navbar-item" href="#">
-			<img src="<?php echo get_template_directory_uri();?>/images/logo-main.svg">
+			<img src="<?php echo get_template_directory_uri();?>/images/TechTop_logo.svg">
 		</a>
 
 		<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -50,7 +50,22 @@
 							</a>
 						<?php endif; ?>
 					</li>
-					<li>
+					<li class="mini-wishlist">
+						<?php 
+							unset($_SESSION['wishlist']);
+							if (is_null($_SESSION['wishlist'])) {
+						        $wishlist_data = User::get_wishlist('ASC');
+						        $_SESSION['wishlist'] = $wishlist_data;
+						    } else {
+						        $wishlist_data = $_SESSION['wishlist'];
+						    }
+						    // $wishlist_data = User::get_wishlist('ASC');
+						?>
+						<span class="counter">
+							<?php if (count($wishlist_data->OutTab) > 0): ?>
+								<span><?php echo count($wishlist_data->OutTab); ?></span>
+							<?php endif; ?>
+						</span>
 						<?php if (is_user_logged_in()): ?>
 							<a href="<?php echo esc_url( wc_get_account_endpoint_url( 'wishlist' ) ); ?>">
 								<svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,13 +79,24 @@
 								</svg>
 							</a>
 						<?php endif; ?>
+                        <div class="navbar-end-menu__sub-cart">
+                            <?php get_template_part( 'template-parts/mini-wishlist' ); ?>
+                        </div>
 					</li>
 					<li>
+						<span class="counter">
+	                        <?php if ( WC()->cart->get_cart_contents_count() > 0 ): ?>
+	                            <span class="counter"><span><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+	                        <?php endif; ?>
+                        </span>
 						<a href="<?php echo esc_url(wc_get_cart_url()); ?>">
 							<svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M24.9375 0.534058L24.1945 2.48066H22.2655L18.7915 14.1603H5.5525L0.9375 3.45396H17.7495L17.1855 5.40056H3.9455L6.8825 12.2137H17.3105L20.7425 0.534058H24.9375ZM9.4375 15.1336C8.6095 15.1336 7.9375 15.7876 7.9375 16.5935C7.9375 17.4004 8.6095 18.0535 9.4375 18.0535C10.2655 18.0535 10.9375 17.4004 10.9375 16.5935C10.9375 15.7876 10.2655 15.1336 9.4375 15.1336ZM16.3375 8.32046L14.4375 15.1336C13.6095 15.1336 12.9375 15.7867 12.9375 16.5935C12.9375 17.4004 13.6095 18.0535 14.4375 18.0535C15.2655 18.0535 15.9375 17.4004 15.9375 16.5935C15.9375 15.7876 15.2655 15.1336 14.4375 15.1336L16.3375 8.32046Z" fill="#767676"/>
 							</svg>
 						</a>
+                        <div class="navbar-end-menu__sub-cart">
+							<?php woocommerce_mini_cart(); ?>
+                        </div>
 					</li>
 				</ul>
 			</div>

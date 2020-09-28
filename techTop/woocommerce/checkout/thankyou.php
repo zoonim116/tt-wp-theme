@@ -71,7 +71,13 @@ wc_get_template( 'order/order-details.php', array( 'order_id' => $order->get_id(
 
 				<li class="woocommerce-order-overview__total total">
 					<?php esc_html_e( 'Total', 'woocommerce' ); ?>
-					<strong><?php echo $order->get_formatted_order_total(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+                    <?php $order_id = $order->get_id(); ?>
+                    <strong>
+                        <span class="woocommerce-Price-amount amount">
+                            <span class="woocommerce-Price-currencySymbol">₪</span>
+                            <?php echo get_post_meta($order_id, 'tt_Total', true); ?>
+                        </span>
+                    </strong>
 				</li>
 
 				<?php if ( $order->get_payment_method_title() ) : ?>

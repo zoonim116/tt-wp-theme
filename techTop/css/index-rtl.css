@@ -7399,6 +7399,19 @@ a {
       .navbar .navbar-end-menu ul li {
         display: inline-block;
         margin-right: 7px; }
+        .navbar .navbar-end-menu ul li .counter {
+          position: relative;
+          display: block;
+          z-index: 1; }
+          .navbar .navbar-end-menu ul li .counter span {
+            position: absolute;
+            top: -6px;
+            background: #0060FE;
+            color: white;
+            font-size: 12px;
+            border-radius: 50%;
+            padding: 0 5px;
+            left: 0; }
         .navbar .navbar-end-menu ul li a {
           display: block;
           padding: 5px;
@@ -10066,6 +10079,10 @@ h1 .number-result {
   display: flex;
   flex-direction: row-reverse;
   margin-bottom: 196px; }
+  .thanks-page .woocommerce-order-details {
+    display: none; }
+  .thanks-page .woocommerce-order {
+    width: 100%; }
   .thanks-page .thanks-page__footer {
     background: #C2D7F8;
     border-radius: 0px 0px 5px 5px;
@@ -10105,6 +10122,9 @@ h1 .number-result {
     box-shadow: none;
     border-radius: 0; }
 
+button.checkout-outer-button#place_order {
+  margin: 55px 32px 55px 0; }
+
 button#place_order {
   height: 47px;
   min-width: 226px;
@@ -10141,14 +10161,12 @@ button#place_order {
 
 .nav-homepage .navbar-end-menu ul {
   padding: 8px 0 11px; }
-  .nav-homepage .navbar-end-menu ul li {
-    position: relative; }
-    .nav-homepage .navbar-end-menu ul li:nth-child(2) a {
-      position: relative;
-      top: 5px; }
-    .nav-homepage .navbar-end-menu ul li:nth-child(3) a {
-      position: relative;
-      top: 5px; }
+  .nav-homepage .navbar-end-menu ul li:nth-child(2) a {
+    position: relative;
+    top: 5px; }
+  .nav-homepage .navbar-end-menu ul li:nth-child(3) a {
+    position: relative;
+    top: 5px; }
 
 .nav-homepage .navbar-end-menu .sign-in {
   box-shadow: none !important;
@@ -10630,6 +10648,12 @@ button#place_order {
     font-size: 18px;
     line-height: 24px;
     color: #0060FE; }
+    .navbar-end-menu__sub-cart .sub-cart__prod-price .product-quantity {
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 19px;
+      color: #767676;
+      padding-right: 10px; }
     .navbar-end-menu__sub-cart .sub-cart__prod-price .woocommerce-Price-amount {
       font-size: inherit;
       line-height: inherit; }

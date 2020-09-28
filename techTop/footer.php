@@ -43,7 +43,7 @@
                 <span>2020 Techtop </span>
             </div>
             <div>
-                <img src="<?php echo get_template_directory_uri(); ?>/images/footer-logo.png">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/ego_logo_sub.svg">
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@
     ul {
       padding: 8px 0 11px;
       li {
-        position: relative;
+        //position: relative;
         &:nth-child(2) {
           a {
             position: relative;
@@ -712,6 +712,13 @@
       font-size: $font-m;
       line-height: 24px;
       color: $blue;
+      .product-quantity {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 19px;
+        color: #767676;
+        padding-right: 10px;
+      }
       .woocommerce-Price-amount {
         font-size: inherit;
         line-height: inherit;

@@ -82,6 +82,21 @@ a {
             li {
                 display: inline-block;
                 margin-right: 7px;
+                .counter {
+                    position: relative;
+                    display: block;
+                    z-index: 1 ;
+                    span {
+                        position: absolute;
+                        top: -6px;
+                        background: $blue;
+                        color: white;
+                        font-size: 12px;
+                        border-radius: 50%;
+                        padding: 0 5px;
+                        left: 0;
+                    }
+                }
                 a {
                     display: block;
                     padding: 5px;

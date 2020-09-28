@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         $sort = $_GET['sort'];
     }
 ?>
-<?php $wishlist_data = Product::get_wishlist($sort); ?>
+<?php $wishlist_data = User::get_wishlist($sort); ?>
 
 <div class="filter-bar">
 	<div class="status">
