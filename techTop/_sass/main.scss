@@ -557,7 +557,12 @@ label {
         }
     }
 }
-
+@media screen and (max-width: $navbar-breakpoint) {
+    .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
+        opacity: 1;
+        transform: scale(1);
+      }
+}
 @media screen and (min-width: $desktop-l) {
     .container {
         max-width: 1238px; 
