@@ -1,0 +1,186 @@
+.catalog-all-list {
+  .catalog-products-item {
+    .item-wrap {
+      border-radius: 20px;
+      .item-img {
+        img {
+          margin: auto;
+        }
+      }
+      .item-info {
+        position: relative;
+        padding-left: 40px;
+        .title {
+          font-size: 20px;
+        }
+        .count {
+          background: #3E3E3E;
+          border-radius: 20px 0px;
+          padding: 6px;
+          color: white;
+          position: absolute;
+          left: -20px;
+          top: -20px;
+          width: 55px;
+          text-align: center;
+          span {
+            display: block;
+            font-size: 11px;
+            &:first-child {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.banners-set.catalog-all-banners {
+  .banners-set-flex {
+    .banners-set-second {
+      width: 68%;
+      display: flex;
+      background: #fff;
+      align-items: center;
+    }
+    .banners-set-first {
+      width: 30%;
+      img {
+        max-height: 100px;
+      }
+    }
+    .set-info {
+      padding-top: 0px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+.banners-set.banners-set-left {
+  background: linear-gradient(0deg, #90EED4, #90EED4), #C2D7F8;
+  .banners-set-flex {
+    & > div {
+      &:first-child {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .banners-set-second {
+          overflow: hidden;
+          background: white;
+          display: flex;
+          flex-wrap: wrap;
+          box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+          border-radius: 5px;
+          height: 48%;
+          .set-info {
+            padding-top: 32px;
+            width: 44%;
+          }
+          .first-img {
+            width: 55%;
+            overflow: hidden;
+            position: relative;
+            img {
+              height: 100%;
+              position: relative;
+              width: auto;
+              object-fit: cover;
+              object-position: left;
+            }
+          }
+        }
+        .banners-set-last {
+          overflow: hidden;
+          color: white;
+          background: black;
+          display: flex;
+          flex-wrap: wrap;
+          box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+          border-radius: 5px;
+          height: 48%;
+          .first-img {
+            width: 78%;
+            order: 1;
+            position: relative;
+            overflow: hidden;
+            img {
+              height: 100%;
+              position: relative;
+              width: auto;
+              object-fit: cover;
+              object-position: right;
+            }
+          }
+          .set-info {
+            width: 21%;
+            padding: 38px 20px 0px 0;
+            .title {
+              color: white;
+              margin-top: 5px;
+              margin-bottom: 31px;
+            }
+          }
+        }
+      }
+    }
+    .banners-set-first {
+      background: white;
+      width: 23%;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+      border-radius: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .banners-set.banners-set-left {
+    .banners-set-flex {
+      .banners-set-first {
+        width: 35%;
+      }
+      & > div{
+        &:first-child {
+          width: 63%;
+          .banners-set-last {
+            .first-img {
+              width: 60%;
+            }
+            .set-info {
+              width: 40%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .banners-set.catalog-all-banners {
+    .banners-set-flex {
+      .banners-set-second {
+        width: 100%;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .banners-set-first {
+        width: 100%;
+      }
+    }
+  }
+  .banners-set.banners-set-left {
+    .banners-set-flex {
+      .banners-set-first {
+        width: 100%;
+        margin-top: 20px;
+      }
+      & > div{
+        &:first-child {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
