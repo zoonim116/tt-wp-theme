@@ -6,6 +6,7 @@ require_once 'inc/product-additonal.php';
 require_once 'inc/my-account.php';
 require_once 'inc/homepage-settings.php';
 require_once 'inc/bulma-navwalker.php';
+require_once 'inc/resselers-settings.php';
 
 if (!session_id()) {
 	session_start();
@@ -835,3 +836,9 @@ function tt_refresh_cart_count($fragments) {
 }
 
 add_filter( 'woocommerce_add_to_cart_fragments', 'tt_refresh_cart_count');
+
+//add_action('woocommerce_add_to_cart', 'custome_add_to_cart');
+//
+//function custome_add_to_cart() {
+//    die("ASD");
+//}

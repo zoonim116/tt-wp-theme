@@ -3,8 +3,8 @@ var slick = require('slick-carousel');
 document.addEventListener('DOMContentLoaded', () => {
 
   jQuery('body').on('added_to_cart', function (a1, a2, a3){
-    jQuery('.navbar-end-menu__sub-cart').html(a2['div.widget_shopping_cart_content']);
-    jQuery('.navbar-item li .counter').html(a2['header-cart-count']);
+    jQuery('.cart .navbar-end-menu__sub-cart').html(a2['div.widget_shopping_cart_content']);
+    jQuery('.navbar-item li.cart .counter').html(a2['header-cart-count']);
   });
 
   jQuery('body').on('removed_from_cart', function (a1, a2, a3){
@@ -25,6 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
     jQuery.post( tt_ajax.url, data, function(response) {
       $('.mini-wishlist .counter').html(response);
     });
+  });
+
+  $('.footer-title').on('click', function (){
+    $(this).next().toggleClass('category-list-hidden');
+  });
+
+  $('.resselers-item .more-info .btn').on('click', function (e){
+    e.preventDefault();
+    $(this).next().removeClass('is-hidden');
+    $(this).addClass('is-hidden');
   });
 
   jQuery('body').on('wc_fragments_refreshed', function (a1, a2, a3){

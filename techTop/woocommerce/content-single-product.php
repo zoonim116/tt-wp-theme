@@ -61,7 +61,7 @@ if ( post_password_required() ) {
 	<?php do_action('tt_template_single_price'); ?>
     <div class="btn-group">
         <?php
-                if ($product->get_stock_quantity() > 0) {
+                if ($product->get_stock_quantity() > 0 && is_user_logged_in()) {
 	                echo apply_filters(
 		                'woocommerce_loop_add_to_cart_link',
 		                sprintf(
@@ -75,7 +75,9 @@ if ( post_password_required() ) {
 		                ),
 		                $product
 	                );
-                }
+                } else { ?>
+	                <a href="<?php echo home_url('resellers'); ?>"class="btn btn-blue ">להוסיף לתיק</a>
+               <?php }
         ?>
         <a href="#" class="like" data-sku="<?php echo $product->get_sku(); ?>">
             <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
