@@ -7755,7 +7755,7 @@ label {
 
 @media screen and (max-width: 1300px) {
   .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
-    opacity: 1;
+    opacity: 1 !important;
     transform: scale(1); } }
 
 @media screen and (min-width: 1408px) {
