@@ -28,6 +28,7 @@ defined( 'ABSPATH' ) || exit;
 
 <section class="main-section">
     <div class="container">
+        <div class="notification-area"></div>
         <div class="columns">
             <div class="column is-3">
             </div>

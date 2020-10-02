@@ -1,4 +1,9 @@
 <?php get_header(); ?>
+<div class="container">
+
+</div>
+
+
 <?php
 $top_categories   = get_categories( [
 	'taxonomy'     => 'product_cat',

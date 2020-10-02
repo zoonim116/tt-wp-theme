@@ -9719,6 +9719,57 @@ h1 .number-result {
   .resellers-address span {
     display: block; }
 
+.notification-area {
+  margin-top: 60px; }
+
+.notification-popup {
+  background: linear-gradient(0deg, #CCDEFF, #CCDEFF), #FFFFFF;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px; }
+  .notification-popup .notification-info {
+    width: 55%;
+    background: #FFFFFF;
+    border: 2px solid #CCDEFF;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+    border-radius: 0px 5px 5px 0px;
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .notification-popup .notification-info .check {
+      font-weight: bold;
+      font-size: 12px;
+      color: #109383;
+      text-decoration: none;
+      margin-left: 15px; }
+    .notification-popup .notification-info .name {
+      font-weight: bold;
+      font-size: 13px;
+      text-decoration: underline; }
+  .notification-popup .notification-price {
+    width: 45%;
+    padding: 5px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around; }
+    .notification-popup .notification-price span {
+      font-size: 14px;
+      font-weight: 500; }
+      .notification-popup .notification-price span .amount {
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 15px; }
+    .notification-popup .notification-price .btn {
+      background: #FFFFFF;
+      border: 1px solid rgba(117, 169, 249, 0.41);
+      box-shadow: 4px 4px 10px #75A9F9;
+      color: #0060FE; }
+
 @media screen and (max-width: 1300px) {
   .catalog-search {
     padding-top: 37px; }
@@ -9830,7 +9881,13 @@ h1 .number-result {
     width: 100%;
     margin-left: 0; }
     .resselers-container .resselers-blocks .resselers-block-item .resselers-list .resselers-item:nth-child(4n) {
-      margin-left: 0; } }
+      margin-left: 0; }
+  .notification-popup .notification-info {
+    width: 100%; }
+    .notification-popup .notification-info .name {
+      display: block; }
+  .notification-popup .notification-price {
+    width: 100%; } }
 
 .woocommerce-shipping-calculator {
   display: none; }
