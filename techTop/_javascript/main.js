@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   jQuery('body').on('added_to_cart', function (a1, a2, a3){
     jQuery('.cart .navbar-end-menu__sub-cart').html(a2['div.widget_shopping_cart_content']);
     jQuery('.navbar-item li.cart .counter').html(a2['header-cart-count']);
+    jQuery('.notification-area').html(a2['popup_notification']);
   });
 
   jQuery('body').on('removed_from_cart', function (a1, a2, a3){

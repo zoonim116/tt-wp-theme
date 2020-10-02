@@ -47,7 +47,7 @@ switch ( $template ) {
 		break;
 	default:
 		if (count($children_categories) > 0) {
-			echo '<section class="main-catalog"><div class="container">';
+			echo '<section class="main-catalog"><div class="container"><div class="notification-area"></div>';
 		} else {
 			if (is_product()) {
 				do_action('tt_breadcrumb');
@@ -57,6 +57,7 @@ switch ( $template ) {
 				do_action('tt_breadcrumb');
 				echo '<section class="main-catalog">';
 				echo '<div class="container">';
+				echo '<div class="notification-area"></div>';
 			}
 		}
 		break;

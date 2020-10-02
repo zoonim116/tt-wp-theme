@@ -88,7 +88,7 @@ function display_woo_categories() {
 			'hierarchical' => 0,
 			'title_li'     => '',
 			'hide_empty'   => 1,
-			'parent'       => $tc->term_id
+			'child_of'       => $tc->term_id
 		]);
 		$child_categories[$tc->term_id][] = $cat;
 	}
@@ -99,6 +99,7 @@ add_action('display_woo_categories', 'display_woo_categories');
 
 function cat($arr, $parent = 0) {
 	foreach ($arr as $category) {
+	    echo $category[0] . " <br>";
 		if ($term = term_exists($category[0], 'product_cat')) {
             $cid = $term['term_id'];
 		} else {
@@ -114,56 +115,57 @@ function cat($arr, $parent = 0) {
 			);
 			$cid = $term['term_id'];
 		}
-		$products = Product::get_items($category[0]);
-		if (count($products->OutTab) > 0) {
-			foreach ($products->OutTab as $item) {
-                $tt_product = Product::get_item_info($item[0]);
-
-				$product_id = 0;
-                if (wc_get_product_id_by_sku($item[0])) {
-                    $product_id = wc_get_product_id_by_sku($item[0]);
-                }
-				try {
-					$price = str_replace('NIS ', '', $item[7]);
-					$product = new WC_Product($product_id);
-					$product->set_name($item[1]);
-					$product->set_status('publish');
-					$product->set_catalog_visibility('visible');
-					$product->set_short_description($item[2]);
-					if (!$product->get_sku()) {
-						$product->set_sku($item[0]);
-					}
-					//TODO add price to product
-					$product->set_price($price);
-					$product->set_regular_price($price);
-					$product->set_manage_stock(true);
-					$product->set_stock_quantity($item[4]);
-					if ($item[28] == 'Out of stock') {
-						$product->set_stock_status('outofstock');
-					} else {
-						$product->set_stock_status('instock');
-					}
-					$product->set_backorders('no');
-					$product->set_reviews_allowed(false);
-					$product->set_sold_individually(false);
-					$product->set_category_ids([$cid]);
-					$product->update_meta_data('remote_image', "https://shop4.wizsoft.com/vshop/images/techtopimg/heb/{$item[6]}");
-					if ($tt_product->Status == 'OK' &&  count($tt_product->VSNotesTab[1]) > 0) {
-						$product->update_meta_data('info_data', $tt_product->VSNotesTab[1]);
-					}
-					if (count($item[4]) > 0) {
-						$product->update_meta_data('gallery_info_data', $item[4]);
-					}
-					$product->save();
-				} catch (Exception $e) {
-				    echo "<pre>";
-					print_r($e);
-				}
-			}
-		}
+//		$products = Product::get_items($category[0]);
+//		if (count($products->OutTab) > 0) {
+//			foreach ($products->OutTab as $item) {
+//                $tt_product = Product::get_item_info($item[0]);
+//
+//				$product_id = 0;
+//                if (wc_get_product_id_by_sku($item[0])) {
+//                    $product_id = wc_get_product_id_by_sku($item[0]);
+//                }
+//				try {
+//					$price = str_replace('NIS ', '', $item[7]);
+//					$product = new WC_Product($product_id);
+//					$product->set_name($item[1]);
+//					$product->set_status('publish');
+//					$product->set_catalog_visibility('visible');
+//					$product->set_short_description($item[2]);
+//					if (!$product->get_sku()) {
+//						$product->set_sku($item[0]);
+//					}
+//					//TODO add price to product
+//					$product->set_price($price);
+//					$product->set_regular_price($price);
+//					$product->set_manage_stock(true);
+//					$product->set_stock_quantity($item[4]);
+//					if ($item[28] == 'Out of stock') {
+//						$product->set_stock_status('outofstock');
+//					} else {
+//						$product->set_stock_status('instock');
+//					}
+//					$product->set_backorders('no');
+//					$product->set_reviews_allowed(false);
+//					$product->set_sold_individually(false);
+//					$product->set_category_ids([$cid]);
+//					$product->update_meta_data('remote_image', "https://shop4.wizsoft.com/vshop/images/techtopimg/heb/{$item[6]}");
+//					if ($tt_product->Status == 'OK' &&  count($tt_product->VSNotesTab[1]) > 0) {
+//						$product->update_meta_data('info_data', $tt_product->VSNotesTab[1]);
+//					}
+//					if (count($item[4]) > 0) {
+//						$product->update_meta_data('gallery_info_data', $item[4]);
+//					}
+//					$product->save();
+//				} catch (Exception $e) {
+//				    echo "<pre>";
+//					print_r($e);
+//				}
+//			}
+//		}
 		if (is_array($category[10]) && count($category[10]) > 0) {
 			cat($category[10], $cid);
 		}
+		echo "_________________________________________________________ <br>";
 	}
 }
 
@@ -174,7 +176,7 @@ function tt_add_cron_interval( $schedules ) {
 		'display'  => esc_html__( 'Half hour' ) );
 	return $schedules;
 }
-
+//add_action('init', 'tt_catalog_cron_hook');
 function tt_catalog_cron_hook () {
 	$root = Categories::get_categories();
 	try {
@@ -832,13 +834,31 @@ function tt_refresh_cart_count($fragments) {
     } else {
 	    $fragments['header-cart-count'] = false;
     }
+	$cart = end(WC()->cart->get_cart());
+    ob_start();?>
+    <div class="notification-popup">
+		<?php $cart = end(WC()->cart->get_cart()); ?>
+        <div class="notification-info">
+            <p>
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 20 15" fill="none">
+                        <path d="M19.3013 1.56873L6.77393 14.1078L0.246582 7.56873L1.30127 6.51404L6.77393 11.975L18.2466 0.514038L19.3013 1.56873Z" fill="#0060FE"/>
+                        <path d="M19.3013 1.56873L6.77393 14.1078L0.246582 7.56873L1.30127 6.51404L6.77393 11.975L18.2466 0.514038L19.3013 1.56873Z" fill="#109383"/>
+                    </svg>
+                </span>
+                <span class="check">נוסף לכרטיס</span>
+                <span class="name"><?php echo $cart['data']->get_name(); ?></span>
+            </p>
+        </div>
+        <div class="notification-price">
+            <span>סכום המשנה של כרטיס (<span><?php echo WC()->cart->get_cart_contents_count(); ?></span>פריטים )</span>
+            <span><?php echo WC()->cart->get_cart_total(); ?></span>
+            <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn">תוינקו לס גצה</a>
+        </div>
+    </div>
+    <?php
+	$fragments['popup_notification'] = ob_get_clean();
 	return $fragments;
 }
 
 add_filter( 'woocommerce_add_to_cart_fragments', 'tt_refresh_cart_count');
-
-//add_action('woocommerce_add_to_cart', 'custome_add_to_cart');
-//
-//function custome_add_to_cart() {
-//    die("ASD");
-//}
