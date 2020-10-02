@@ -51,7 +51,7 @@ foreach ( $top_categories as $index => $tc ) {
                                     <div class="item-info">
                                         <p class="title"><a href="<?php echo get_term_link($child->term_id); ?>"><?php echo $child->name; ?> </a></p>
                                         <div class="count">
-                                            <span>5</span>
+                                            <span><?php echo $child->count; ?></span>
                                             <span>מוצרים למכירה</span>
                                         </div>
                                     </div>

@@ -256,6 +256,7 @@ function woo_remove_wc_breadcrumbs() {
 	    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 	    remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 	    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+	    remove_action( 'woocommerce_account_content', 'woocommerce_output_all_notices', 5 );
 //	}
 }
 

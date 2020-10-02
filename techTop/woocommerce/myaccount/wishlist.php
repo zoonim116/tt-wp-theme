@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 echo apply_filters(
                                     'woocommerce_loop_add_to_cart_link',
                                     sprintf(
-                                        '<a href="%s" data-product_id="%s" data-product_sku="%s" class="cart product_type_%s"><span></span></a>',
+                                        '<a href="%s" data-product_id="%s" data-product_sku="%s" class="cart product_type_simple %s ajax_add_to_cart"><span></span></a>',
                                         esc_url( $product->add_to_cart_url() ),
                                         esc_attr( $product->get_id() ),
                                         esc_attr( $product->get_sku() ),
