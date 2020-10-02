@@ -445,12 +445,26 @@
 .woocommerce .woocommerce-customer-details .woocommerce-customer-details--phone {
   padding-right: 30px;
   padding-left: 0;
-
   &::before {
-    right: 49px;
+    right: 77px;
+  }
+}
+.woocommerce-order-overview.woocommerce-thankyou-order-details.order_details li {
+  margin-left: 0;
+  border-left: 0;
+}
+
+.woocommerce-orders-table.woocommerce-MyAccount-orders.shop_table.shop_table_responsive.my_account_orders.account-orders-table {
+  .woocommerce-Price-amount.amount  {
+    font-size: .85em;
   }
 }
 
+.woocommerce-account.woocommerce-page.woocommerce-orders {
+  .main-section {
+    padding-top: 0;
+  }
+}
 .woocommerce-order-details {
   width: 360px;
   padding: 0 17px;
