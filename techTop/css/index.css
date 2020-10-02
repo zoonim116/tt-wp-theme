@@ -9641,7 +9641,7 @@ h1 .number-result {
   .main-navbar.navbar .navbar-end-menu li:hover .navbar-end-menu__sub-cart {
     display: none; }
     .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
-      opacity: 1;
+      opacity: 1 !important;
       transform: scale(1); } }
 
 @media screen and (max-width: 991px) {
