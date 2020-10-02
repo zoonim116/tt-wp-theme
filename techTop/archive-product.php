@@ -55,9 +55,14 @@ foreach ( $top_categories as $index => $tc ) {
                                             <span>מוצרים למכירה</span>
                                         </div>
                                     </div>
+
                                     <div class="item-img">
                                         <a href="<?php echo get_term_link($child->term_id); ?>">
-                                            <img src="<?php echo carbon_get_term_meta($child->term_id, 'crb_homepage_banner_thumb')?>">
+                                            <?php if (carbon_get_term_meta($child->term_id, 'crb_homepage_banner_thumb')): ?>
+                                                <img src="<?php echo carbon_get_term_meta($child->term_id, 'crb_homepage_banner_thumb')?>">
+                                            <?php else: ?>
+	                                            <?php do_action( 'woocommerce_before_subcategory_title', $child ); ?>
+                                            <?php endif; ?>
                                         </a>
                                     </div>
                                 </div>

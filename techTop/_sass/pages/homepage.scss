@@ -7,7 +7,7 @@
       font-size: $font-xm;
       margin-left: 27px;
       padding: 5px 1.2vw;
-      &:hover, &.active {
+      &:hover, &.active, &:focus, &:focus-within {
         background: #141414;
         border-radius: 5px;
       }

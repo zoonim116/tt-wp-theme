@@ -240,7 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if ($('div.balance').length > 0) {
+
+  if (jQuery('div.balance').length > 0) {
     var data = {
       action: 'get_b2b_user_balance',
     };

@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
     <div class="category-info">
         <div class="count">
-            <span>5</span>
+            <span><?php echo $category->count; ?></span>
             <span> מוצרים למכירה</span>
         </div>
         <div class="category-header">

@@ -9014,7 +9014,9 @@ label {
   .main-navbar .navbar-megamenu a {
     color: #fff; }
   .main-navbar .navbar-megamenu > ul {
-    padding-top: 6px; }
+    padding-top: 6px;
+    display: flex;
+    flex-wrap: wrap; }
     .main-navbar .navbar-megamenu > ul > li {
       display: inline-block; }
       .main-navbar .navbar-megamenu > ul > li > a {
@@ -10329,7 +10331,7 @@ button#place_order {
     font-size: 16px;
     margin-left: 27px;
     padding: 5px 1.2vw; }
-    .nav-homepage .navbar-start .navbar-item:hover, .nav-homepage .navbar-start .navbar-item.active {
+    .nav-homepage .navbar-start .navbar-item:hover, .nav-homepage .navbar-start .navbar-item.active, .nav-homepage .navbar-start .navbar-item:focus, .nav-homepage .navbar-start .navbar-item:focus-within {
       background: #141414;
       border-radius: 5px; }
 

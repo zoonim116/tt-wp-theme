@@ -257,10 +257,11 @@ function woo_remove_wc_breadcrumbs() {
 	    remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 	    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 	    remove_action( 'woocommerce_account_content', 'woocommerce_output_all_notices', 5 );
+	    remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 //	}
 }
 
-function tt_template_loop_price(){
+function tt_template_loop_price() {
     global $product;
     $info = Product::get_item_info($product->get_sku());
     echo '<p>'.$info->OutTab[0][6].'</p>';
@@ -836,9 +837,9 @@ function tt_refresh_cart_count($fragments) {
 	    $fragments['header-cart-count'] = false;
     }
 	$cart = end(WC()->cart->get_cart());
+    if ($cart) {
     ob_start();?>
     <div class="notification-popup">
-		<?php $cart = end(WC()->cart->get_cart()); ?>
         <div class="notification-info">
             <p>
                 <span>
@@ -847,18 +848,21 @@ function tt_refresh_cart_count($fragments) {
                         <path d="M19.3013 1.56873L6.77393 14.1078L0.246582 7.56873L1.30127 6.51404L6.77393 11.975L18.2466 0.514038L19.3013 1.56873Z" fill="#109383"/>
                     </svg>
                 </span>
-                <span class="check">נוסף לכרטיס</span>
-                <span class="name"><?php echo $cart['data']->get_name(); ?></span>
-            </p>
+                    <span class="check">נוסף לכרטיס</span>
+                    <span class="name"><?php echo $cart['data']->get_name(); ?></span>
+                </p>
+            </div>
+            <div class="notification-price">
+                <span>סכום המשנה של כרטיס (<span><?php echo WC()->cart->get_cart_contents_count(); ?></span>פריטים )</span>
+                <span><?php echo WC()->cart->get_cart_total(); ?></span>
+                <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn">תוינקו לס גצה</a>
+            </div>
         </div>
-        <div class="notification-price">
-            <span>סכום המשנה של כרטיס (<span><?php echo WC()->cart->get_cart_contents_count(); ?></span>פריטים )</span>
-            <span><?php echo WC()->cart->get_cart_total(); ?></span>
-            <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn">תוינקו לס גצה</a>
-        </div>
-    </div>
-    <?php
-	$fragments['popup_notification'] = ob_get_clean();
+        <?php
+        $fragments['popup_notification'] = ob_get_clean();
+    } else {
+	    $fragments['popup_notification'] = false;
+    }
 	return $fragments;
 }
 

@@ -75,7 +75,7 @@ if ( post_password_required() ) {
 		                ),
 		                $product
 	                );
-                } else { ?>
+                } elseif(!is_user_logged_in()) { ?>
 	                <a href="<?php echo home_url('resellers'); ?>"class="btn btn-blue ">להוסיף לתיק</a>
                <?php }
         ?>

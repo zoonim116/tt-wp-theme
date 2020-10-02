@@ -52,7 +52,7 @@ switch ( $template ) {
 			if (is_product()) {
 				do_action('tt_breadcrumb');
 				echo '<section class="main-card">';
-				echo '<div class="container">';
+				echo '<div class="container"><div class="notification-area"></div>';
 			} else {
 				do_action('tt_breadcrumb');
 				echo '<section class="main-catalog">';

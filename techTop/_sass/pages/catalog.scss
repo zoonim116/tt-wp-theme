@@ -25,6 +25,8 @@
     }
     & > ul {
       padding-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
       & > li {
         display: inline-block;
         & > a {

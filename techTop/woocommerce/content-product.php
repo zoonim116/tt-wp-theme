@@ -40,7 +40,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
                  */
                 if ($product->get_stock_quantity() > 0 && is_user_logged_in()) {
 	                do_action( 'woocommerce_after_shop_loop_item' );
-                } else {
+                } elseif(!is_user_logged_in()) {
                 ?>
                     <a href="<?php echo home_url('resellers'); ?>"class="btn btn-blue ">להוסיף לתיק</a>
                 <?php } ?>

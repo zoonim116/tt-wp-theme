@@ -41,9 +41,10 @@
 				<ul>
 					<li>
 						<?php if (is_user_logged_in()): ?>
-							<a href="<?php echo home_url('my-account/') ?>"  class="sign-in btn btn-blue">
-								לאיזור אישי
-							</a>
+                            <div class="balance">
+                                <p>יתרת כרטיס</p>
+                                <p style="direction: ltr;">...</p>
+                            </div>
 						<?php else: ?>
 							<a href="<?php echo home_url('login/') ?>"  class="sign-in btn btn-blue">
 								לאיזור אישי
