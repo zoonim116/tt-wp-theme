@@ -14,29 +14,41 @@
     }
   }
   .navbar-end-menu {
-    ul {
-      padding: 8px 0 11px;
-      li {
-        //position: relative;
-        &:nth-child(2) {
+    .navbar-item {
+      & > ul {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        li {
+          margin-right: 8px;
           a {
-            position: relative;
-            top: 5px;
+            svg {
+              margin-top: 3px;
+              margin-right: 2px;
+            }
           }
         }
-        &:nth-child(3) {
+        .mini-wishlist {
           a {
-            position: relative;
-            top: 5px;
+            svg {
+              margin-top: 0px;
+            }
+          }
+          .counter span {
+            top: -5px !important;
           }
         }
       }
     }
+   
     .sign-in {
       box-shadow: none !important;
       margin-left: 10px;
       padding: 9px 38px;
     }
+  }
+  .navbar-end-menu ul li .counter span {
+    top: -2px !important;
   }
 }
 
@@ -635,6 +647,7 @@
     padding-bottom: 0px;
   }
 }
+
 .navbar-end-menu{
   &__sub-cart {
     display: none;
@@ -649,19 +662,35 @@
     z-index: 1000;
     padding: 11px 0 23px 0;
     .sub-cart__title {
-      font-size: 13px;
-      line-height: 19px;
-      padding-left: 30px;
-      padding-right: 30px;
+      font-size: 13px !important;
+      line-height: 19px !important;
+      padding-left: 30px !important;
+      padding-right: 30px !important;
       .sub-cart__title-big {
-        font-size: 24px;
-        line-height: 60px;
-        padding-left: 10px;    
+        font-size: 24px !important;
+        line-height: 60px !important;
+        padding-left: 10px !important;  
+        position: static !important; 
+        top: 0 !important;
+        background-color: transparent !important; 
+        color: #000 !important;
+        & ~ span {
+          color: #4a4a4a !important;
+        }
       }
+      span:not(.sub-cart__title-big ) {
+        color: #4a4a4a;
+        position: static !important; 
+        top: 0 !important;
+        background-color: transparent !important; 
+      }
+      
     }
+    
     .sub-cart__list {
       //height: 283px;
       overflow: auto;
+      overflow-x: hidden;
       padding-left: 30px;
       padding-right: 30px;
       margin: 0 !important;
@@ -784,7 +813,9 @@
     }
   }
 }
-
+.nav-homepage .navbar-end-menu__sub-cart {
+  top: 36px;
+}
  .navbar-end-menu li:hover .navbar-end-menu__sub-cart {
    display: block;
    height: auto;
