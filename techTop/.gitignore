@@ -1,3 +1,7 @@
 node_modules
 vendor
 composer.lock
+../twentynineteen/
+../twentyseventeen/
+../twentytwenty/
+../index.php
