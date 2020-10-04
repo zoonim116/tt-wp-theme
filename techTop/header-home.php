@@ -84,10 +84,10 @@
                             <?php get_template_part( 'template-parts/mini-wishlist' ); ?>
                         </div>
 					</li>
-					<li>
+					<li class="cart">
 						<span class="counter">
 	                        <?php if ( WC()->cart->get_cart_contents_count() > 0 ): ?>
-	                            <span class="counter"><span><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+	                            <span><?php echo WC()->cart->get_cart_contents_count(); ?></span>
 	                        <?php endif; ?>
                         </span>
 						<a href="<?php echo esc_url(wc_get_cart_url()); ?>">

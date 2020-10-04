@@ -9987,6 +9987,12 @@ h1 .number-result {
 .product-thumbnail a img {
   width: 100% !important; }
 
+.woocommerce-cart-form__cart-item .product-price {
+  font-size: 21px !important; }
+
+.woocommerce-cart-form__cart-item .product-subtotal {
+  font-size: 29px !important; }
+
 .product-name {
   text-align: right !important;
   font-weight: bold;

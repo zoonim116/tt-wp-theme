@@ -79,8 +79,13 @@
   width: 100% !important;
 }
 
-.product-remove a.remove {
-
+.woocommerce-cart-form__cart-item {
+  .product-price {
+    font-size: 21px !important;
+  }
+  .product-subtotal { 
+    font-size: 29px !important; 
+  }
 }
 
 .product-name {

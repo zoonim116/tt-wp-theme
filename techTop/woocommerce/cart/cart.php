@@ -109,10 +109,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 						</td>
 
 						<td class="product-price" data-title="<?php esc_attr_e( 'Price', 'woocommerce' ); ?>">
+						<span class="woocommerce-Price-currencySymbol">
 							<?php
-//								echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
                                 echo $wiz_product['5'];
 							?>
+							₪
+							</span>
 						</td>
 
 						<td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
@@ -137,10 +139,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 						</td>
 						<td class="product-subtotal" data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
+						<span class="woocommerce-Price-currencySymbol">
 							<?php
 //								echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
                                 echo $wiz_product[8];
 							?>
+							₪
+						</span>
 						</td>
 					</tr>
 					<?php

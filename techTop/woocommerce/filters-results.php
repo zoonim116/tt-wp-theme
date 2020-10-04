@@ -23,7 +23,7 @@
             <div class="item-flex">
                 <div class="item-price">
                     <?php if (is_user_logged_in()): ?>
-                        <p class="old-price">NIS <?php echo $product->get_price(); ?></p>
+                        <p class="old-price">₪ <?php echo $product->get_price(); ?></p>
                     <?php endif; ?>
                     <p><?php echo $info[6]; ?></p>                </div>
             </div>

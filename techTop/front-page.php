@@ -95,6 +95,7 @@
 	    'hide_empty'   => 1,
 	    'parent'       => 0
     ]);
+    $top_categories = [];
     $child_categories = [];
     foreach ($top_categories as $index => $tc) {
 	    if ($tc->term_id == 15)
@@ -109,7 +110,6 @@
 	    $child_categories[$tc->term_id][] = $cat;
     }
     ?>
-
     <?php foreach ($top_categories as $index => $parent_category): ?>
         <div class="home-category-item">
             <div class="container">

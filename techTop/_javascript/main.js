@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   jQuery('body').on('removed_from_cart', function (a1, a2, a3){
-    jQuery('.navbar-item li .counter').html(a2['header-cart-count']);
+    jQuery('.navbar-item li.cart .counter').html(a2['header-cart-count']);
+    jQuery(document.body).trigger('wc_fragments_refreshed');
   });
 
   jQuery('body').on('wishlist_fragments_refreshed', function (){
@@ -376,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sku: $(this).data('sku')
     };
     jQuery.post( tt_ajax.url, data, function(response) {
-      alert(response);
+      // alert(response);
       window.location.reload();
     });
   });

@@ -176,6 +176,8 @@ function tt_add_cron_interval( $schedules ) {
 		'display'  => esc_html__( 'Half hour' ) );
 	return $schedules;
 }
+
+// Uncomment next line to run import from CRM
 //add_action('init', 'tt_catalog_cron_hook');
 function tt_catalog_cron_hook () {
 	$root = Categories::get_categories();
@@ -340,7 +342,7 @@ function tt_price_html( $price, $product ){
 	$info = Product::get_item_info($product->get_sku());
 	$old_price = '';
 	if ( is_user_logged_in() ){
-	    $old_price = '<p class="old-price">NIS '.$product->get_price().'</p>';
+	    $old_price = '<p class="old-price">₪ '.$product->get_price().'</p>';
     }
 	return '<div class="item-price">
             '.$old_price.'
