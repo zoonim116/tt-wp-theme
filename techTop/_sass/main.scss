@@ -9,7 +9,9 @@ body {
 a {
     color: black;
 }
-
+.woocommerce-Price-currencySymbol {
+    white-space: nowrap !important;
+}
 .navbar {
     background: #fff;
     border-bottom: 1px solid #EEEEEE;
@@ -112,6 +114,7 @@ a {
                             position:static !important;
                             background: transparent !important;
                             color: #0060FE !important;
+                            white-space: nowrap !important;
                         }
                     }
                 }
@@ -580,6 +583,39 @@ label {
         opacity: 1 !important;
         transform: scale(1);
       }
+      .home {
+        .nav-homepage .navbar-end-menu .navbar-item > ul {
+            display: block;
+            text-align: center;
+            li {
+                margin-right: 8px;
+                margin-left: 8px;
+            }
+                li:first-child {
+                    display: block;
+                     .balance {
+                        display: inline-block;
+                        margin-bottom: 20px;
+                    }
+                }
+        }
+        .nav-homepage .navbar-start .navbar-item {
+            margin-left: 0;
+        }
+        .nav-homepage .navbar-start {
+          text-align: center;
+        }
+      }
+      .main-navbar .navbar-megamenu > ul {
+          display: block !important;
+      }
+      .navbar .navbar-end-menu .navbar-item {
+          text-align: center;
+      }
+      .navbar .navbar-end-menu .balance {
+        display: inline-block;
+        margin-bottom: 20px;
+      }
 }
 @media screen and (min-width: $desktop-l) {
     .container {
@@ -617,7 +653,7 @@ label {
             max-height: 85px;
             overflow: hidden;
             position: relative;
-            transition: max-height 3s;
+            // transition: max-height 3s;
             &.active {
                 max-height: 1000px;
                 & + .more-btn {
@@ -720,7 +756,7 @@ label {
         }
         .customer_checkout-fields {
             width: 100%;
-            margin-bottom: 80px !important;
+            margin-bottom: 40px !important;
             padding-left: 30px !important;
             padding-right: 30px !important;
         }
@@ -728,6 +764,14 @@ label {
     .woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea, .woocommerce form .form-row select  {
         width: 100% !important;
       }
+      button#place_order {
+          display: inline-block;
+          margin: 0 auto !important;
+          margin-bottom: 40px !important;
+          position: relative;
+          right: 50%;
+          transform: translateX(50%);
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -749,7 +793,19 @@ label {
 }
 
 @media screen and (max-width: $mobile) {
-   
+    .home {
+        .nav-homepage .navbar-end-menu .navbar-item > ul  {
+            text-align: center;
+            li {
+                margin-right: 0;
+                text-align: center;
+            }
+        }
+        .nav-homepage .navbar-start .navbar-item {
+            margin-left: 0;
+        }
+
+      }
     .navbar {
         .navbar-menu {
             padding: 20px;
@@ -788,6 +844,26 @@ label {
             &.active {
                 min-width: 30px;
             }
+        }
+    }
+
+    .woocommerce table.shop_table_responsive tr td, .woocommerce-page table.shop_table_responsive tr td {
+        text-align: right !important;
+    }
+    .woocommerce table.shop_table_responsive tr, .woocommerce-page table.shop_table_responsive tr:last-child {
+        display: flex;
+        flex-direction: column;
+        td:first-child{
+            order: 4;
+        }
+        td:nth-child(2){
+            order: 1;
+        }
+        td:nth-child(3){
+            order: 2;
+        }
+        td:last-child(2){
+            order: 3;
         }
     }
 }

@@ -1095,6 +1095,11 @@ h1 {
       }
     }
   }
+  .home .nav-homepage .navbar-start .navbar-item {
+    border-bottom: 1px solid #404040;
+    margin-bottom: 10px;
+    padding-bottom: 12px;
+  }
 }
 
 @media screen and (max-width: $tablet) {
