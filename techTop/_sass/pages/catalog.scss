@@ -24,13 +24,14 @@
       color: $white;
     }
     & > ul {
-      padding-top: 6px;
+      // padding-top: 6px;
       display: flex;
       flex-wrap: wrap;
       & > li {
         display: inline-block;
         & > a {
           padding: 5px 1.2vw;
+          font-size: 16px;
         }
 
         ul {

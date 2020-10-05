@@ -790,6 +790,16 @@ label {
             margin-right: auto !important;
         }
     }
+    .main-card .card-price .item-price .old-price + p {
+        font-size: 18px !important;
+    }
+    .main-card .card-price {
+        align-items: flex-start !important;
+        flex-direction: column;
+    }
+    .main-card .card-price .btn-group {
+        margin-top: 10px;
+    }
 }
 
 @media screen and (max-width: $mobile) {
