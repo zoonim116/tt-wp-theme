@@ -88,7 +88,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 	</ul>
     <div class="sub-cart__footer">
         <div class="sub-cart__footer-header">
-            <div class="sub-cart__footer-total">:כ"הס</div>
+            <div class="sub-cart__footer-total">סה׳׳כ:</div>
             <div class="sub-cart__footer-price" ><?php echo WC()->cart->get_cart_total(); ?></div>
         </div>
         <div class="sub-cart__footer-button">

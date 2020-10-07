@@ -10978,6 +10978,7 @@ button#place_order {
   .navbar-end-menu__sub-cart .sub-cart__footer-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px; }
   .navbar-end-menu__sub-cart .sub-cart__footer-total {
     font-weight: 500;
@@ -10985,12 +10986,14 @@ button#place_order {
     line-height: 53px;
     min-width: 100px;
     margin-left: 20px;
+    padding-right: 12px;
     color: #000; }
   .navbar-end-menu__sub-cart .sub-cart__footer-price {
     font-weight: bold;
     font-size: 18px;
     line-height: 24px;
-    color: blue; }
+    color: blue;
+    padding-left: 10px; }
     .navbar-end-menu__sub-cart .sub-cart__footer-price .woocommerce-Price-amount.amount {
       font-weight: bold;
       font-size: 18px;

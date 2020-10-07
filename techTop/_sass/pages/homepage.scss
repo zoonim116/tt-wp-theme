@@ -770,6 +770,7 @@
     .sub-cart__footer-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin-bottom: 10px;
     }
     .sub-cart__footer-total {
@@ -778,6 +779,7 @@
       line-height: 53px;
       min-width: 100px;
       margin-left: 20px;
+      padding-right: 12px;
       color: #000;
     }
     .sub-cart__footer-price {
@@ -785,6 +787,7 @@
       font-size: $font-m;
       line-height: 24px;
       color: blue;
+      padding-left: 10px;
       .woocommerce-Price-amount.amount {
         font-weight: bold;
       font-size: $font-m;
