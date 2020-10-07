@@ -11,9 +11,9 @@
                             <a href="<?php echo get_term_link($item['crb_ts_category'][0]['id']); ?>" class="btn btn-blue">צפה בקטלוג</a>
                         <?php endif; ?>
                     </div>
-                    <div class="column is-2 col-products">
-                        <span><span><?php echo $item['crb_ts_product_count']?></span>מוצרים</span>
-                    </div>
+                    <!-- <div class="column is-2 col-products"> -->
+                        <!-- <span><span><?php //echo $item['crb_ts_product_count']?></span>מוצרים</span> -->
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
                                                     echo apply_filters(
                                                         'woocommerce_loop_add_to_cart_link',
                                                         sprintf(
-                                                            '<a href="%s" data-product_id="%s" data-product_sku="%s" class="btn btn-blue %s product_type_%s add_to_cart_button ajax_add_to_cart">%s</a>',
+                                                            '<a href="%s" data-product_id="%s" data-product_sku="%s" class="btn btn-blue %s button product_type_%s add_to_cart_button ajax_add_to_cart">%s</a>',
                                                             esc_url( $product->add_to_cart_url() ),
                                                             esc_attr( $product->get_id() ),
                                                             esc_attr( $product->get_sku() ),

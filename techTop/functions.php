@@ -87,8 +87,8 @@ function display_woo_categories() {
 			'taxonomy'     => 'product_cat',
 			'hierarchical' => 0,
 			'title_li'     => '',
-			'hide_empty'   => 1,
-			'child_of'       => $tc->term_id
+			'hide_empty'   => 0,
+			'parent'       => $tc->term_id
 		]);
 		$child_categories[$tc->term_id][] = $cat;
 	}
@@ -259,7 +259,11 @@ function woo_remove_wc_breadcrumbs() {
 	    remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 	    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 	    remove_action( 'woocommerce_account_content', 'woocommerce_output_all_notices', 5 );
-	    remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+		// remove_action( 'woocommerce_before_cart', 'woocommerce_output_all_notices', 10 );
+		// remove_action( 'woocommerce_cart_is_empty', 'wc_empty_cart_message', 10 );
+		// add_action( 'woocommerce_cart_is_empty', 'tt_empty_cart_message', 10 );
+		// add_action( 'woocommerce_before_cart', 'tt_output_all_notices', 11 );
 //	}
 }
 
@@ -827,11 +831,13 @@ add_filter( 'wp_ajax_nopriv_tt_update_mini_cart', 'tt_update_mini_cart' );
 add_filter( 'wp_ajax_tt_update_mini_cart', 'tt_update_mini_cart' );
 
 function tt_refresh_cart_count($fragments) {
-    if (WC()->cart->get_cart_contents_count() > 0) {
+	$tt_cart = Product::get_cart();
+	$_SESSION['tt_cart'] = $tt_cart;
+    if ($tt_cart->TotalQuant > 0) {
 	    ob_start();
 	?>
         <span>
-            <?php echo WC()->cart->get_cart_contents_count(); ?>
+            <?php echo (int)$tt_cart->TotalQuant; ?>
         </span>
 	<?php
 	    $fragments['header-cart-count'] = ob_get_clean();
@@ -855,7 +861,7 @@ function tt_refresh_cart_count($fragments) {
                 </p>
             </div>
             <div class="notification-price">
-                <span>סכום המשנה של כרטיס (<span><?php echo WC()->cart->get_cart_contents_count(); ?></span>פריטים )</span>
+                <span>סכום המשנה של כרטיס (<span><?php echo (int)$tt_cart->TotalQuant; ?></span>פריטים )</span>
                 <span><?php echo WC()->cart->get_cart_total(); ?></span>
                 <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn">תוינקו לס גצה</a>
             </div>
@@ -869,3 +875,32 @@ function tt_refresh_cart_count($fragments) {
 }
 
 add_filter( 'woocommerce_add_to_cart_fragments', 'tt_refresh_cart_count');
+
+function tt_output_all_notices() {
+	echo '<div class="woocommerce-notices-wrapper notification-area cart" style="margin-bottom: 20px;">';
+	wc_print_notices();
+	echo '</div>';
+}
+
+function tt_empty_cart_message() {
+	echo '<div class="woocommerce-notices-wrapper notification-area cart" style="margin-bottom: 20px;">';
+	echo '<div class="notification-popup">';
+	echo '<div class="notification-info" style="padding: 15px;">';
+	echo '<p>';
+	echo '<span>
+	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 20 15" fill="none">
+		<path d="M19.3013 1.56873L6.77393 14.1078L0.246582 7.56873L1.30127 6.51404L6.77393 11.975L18.2466 0.514038L19.3013 1.56873Z" fill="#0060FE"></path>
+		<path d="M19.3013 1.56873L6.77393 14.1078L0.246582 7.56873L1.30127 6.51404L6.77393 11.975L18.2466 0.514038L19.3013 1.56873Z" fill="#109383"></path>
+	</svg>
+</span>';
+	echo '<span>' . wp_kses_post( apply_filters( 'wc_empty_cart_message', __( 'Your cart is currently empty.', 'woocommerce' ) ) ) . '</span>';
+	echo '</p>';
+	echo '</div>';
+	if ( wc_get_page_id( 'shop' ) > 0 ) {
+		echo '<div class="notification-price">';
+		echo '<a href="'. esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ).'" class="btn">תוינקו לס גצה</a>';
+		echo '</div>';
+	}
+	echo '</div>';
+	echo '</div>';
+}

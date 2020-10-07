@@ -88,6 +88,14 @@
   }
 }
 
+.notification-area {
+  .cart {
+    a {
+      display: none;
+    }
+  }
+}
+
 .product-name {
   text-align: right !important;
   font-weight: bold;

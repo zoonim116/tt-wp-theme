@@ -65,7 +65,7 @@ if ( post_password_required() ) {
 	                echo apply_filters(
 		                'woocommerce_loop_add_to_cart_link',
 		                sprintf(
-			                '<a href="%s" data-product_id="%s" data-product_sku="%s" class="btn btn-blue %s product_type_%s">%s</a>',
+			                '<a href="%s" data-product_id="%s" data-product_sku="%s" class="btn btn-blue button %s product_type_%s ajax_add_to_cart">%s</a>',
 			                esc_url( $product->add_to_cart_url() ),
 			                esc_attr( $product->get_id() ),
 			                esc_attr( $product->get_sku() ),
