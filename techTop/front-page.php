@@ -7,8 +7,9 @@
                 <div class="columns is-mobile">
                     <div class="column is-10 home-slider-title">
                         <?php echo apply_filters( 'the_content', $item['crb_ts_description'] ); ?>
-
-                        <a href="<?php echo get_term_link(get_term($item['crb_ts_category'][0]['id'])); ?>" class="btn btn-blue">צפה בקטלוג</a>
+                        <?php if(!is_wp_error(get_term_link($item['crb_ts_category'][0]['id']))): ?>
+                            <a href="<?php echo get_term_link($item['crb_ts_category'][0]['id']); ?>" class="btn btn-blue">צפה בקטלוג</a>
+                        <?php endif; ?>
                     </div>
                     <div class="column is-2 col-products">
                         <span><span><?php echo $item['crb_ts_product_count']?></span>מוצרים</span>
