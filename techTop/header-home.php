@@ -51,7 +51,7 @@
 							</a>
 						<?php endif; ?>
 					</li>
-					<li>
+					<li class="account-link">
                         <?php if (is_user_logged_in()): ?>
                             <a href="<?php echo home_url('my-account/') ?>">
                                 <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">

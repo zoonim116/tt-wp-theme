@@ -24,26 +24,26 @@
         <img src="<?php echo get_template_directory_uri()?>/images/top-img.png">
     </div>
     <div class="container">
-        <h3>‎טק טופ — היבואן הגדול<br>בישראל לציוד אודיו מקצועי ותאורה</h3>
-        <p class="home-review__subTitle">מגוון ענק של מותגי אודיו, הגברה ותאורה הטובים בעולם מכירה סיטונאית לחברות אינטגרציה והתקנות, חנויות ומפיצים, קבלני הגברה ותאורה היבואן הגדול בישראל לציוד הגברה ותאורה מקצועי</p>
+        <h3>‎טקטופ היבואן הגדול בישראל לפתרונות אודיו, מולטימדיה ותאורה מקצועיים</h3>
+        <p class="home-review__subTitle">מגוון רחב של מותגים בינלאומיים מהמובילים בעולם, המספקים פתרונות להגברה מולטימדיה ותאורה.</p>
         <div class="home-review-list">
             <div class="home-review-item">
                 <div class="home-review-img">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/box.png">
                 </div>
-                <p>שרותי מעבדה מיומנים</p>
+                <p>שירותי מעבדה ותמיכה טכנית</p>
             </div>
             <div class="home-review-item">
                 <div class="home-review-img">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/review2.png">
                 </div>
-                <p>תכנון וייעוץ עם אנשי צוות מקצוענים</p>
+                <p>צוות מכירות מקצועי</p>
             </div>
             <div class="home-review-item">
                 <div class="home-review-img">
                     <img src="<?php echo get_template_directory_uri()?>/images/review3.png">
                 </div>
-                <p>מעל 25 שנים</p>
+                <p>תכנון וייעוץ בעל ותק של 25 שנות ניסיון</p>
             </div>
         </div>
     </div>
@@ -252,20 +252,11 @@
 <section class="home-join-us">
     <div class="container">
         <div class="home-join-flex">
-            <div class="home-join-sale">
-                <div>
-                    <span class="count">1098</span>
-                    <p>טובין במלאי חידוש הבסיס בכל שבוע</p>
-                </div>
-                <div>
-                    <span class="count">25%</span>
-                    <p>הנחות קבועות בכל שבוע</p>
-                </div>
-            </div>
+           
             <div class="home-join-form">
                 <p class="subtitle">כל החדשות והעדכונים שלנו ישירות אליכם למייל
 פשוט, חינמי ושווה.</p>
-                <p class="title">הצטרפו לניוזלטר שלנו וקבלו עדכונים,</br> ישירות למייל.</p>
+                <p class="title">הצטרפו לניוזלטר שלנו וקבלו עדכונים, <br> מבצעים וטיפים ישירות למייל.</p>
                 <form>
                     <p>אימייל</p>
                     <div class="form-group">

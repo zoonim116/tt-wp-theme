@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('.more-btn').click(function(){
     $('.nav-menu ul').toggleClass('active');
   });
+  
   $('.more-btn.remove').click(function(event){
     event.preventDefault();
       $('form').addClass('remove');

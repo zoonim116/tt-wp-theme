@@ -7768,6 +7768,8 @@ label {
     max-width: 74%; } }
 
 @media screen and (max-width: 1300px) {
+  .woocommerce-account .main-section {
+    padding-top: 0; }
   .catalog-products-list .catalog-products-item .item-wrap .item-img .btn-group {
     opacity: 1 !important;
     transform: scale(1); }
@@ -7777,6 +7779,8 @@ label {
     .home .nav-homepage .navbar-end-menu .navbar-item > ul li {
       margin-right: 8px;
       margin-left: 8px; }
+      .home .nav-homepage .navbar-end-menu .navbar-item > ul li.account-link {
+        margin-right: 8px !important; }
     .home .nav-homepage .navbar-end-menu .navbar-item > ul li:first-child {
       display: block; }
       .home .nav-homepage .navbar-end-menu .navbar-item > ul li:first-child .balance {
@@ -10461,6 +10465,41 @@ button#place_order {
   border: none;
   height: 40px; }
 
+.home .account-link {
+  position: relative;
+  top: -2px;
+  left: 1px; }
+
+.home .cart {
+  position: relative;
+  top: 0px; }
+
+.home .nav-homepage .navbar-end-menu ul li.cart .counter span {
+  top: -4px !important; }
+
+.woocommerce-account .navbar .navbar-end-menu ul li {
+  margin-right: 4px; }
+
+.woocommerce-account .navbar .navbar-end-menu ul li.mini-wishlist {
+  margin-right: 3px; }
+
+.home .nav-homepage .navbar-end-menu .navbar-item > ul li {
+  margin-right: 7px; }
+  .home .nav-homepage .navbar-end-menu .navbar-item > ul li.mini-wishlist {
+    margin-right: 4px; }
+    .home .nav-homepage .navbar-end-menu .navbar-item > ul li.mini-wishlist svg {
+      margin-left: 0; }
+  .home .nav-homepage .navbar-end-menu .navbar-item > ul li.cart {
+    margin-right: 5px; }
+  .home .nav-homepage .navbar-end-menu .navbar-item > ul li.account-link {
+    margin-right: 34px; }
+
+.home .mini-wishlist {
+  position: relative;
+  top: 0px; }
+  .home .mini-wishlist svg {
+    margin-right: 0; }
+
 .nav-homepage .navbar-start {
   margin-right: 0px;
   align-items: center; }
@@ -10788,29 +10827,8 @@ button#place_order {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; }
-    .home-join-us .home-join-flex .home-join-sale {
-      width: 273px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end; }
-      .home-join-us .home-join-flex .home-join-sale > div {
-        border: 1px solid #000000;
-        border-radius: 5px;
-        position: relative;
-        padding: 31px 30px 24px;
-        margin-top: 31px;
-        font-size: 18px; }
-      .home-join-us .home-join-flex .home-join-sale .count {
-        font-size: calc(30px + 1vw);
-        color: #0060FE;
-        font-weight: bold;
-        position: absolute;
-        top: -26%;
-        background: #f5f5f5;
-        padding: 0 10px;
-        line-height: 1; }
     .home-join-us .home-join-flex .home-join-form {
-      width: calc(100% - 291px);
+      width: 100%;
       background-color: #75A9F9;
       background-image: url("../images/join-bg.jpg");
       background-size: cover;

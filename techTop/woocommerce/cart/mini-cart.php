@@ -27,8 +27,8 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 
 <?php if ( ! WC()->cart->is_empty() ) : ?>
     <div class="sub-cart__title">
-        <span class="sub-cart__title-big">הלכלכ</span>
-        <?php echo $cart->TotalQuant; ?> <span>םיטירפ</span>
+        <span class="sub-cart__title-big">סל קניות</span>
+        <?php echo $cart->TotalQuant; ?> <span>פריטים</span>
     </div>
 	<ul class="woocommerce-mini-cart cart_list product_list_widget sub-cart__list <?php echo esc_attr( $args['list_class'] ); ?>">
 		<?php
@@ -92,8 +92,8 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
             <div class="sub-cart__footer-price" ><?php echo WC()->cart->get_cart_total(); ?></div>
         </div>
         <div class="sub-cart__footer-button">
-            <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn-white">הלגעל ףסוה</a>
-            <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn-blue button">םלשל</a>
+            <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn-white">סל קניות</a>
+            <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn-blue button">לתשלום</a>
         </div>
     </div>
 <?php else : ?>

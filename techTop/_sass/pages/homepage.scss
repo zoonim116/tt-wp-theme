@@ -1,3 +1,48 @@
+.home .account-link {
+  position: relative;
+  top: -2px;
+  left: 1px;
+}
+.home  .cart {
+  position: relative;
+  top: 0px;
+}
+
+.home .nav-homepage .navbar-end-menu ul li.cart .counter span {
+  top: -4px !important;
+}
+.woocommerce-account {
+  .navbar .navbar-end-menu ul li {
+    margin-right: 4px;
+  }
+  .navbar .navbar-end-menu ul li.mini-wishlist {
+    margin-right: 3px;
+  }
+}
+.home {
+  .nav-homepage .navbar-end-menu .navbar-item>ul li {
+    margin-right: 7px;
+    &.mini-wishlist {
+      margin-right: 4px;
+      svg {
+        margin-left: 0;
+      }
+    }
+    &.cart {
+      margin-right: 5px;
+    }
+    &.account-link {
+      margin-right: 34px;
+    }
+  }
+}
+.home .mini-wishlist {
+  position: relative;
+  top: 0px;
+  svg {
+    margin-right: 0;
+  }
+}
 .nav-homepage {
   .navbar-start {
     margin-right: 0px;
@@ -51,6 +96,9 @@
     top: -2px !important;
   }
 }
+
+
+
 
 .home-slider {
   color: #fff;
@@ -433,32 +481,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .home-join-sale {
-      width: 273px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      & > div {
-        border: 1px solid #000000;
-        border-radius: 5px;
-        position: relative;
-        padding: 31px 30px 24px;
-        margin-top: 31px;
-        font-size: $font-m;
-      }
-      .count {
-        font-size: $font-h3;
-        color: $blue;
-        font-weight: bold;
-        position: absolute;
-        top: -26%;
-        background: #f5f5f5;
-        padding: 0 10px;
-        line-height: 1;
-      }
-    }
     .home-join-form {
-      width: calc(100% - 291px);
+      width: 100%;
       background-color: $light-blue;
       background-image: url("../images/join-bg.jpg");
       background-size: cover;
