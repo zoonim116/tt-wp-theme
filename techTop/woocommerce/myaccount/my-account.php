@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
                  * @since 2.6.0
                  */
                 do_action( 'woocommerce_account_navigation' ); ?>
-                <a href="#" class="more-btn"></a>
+                <a class="more-btn remove1"></a>
             </div>
             <div class="column is-9">
 	            <?php
