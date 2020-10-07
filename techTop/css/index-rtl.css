@@ -9822,6 +9822,12 @@ h1 .number-result {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px; }
+  .notification-popup.woocommerce-message {
+    padding: 0px;
+    border: none;
+    position: inherit; }
+    .notification-popup.woocommerce-message::before {
+      display: none; }
   .notification-popup .notification-info {
     width: 55%;
     background: #FFFFFF;
@@ -9833,6 +9839,24 @@ h1 .number-result {
     display: flex;
     flex-direction: column;
     justify-content: center; }
+    .notification-popup .notification-info .notification-icon {
+      position: relative;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-left: 10px; }
+      .notification-popup .notification-info .notification-icon::before {
+        content: "";
+        width: 20px;
+        height: 11px;
+        border-left: 2px solid #109383;
+        border-bottom: 2px solid #109383;
+        display: block;
+        transform: rotate(-45deg);
+        position: relative;
+        top: 3px; }
+    .notification-popup .notification-info .restore-item {
+      display: none; }
     .notification-popup .notification-info .check {
       font-weight: bold;
       font-size: 12px;
@@ -10055,6 +10079,9 @@ h1 .number-result {
 
 .woocommerce-cart-form__cart-item .product-subtotal {
   font-size: 29px !important; }
+
+.notification-area .cart a {
+  display: none; }
 
 .product-name {
   text-align: right !important;

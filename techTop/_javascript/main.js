@@ -7,13 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     jQuery('.navbar-item li.cart .counter').html(a2['header-cart-count']);
     jQuery('.notification-area').html(a2['popup_notification']);
     $([document.documentElement, document.body]).animate({
-      scrollTop: $(".notification-area").offset().top - 50
-  }, 1000);
+        scrollTop: $(".notification-area").offset().top - 50
+    }, 1000);
   });
 
   jQuery('body').on('removed_from_cart', function (a1, a2, a3){
     jQuery('.navbar-item li.cart .counter').html(a2['header-cart-count']);
     jQuery(document.body).trigger('wc_fragments_refreshed');
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $(".woocommerce-notices-wrapper").offset().top - 50
+    }, 1000);
   });
 
   jQuery('body').on('wishlist_fragments_refreshed', function (){

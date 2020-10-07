@@ -28,7 +28,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 <?php if ( ! WC()->cart->is_empty() ) : ?>
     <div class="sub-cart__title">
         <span class="sub-cart__title-big">הלכלכ</span>
-        <?php echo WC()->cart->get_cart_contents_count(); ?> <span>םיטירפ</span>
+        <?php echo $cart->TotalQuant; ?> <span>םיטירפ</span>
     </div>
 	<ul class="woocommerce-mini-cart cart_list product_list_widget sub-cart__list <?php echo esc_attr( $args['list_class'] ); ?>">
 		<?php
