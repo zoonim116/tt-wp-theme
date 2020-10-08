@@ -53,5 +53,5 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 	<?php endif; ?>
 </form>
-<button type="submit" class="button alt checkout-outer-button" name="woocommerce_checkout_place_order" id="place_order" value="הנמזה עצבל" data-value="הנמזה עצבל">הנמזה עצבל</button>
+<button type="submit" class="button alt checkout-outer-button" name="woocommerce_checkout_place_order" id="place_order" value="אישור הזמנה" data-value="">אישור הזמנה</button>
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

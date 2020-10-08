@@ -71,12 +71,12 @@ if ( post_password_required() ) {
 			                esc_attr( $product->get_sku() ),
 			                $product->is_purchasable() ? 'add_to_cart_button' : '',
 			                esc_attr( $product->product_type ),
-			                esc_html( $product->add_to_cart_text() )
+			                'הוסף לסל'
 		                ),
 		                $product
 	                );
                 } elseif(!is_user_logged_in()) { ?>
-	                <a href="<?php echo home_url('resellers'); ?>"class="btn btn-blue ">להוסיף לתיק</a>
+	                <a href="<?php echo home_url('resellers'); ?>"class="btn btn-blue ">הוסף לסל</a>
                <?php }
         ?>
         <a href="#" class="like" data-sku="<?php echo $product->get_sku(); ?>">

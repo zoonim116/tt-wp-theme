@@ -19,8 +19,8 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'woocommerce_before_main_content' );
 ?>
 <div class="thanks-page__mainTitle">
-			<h2 class="sub-title">החלצהב החלשנ ךלש הנמזהה !הדות</h2>
-			<p>רשק ךתיא רוצי ונלש תוריכמ גיצנ</p>
+			<h2 class="sub-title"> תודה! ההזמה הושלמה בהצלחה</h2>
+			<p> נציג יצור איתך קשר בהקדם</p>
 		</div>
 	<div class="thanks-page">
 		
@@ -74,8 +74,9 @@ wc_get_template( 'order/order-details.php', array( 'order_id' => $order->get_id(
                     <?php $order_id = $order->get_id(); ?>
                     <strong>
                         <span class="woocommerce-Price-amount amount">
-                            <span class="woocommerce-Price-currencySymbol">₪</span>
-                            <?php echo get_post_meta($order_id, 'tt_Total', true); ?>
+                           
+							<?php echo get_post_meta($order_id, 'tt_Total', true); ?>
+							<span class="woocommerce-Price-currencySymbol">₪</span>
                         </span>
                     </strong>
 				</li>

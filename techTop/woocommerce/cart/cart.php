@@ -21,7 +21,7 @@ do_action( 'woocommerce_before_main_content' );
 do_action( 'woocommerce_before_cart' ); ?>
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 	
-	<h2 class="sub-title">הלכלכ</h2>
+	<h2 class="sub-title">סל קניות</h2>
 	<?php do_action( 'woocommerce_before_cart_table' ); ?>
 	<div class="shop_table-wrapp">
 	
@@ -176,11 +176,10 @@ do_action( 'woocommerce_before_cart' ); ?>
 			<tr>
 					<td style="text-align: right;" colspan="3">
 						<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="button alt wc-forward checkout-button-custom">
-						התקדם לנקודת הביקורת
+						מעבר לתשלום
 						</a>
 					</td>
-					<td></td>
-					<td style="padding 10px 15px;  font-weight: 500; font-size: 18px; text-align: center; line-height: 68px;" class="">יפוס ריחמ</td>
+					<td colspan="2" style="padding 10px 15px;  font-weight: 500; font-size: 18px; text-align: left; line-height: 1;" class="">מחיר לא כולל מע׳׳מ</td>
 					<td style="color: #0060FE;" class="product-subtotal"><?php wc_cart_totals_order_total_html(); ?></td>
 					
 					

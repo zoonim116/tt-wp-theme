@@ -14,7 +14,7 @@ get_header('auth');
            </div>
         </div>
        <div class="registration-wrap woocommerce">
-            <div class="logo__title">תורבחתה</div>
+            <div class="logo__title">התחברות</div>
             <div class="registration">
             <?php 
 wc_get_template( 'myaccount/form-login.php');

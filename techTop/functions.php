@@ -7,7 +7,7 @@ require_once 'inc/my-account.php';
 require_once 'inc/homepage-settings.php';
 require_once 'inc/bulma-navwalker.php';
 require_once 'inc/resselers-settings.php';
-
+require_once 'inc/theme-settings.php';
 if (!session_id()) {
 	session_start();
 }

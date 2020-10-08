@@ -158,7 +158,7 @@
                                                         $product
                                                     );
                                                 } elseif(!is_user_logged_in()) { ?>
-                                                    <a href="<?php echo home_url('resellers'); ?>"class="btn btn-blue ">להוסיף לתיק</a>
+                                                    <a href="<?php echo home_url('resellers'); ?>"class="btn btn-blue ">הוסף לסל</a>
                                                <?php }
                                         ?>
                                         <a href="#" class="like" data-sku="<?php echo $product->get_sku(); ?>">

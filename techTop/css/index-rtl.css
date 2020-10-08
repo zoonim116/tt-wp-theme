@@ -10230,15 +10230,16 @@ h1 .number-result {
 .woocommerce-checkout-review-order-table .promo {
   display: flex;
   align-items: center;
-  padding: 26px 30px; }
+  padding: 26px 30px;
+  justify-content: space-between; }
 
 .woocommerce-checkout-review-order-table .promo-icon {
   display: flex;
   background: rgba(0, 96, 254, 0.1);
   border-radius: 4px;
-  width: 207px;
+  width: 180px;
   height: 40px;
-  margin-right: 20px;
+  margin-right: 5px;
   position: relative; }
   .woocommerce-checkout-review-order-table .promo-icon svg {
     position: absolute;

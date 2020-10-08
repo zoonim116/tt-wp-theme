@@ -397,7 +397,9 @@ document.addEventListener('DOMContentLoaded', () => {
     infinite: true,
     dots: true,
     rtl: true,
-    arrows: false,
+    arrows: true,
+    prevArrow: $('.our-brands .arrows-slider .prev'),
+    nextArrow: $('.our-brands .arrows-slider .next'),
     autoplay: true,
     autoplaySpeed: 5000,
   });

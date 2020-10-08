@@ -36,18 +36,18 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 					<?php do_action( 'woocommerce_login_form_start' ); ?>
 
                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                        <label for="username"><span class="required">*</span><?php esc_html_e( 'חוקל רפסמ', 'woocommerce' ); ?>&nbsp;</label>
+                        <label for="username"><span class="required">*</span><?php esc_html_e( 'מספר לקוח', 'woocommerce' ); ?>&nbsp;</label>
                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
                     </p>
                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                        <label for="password"><span class="required">*</span><?php esc_html_e( 'המסיס', 'woocommerce' ); ?>&nbsp;</label>
+                        <label for="password"><span class="required">*</span><?php esc_html_e( 'סיסמה', 'woocommerce' ); ?>&nbsp;</label>
                         
                             <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password" />
                     </p>
 
                     <p class="form-row">
                         <p class="woocommerce-LostPassword lost_password">
-                            <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( '?אמסס תחכש', 'woocommerce' ); ?></a>
+                            <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php echo __( 'איפוס סיסמה'); ?></a>
                         </p>
 						<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
                         <button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'Log in', 'woocommerce' ); ?></button>

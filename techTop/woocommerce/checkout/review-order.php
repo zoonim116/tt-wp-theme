@@ -61,7 +61,7 @@ if ($_SESSION['tt_cart']) {
 		?>
 		<div class="promo-wrap">
 			<label class="promo" for="promo">
-			דוק
+			קוד קופון
 				<div class="promo-icon">
 					<svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M16.0439 8.0083V18.9331H4.79395V15.5581H0.293945V0.933105H7.84375L11.2188 4.30811H12.3438L16.0439 8.0083ZM12.6689 7.68311H14.1191L12.6689 6.23291V7.68311ZM4.79395 4.30811H9.61914L7.36914 2.05811H1.41895V14.4331H4.79395V4.30811ZM14.9189 8.80811H11.5439V5.43311H5.91895V17.8081H14.9189V8.80811Z" fill="#0060FE"/>
@@ -71,7 +71,7 @@ if ($_SESSION['tt_cart']) {
 			</label>
 		</div>
 		<div class="customer-order-total">
-			<div class="customer-order-total__title">מ"עמ ללוכ אל ריחמ</div>
+			<div class="customer-order-total__title">מחיר לא כולל מע׳׳מ</div>
 			<div class="customer-order-total"><?php wc_cart_totals_order_total_html(); ?></div>
 		</div>
 	<div>

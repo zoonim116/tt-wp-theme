@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php else : ?>
 
-		<h3 class="woocommerce-billing-fields__title"><?php esc_html_e( 'חולשמל תבותכ', 'woocommerce' ); ?></h3>
+		<h3 class="woocommerce-billing-fields__title"><?php esc_html_e( 'כתובת למשלוח', 'woocommerce' ); ?></h3>
 
 	<?php endif; ?>
 
