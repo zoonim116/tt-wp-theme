@@ -393,13 +393,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  $('.home-slider').slick({
+  $('.home-slider-carousel').slick({
     infinite: true,
-    dots: true,
+    dots: false,
     rtl: true,
     arrows: true,
-    prevArrow: $('.our-brands .arrows-slider .prev'),
-    nextArrow: $('.our-brands .arrows-slider .next'),
+    prevArrow: $('.home-slider .arrows-slider .prev'),
+    nextArrow: $('.home-slider .arrows-slider .next'),
     autoplay: true,
     autoplaySpeed: 5000,
   });

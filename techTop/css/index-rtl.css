@@ -8698,6 +8698,23 @@ label {
       position: relative;
       top: 10px; }
 
+.balance-banner {
+  background-image: url("../images/balance-banner-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding-top: calc(20px + 0.2vw);
+  padding-bottom: calc(40px + 1vw);
+  padding-left: calc(15px + 2vw);
+  padding-right: calc(15px + 2vw); }
+  .balance-banner h3 {
+    font-size: calc(35px + 2vw);
+    color: #0060FE;
+    margin-bottom: calc(40px + 0.5vw); }
+  .balance-banner .btn {
+    padding: 14px;
+    min-width: 163px; }
+
 .payments-header {
   padding: 33px 18px 73px; }
   .payments-header p {
@@ -10536,7 +10553,14 @@ button#place_order {
   top: -2px !important; }
 
 .home-slider {
-  color: #fff; }
+  color: #fff;
+  position: relative; }
+  .home-slider .arrows-slider svg {
+    width: 50px;
+    height: 40px; }
+    .home-slider .arrows-slider svg path {
+      fill: #fff;
+      opacity: 0.5; }
   .home-slider .slick-dots {
     bottom: 40px; }
   .home-slider.slick-dotted.slick-slider {

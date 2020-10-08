@@ -1,23 +1,34 @@
 <?php get_header('home'); ?>
 <?php get_search_form(); ?>
 <section class="home-slider">
-    <?php foreach (carbon_get_post_meta(get_the_ID(), 'crb_top_slider') as $item): ?>
-        <div class="home-slider-item" style="background-image: url('<?php echo $item['crb_ts_background']; ?>');">
-            <div class="container">
-                <div class="columns is-mobile">
-                    <div class="column is-10 home-slider-title">
-                        <?php echo apply_filters( 'the_content', $item['crb_ts_description'] ); ?>
-                        <?php if(!is_wp_error(get_term_link($item['crb_ts_category'][0]['id']))): ?>
-                            <a href="<?php echo get_term_link($item['crb_ts_category'][0]['id']); ?>" class="btn btn-blue">צפה בקטלוג</a>
-                        <?php endif; ?>
+    <div class="home-slider-carousel">
+        <?php foreach (carbon_get_post_meta(get_the_ID(), 'crb_top_slider') as $item): ?>
+            <div class="home-slider-item" style="background-image: url('<?php echo $item['crb_ts_background']; ?>');">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-10 home-slider-title">
+                            <?php echo apply_filters( 'the_content', $item['crb_ts_description'] ); ?>
+                            <?php if(!is_wp_error(get_term_link($item['crb_ts_category'][0]['id']))): ?>
+                                <a href="<?php echo get_term_link($item['crb_ts_category'][0]['id']); ?>" class="btn btn-blue">צפה בקטלוג</a>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <!-- <div class="column is-2 col-products"> -->
-                        <!-- <span><span><?php //echo $item['crb_ts_product_count']?></span>מוצרים</span> -->
-                    <!-- </div> -->
                 </div>
             </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+    <div class="arrows-slider">
+        <span class="next">
+            <svg width="13" height="23" viewBox="0 0 13 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12.9998 21L3.24975 11.5L12.9998 2L11.2498 0.25L-0.000250354 11.5L11.2498 22.75L12.9998 21Z" fill="black"/>
+            </svg>
+        </span>
+        <span class="prev">
+            <svg width="13" height="23" viewBox="0 0 13 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M6.10352e-05 2L9.75006 11.5L6.10352e-05 21L1.75006 22.75L13.0001 11.5L1.75006 0.249988L6.10352e-05 2Z" fill="black"/>
+            </svg>
+        </span>
+    </div>
 </section>
 <section class="home-review">
     <div class="top-img">

@@ -43,6 +43,34 @@ function my_wishlist_endpoint_content() {
 	wc_get_template_part( 'myaccount/wishlist' );
 }
 
+add_action( 'woocommerce_account_payments_endpoint', 'my_payments_endpoint_content' );
+function my_payments_endpoint_content() {
+	wc_get_template_part( 'myaccount/balance' );
+}
+
+add_action( 'woocommerce_account_balance_endpoint', 'my_balance_endpoint_content' );
+function my_balance_endpoint_content() {
+	wc_get_template_part( 'myaccount/balance' );
+}
+
+add_action( 'woocommerce_account_delivery-addresses_endpoint', 'my_da_endpoint_content');
+
+function my_da_endpoint_content() {
+	wc_get_template_part( 'myaccount/balance' );
+}
+
+add_action( 'woocommerce_account_consultant_endpoint', 'my_consultant_endpoint_content');
+
+function my_consultant_endpoint_content() {
+	wc_get_template_part( 'myaccount/balance' );
+}
+
+add_action( 'woocommerce_account_promotional_endpoint', 'my_promotional_endpoint_content');
+
+function my_promotional_endpoint_content() {
+	wc_get_template_part( 'myaccount/balance' );
+}
+
 add_action( 'woocommerce_account_logout_endpoint', 'logout_endpoint_content' );
 function logout_endpoint_content() {
 	wc_get_template_part( 'myaccount/logout' );

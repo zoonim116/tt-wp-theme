@@ -67,3 +67,24 @@
         }
     }
 }
+
+.balance-banner {
+    background-image: url('../images/balance-banner-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: calc(20px + 0.2vw);
+    padding-bottom: calc(40px + 1vw);
+    padding-left: calc(15px + 2vw);
+    padding-right: calc(15px + 2vw);
+    
+    h3 {
+        font-size: $font-h1;
+        color: $blue;
+        margin-bottom: calc(40px + 0.5vw);
+    }
+    .btn {
+        padding: 14px;
+        min-width: 163px;
+    }
+}

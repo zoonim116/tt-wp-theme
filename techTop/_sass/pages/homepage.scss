@@ -102,6 +102,17 @@
 
 .home-slider {
   color: #fff;
+  position: relative;
+  .arrows-slider {
+    svg {
+      width: 50px;
+      height: 40px;
+      path {
+        fill: #fff;
+        opacity: 0.5;
+      }
+    }
+  }
   .slick-dots {
     bottom: 40px;
   }
