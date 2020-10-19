@@ -234,6 +234,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if ($('.news-list').length > 0) {
+    var blogInfScroll = new InfiniteScroll('.news-list', {
+      // options
+      path: ".blog-pagination a.next",
+      append: ".news-list .news-item",
+      history: false,
+      button: '.news-more a',
+      scrollThreshold: false,
+    });
+  }
+
+  
+
   // $('.catalog-products-list').infiniteScroll();
 
   //Unbind load more on scroll
