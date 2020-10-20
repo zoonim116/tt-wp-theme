@@ -11399,3 +11399,26 @@ button#place_order {
         display: block;
         padding: 0;
         min-width: auto; } }
+
+.privacy-container h1 {
+  font-size: 36px;
+  font-weight: bold; }
+
+.privacy-container .privacy-list {
+  margin-bottom: 80px; }
+  .privacy-container .privacy-list .privacy-item {
+    background: #fff;
+    padding: 15px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+    border-radius: 5px;
+    margin-bottom: 25px; }
+    .privacy-container .privacy-list .privacy-item .title {
+      font-size: 18px;
+      font-weight: 500; }
+
+.privacy-container .privacy-links li {
+  margin-bottom: 15px; }
+
+@media screen and (max-width: 767px) {
+  .privacy-container h1 {
+    font-size: 20px; } }

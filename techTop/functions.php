@@ -9,6 +9,7 @@ require_once 'inc/bulma-navwalker.php';
 require_once 'inc/resselers-settings.php';
 require_once 'inc/theme-settings.php';
 require_once 'inc/blog-post-additional.php';
+require_once 'inc/privacy-policy-settings.php';
 if (!session_id()) {
 	session_start();
 }

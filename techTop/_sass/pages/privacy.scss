@@ -1,0 +1,33 @@
+.privacy-container {
+  h1 {
+    font-size: $font-l;
+    font-weight: bold;
+  }
+  .privacy-list {
+    margin-bottom: 80px;
+    .privacy-item {
+      background: #fff;
+      padding: 15px;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.07);
+      border-radius: 5px;
+      margin-bottom: 25px;
+      .title {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+  .privacy-links {
+    li {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .privacy-container {
+    h1 {
+      font-size: 20px;
+    }
+  }
+}

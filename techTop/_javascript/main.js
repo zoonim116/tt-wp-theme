@@ -483,4 +483,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  $('.privacy-links a').on('click', function(e) {
+      e.preventDefault();
+      var link = $(this).attr('href');
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $(link).offset().top - 50
+    }, 1000);
+  });
+
 });
