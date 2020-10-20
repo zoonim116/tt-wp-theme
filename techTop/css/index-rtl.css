@@ -11351,9 +11351,23 @@ button#place_order {
 .banners-container {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap; }
+  align-items: center; }
   .banners-container img {
     margin-bottom: 20px; }
+  .banners-container a {
+    display: block; }
+  .banners-container.single a {
+    width: 100%; }
+    .banners-container.single a img {
+      width: 100%; }
+  .banners-container.twice a:first-child {
+    width: 75%; }
+    .banners-container.twice a:first-child img {
+      width: 100%; }
+  .banners-container.twice a:last-child {
+    width: 23%; }
+    .banners-container.twice a:last-child img {
+      width: 100%; }
 
 @media screen and (min-width: 991px) {
   .news-list .news-item .news-info {

@@ -906,3 +906,54 @@ function tt_empty_cart_message() {
 	echo '</div>';
 	echo '</div>';
 }
+
+add_action( 'tt_show_post_big_thumbnail_action', 'tt_show_post_big_thumbnail' , 10 );
+
+function tt_show_post_big_thumbnail() { 
+	$attachment_ID = carbon_get_post_meta(get_the_ID(), 'crb_post_big_thumbnail');
+	$url = wp_get_attachment_url( $attachment_ID );
+	$alt = get_post_meta($attachment_ID, '_wp_attachment_image_alt', TRUE);
+	get_template_part( 'template-parts/post-item', 'big-thumbnail', compact('url', 'alt') );
+}
+
+add_action( 'tt_show_post_banners_action', 'tt_show_post_banners', 10);
+
+function tt_show_post_banners() {
+	get_template_part( 'template-parts/post-item', 'banners' );
+}
+
+add_action( 'tt_show_related_posts_action', 'tt_show_related_posts', 10);
+
+function tt_show_related_posts() {
+	global $post;
+	$categories = get_the_category($post->ID);
+	if ($categories) {
+		$category_ids = [];
+		foreach($categories as $individual_category) $category_ids[] = $individual_category->term_id;
+
+		$args = [
+			'category__in' => $category_ids,
+			'post__not_in' => array($post->ID),
+			'posts_per_page' => 2, // Number of related posts that will be shown.
+			'ignore_sticky_posts' => 1
+		];
+
+		$related_posts = new wp_query( $args );
+		if( $related_posts->have_posts() ) { ?>
+		<section class="latest-news">
+			<div class="container">
+				<p class="title">אולי גם תאהב</p>
+				<div class="news-list">
+					<?php while ($related_posts->have_posts()) : $related_posts->the_post();
+						get_template_part( 'template-parts/post', 'item' );
+					endwhile; ?>
+					<div class="news-more">
+						<a href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>" class="btn btn-blue">הראה את כל המאמרים</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<?php }
+		wp_reset_query();
+	}
+}
