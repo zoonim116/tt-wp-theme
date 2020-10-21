@@ -1,1 +1,3 @@
-<img src="<?php echo $args['url']; ?>" alt="<?php echo $args['alt'] ?>" />
+<?php extract( $template_args ); ?>
+
+<img src="<?php echo $url; ?>" alt="<?php echo $alt ?>" />

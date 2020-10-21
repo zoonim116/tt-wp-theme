@@ -7,7 +7,7 @@
             <div class="column is-3">
             </div>
             <div class="column is-9">
-                <h1>תקנון אתר טקטופ שיווק – תנאי שימוש ומדיניות פרטיות</h1>
+                <h1><?php the_title( ); ?></h1>
             </div>
         </div>
         <div class="columns">

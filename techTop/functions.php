@@ -914,7 +914,7 @@ function tt_show_post_big_thumbnail() {
 	$attachment_ID = carbon_get_post_meta(get_the_ID(), 'crb_post_big_thumbnail');
 	$url = wp_get_attachment_url( $attachment_ID );
 	$alt = get_post_meta($attachment_ID, '_wp_attachment_image_alt', TRUE);
-	get_template_part( 'template-parts/post-item', 'big-thumbnail', compact('url', 'alt') );
+	echo Helper::hm_get_template_part('template-parts/post-item-big-thumbnail', compact('url', 'alt'));
 }
 
 add_action( 'tt_show_post_banners_action', 'tt_show_post_banners', 10);
